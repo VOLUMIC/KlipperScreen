@@ -24,24 +24,42 @@ class Panel(ScreenPanel):
 
         self.labels["menu"] = self._gtk.Button("settings", _("Menu"), "color4")
         self.labels["menu"].connect("clicked", self._screen._go_to_submenu, "")
+# VOLUMIC MODIF
+        self.labels["menu"].connect("pressed", self._sound_select)
+# END VOLUMIC MODIF
         self.labels["restart"] = self._gtk.Button(
             "refresh", _("Klipper Restart"), "color1"
         )
         self.labels["restart"].connect("clicked", self.restart_klipper)
+# VOLUMIC MODIF
+        self.labels["restart"].connect("pressed", self._sound_select)
+# END VOLUMIC MODIF
         self.labels["firmware_restart"] = self._gtk.Button(
             "refresh", _("Firmware Restart"), "color2"
         )
         self.labels["firmware_restart"].connect("clicked", self.firmware_restart)
+# VOLUMIC MODIF
+        self.labels["firmware_restart"].connect("pressed", self._sound_select)
+# END VOLUMIC MODIF
         self.labels["restart_system"] = self._gtk.Button(
             "refresh", _("System Restart"), "color1"
         )
         self.labels["restart_system"].connect("clicked", self.reboot_poweroff, "reboot")
+# VOLUMIC MODIF
+        self.labels["restart_system"].connect("pressed", self._sound_select)
+# END VOLUMIC MODIF
         self.labels["shutdown"] = self._gtk.Button(
             "shutdown", _("System Shutdown"), "color2"
         )
         self.labels["shutdown"].connect("clicked", self.reboot_poweroff, "shutdown")
+# VOLUMIC MODIF
+        self.labels["shutdown"].connect("pressed", self._sound_select)
+# END VOLUMIC MODIF
         self.labels["retry"] = self._gtk.Button("load", _("Retry"), "color3")
         self.labels["retry"].connect("clicked", self.retry)
+# VOLUMIC MODIF
+        self.labels["retry"].connect("pressed", self._sound_select)
+# END VOLUMIC MODIF
 
         self.labels["actions"] = Gtk.Box(hexpand=True, vexpand=False, homogeneous=True)
 

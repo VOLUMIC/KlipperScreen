@@ -22,6 +22,9 @@ class Keypad(Gtk.Box):
         close.set_hexpand(False)
         close.set_vexpand(False)
         close.connect("clicked", close_function)
+# VOLUMIC MODIF
+        close.connect("pressed", self._sound_select)
+# END VOLUMIC MODIF
 
         self.top_box = Gtk.Box(spacing=5)
         self.top_box.add(self.labels["entry"])
@@ -52,6 +55,9 @@ class Keypad(Gtk.Box):
             else:
                 self.labels[k_id] = self._gtk.Button(label=keys[i][0], style="numpad_key")
             self.labels[k_id].connect('clicked', self.keypad_clicked, keys[i][0])
+# VOLUMIC MODIF
+            self.labels[k_id].connect("pressed", self._sound_feedback)
+# END VOLUMIC MODIF
             self.labels[k_id].get_style_context().add_class(keys[i][1])
             numpad.attach(self.labels[k_id], i % 3, i // 3, 1, 1)
 

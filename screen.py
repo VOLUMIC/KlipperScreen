@@ -400,6 +400,9 @@ class KlipperScreen(Gtk.Window):
                 widget.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
                 widget.set_max_width_chars(40)
         msg.connect("clicked", self.close_popup_message)
+# VOLUMIC MODIF
+        msg.connect("pressed", self._sound_feedback)
+# END VOLUMIC MODIF
         msg.get_style_context().add_class("message_popup")
         if level == 1:
             msg.get_style_context().add_class("message_popup_echo")
@@ -559,6 +562,16 @@ class KlipperScreen(Gtk.Window):
     def reload_icon_theme(self):
         self.panels_reinit = list(self.panels)
         self.base_panel.reload_icons()
+# VOLUMIC MODIF
+    def _sound_feedback(self, widget=None):
+        os.system('/etc/scripts/ks_click.sh')
+
+    def _sound_select(self, widget=None):
+        os.system('/etc/scripts/ks_select.sh')
+
+    def _sound_start(self, widget=None):
+        os.system('/etc/scripts/ks_start.sh')
+# END VOLUMIC MODIF
 
     def _go_to_submenu(self, widget, name):
         logging.info(f"#### Go to submenu {name}")
@@ -635,6 +648,9 @@ class KlipperScreen(Gtk.Window):
 
         close = Gtk.Button()
         close.connect("clicked", self.close_screensaver)
+# VOLUMIC MODIF
+        close.connect("pressed", self._sound_feedback)
+# END VOLUMIC MODIF
 
         box = Gtk.Box(halign=Gtk.Align.CENTER, width_request=self.width, height_request=self.height)
         box.pack_start(close, True, True, 0)

@@ -102,6 +102,9 @@ class ScreenPanel:
 
     def on_dropdown_change(self, combo, section, option, callback=None):
         tree_iter = combo.get_active_iter()
+# VOLUMIC MODIF
+        self._screen._sound_select()
+# END VOLUMIC MODIF
         if tree_iter is not None:
             model = combo.get_model()
             value = model[tree_iter][1]
@@ -124,6 +127,9 @@ class ScreenPanel:
             self._config.get_config().add_section(section)
         self._config.set(section, option, "True" if switch.get_active() else "False")
         self._config.save_user_config_options()
+# VOLUMIC MODIF
+        self._screen._sound_select()
+# END VOLUMIC MODIF
         if callback is not None:
             callback(switch.get_active())
 
