@@ -38,7 +38,7 @@ class Panel(MenuPanel):
             self.main_menu.attach(scroll, 1, 0, 1, 1)
         self.content.add(self.main_menu)
 
-    def update_graph_visibility(self, force_hide=False):
+    def update_graph_visibility(self, force_hide=True):
         if self.left_panel is None:
             logging.info("No left panel")
             return
@@ -221,11 +221,11 @@ class Panel(MenuPanel):
         self.labels['devices'] = Gtk.Grid(vexpand=False)
         self.labels['devices'].get_style_context().add_class('heater-grid')
 
-        name = Gtk.Label()
-        temp = Gtk.Label(label=_("Temp (°C)"))
+        #name = Gtk.Label()
+        #temp = Gtk.Label(label=_("Temp (°C)"))
 
-        self.labels['devices'].attach(name, 0, 0, 1, 1)
-        self.labels['devices'].attach(temp, 1, 0, 1, 1)
+        #self.labels['devices'].attach(name, 0, 0, 1, 1)
+        #self.labels['devices'].attach(temp, 1, 0, 1, 1)
 
         self.labels['da'] = HeaterGraph(self._screen, self._printer, self._gtk.font_size)
 
