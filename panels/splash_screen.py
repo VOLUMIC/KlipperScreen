@@ -14,8 +14,11 @@ class Panel(ScreenPanel):
         image = self._gtk.Image(
             "klipper", self._gtk.content_width * 0.2, self._gtk.content_height * 0.5
         )
+# VOLUMIC MODIF
+        self._screen._sound_start()
+# END VOLUMIC MODIF
         self.labels["text"] = Gtk.Label(
-            label=_("Initializing printer..."),
+            label=_("Démarrage..."),
             wrap=True,
             wrap_mode=Pango.WrapMode.WORD_CHAR,
             halign=Gtk.Align.CENTER,
