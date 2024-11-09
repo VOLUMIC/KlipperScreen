@@ -23,7 +23,7 @@ class Keypad(Gtk.Box):
         close.set_vexpand(False)
         close.connect("clicked", close_function)
 # VOLUMIC MODIF
-        close.connect("pressed", self._sound_select)
+        close.connect("pressed", self.screen._sound_select)
 # END VOLUMIC MODIF
 
         self.top_box = Gtk.Box(spacing=5)

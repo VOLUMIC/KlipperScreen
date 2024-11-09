@@ -181,7 +181,7 @@ class KlippyGtk:
             b.get_style_context().add_class(style)
         b.connect("clicked", self.screen.reset_screensaver_timeout)
 # VOLUMIC MODIF
-        b.connect("pressed", self._sound_feedback)
+        b.connect("pressed", self.screen._sound_feedback)
 # END VOLUMIC MODIF
         return b
 
@@ -242,7 +242,7 @@ class KlippyGtk:
         dialog.connect("response", self.screen.reset_screensaver_timeout)
         dialog.connect("response", callback, *args)
 # VOLUMIC MODIF
-        dialog.connect("pressed", self._sound_feedback)
+        dialog.connect("pressed", self.screen._sound_feedback)
 # END VOLUMIC MODIF
         dialog.get_style_context().add_class("dialog")
 
