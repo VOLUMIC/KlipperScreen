@@ -238,9 +238,6 @@ class KlippyGtk:
             content.connect("button-release-event", self.dialog_content_decouple, dialog)
             dialog.add_events(Gdk.EventMask.BUTTON_RELEASE_MASK)
             dialog.connect("button-release-event", self.remove_dialog)
-            # VOLUMIC MODIF
-            dialog.connect("button-release-event", self.screen._sound_feedback)
-            # END VOLUMIC MODIF
 
         dialog.connect("response", self.screen.reset_screensaver_timeout)
         dialog.connect("response", callback, *args)
