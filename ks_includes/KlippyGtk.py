@@ -242,7 +242,7 @@ class KlippyGtk:
         dialog.connect("response", self.screen.reset_screensaver_timeout)
         dialog.connect("response", callback, *args)
 # VOLUMIC MODIF
-        dialog.connect("response", self.screen._sound_feedback)
+#        dialog.connect("response", self.screen._sound_feedback)
 # END VOLUMIC MODIF
         dialog.get_style_context().add_class("dialog")
 
