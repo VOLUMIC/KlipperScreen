@@ -9,7 +9,7 @@ from ks_includes.screen_panel import ScreenPanel
 
 
 class Panel(ScreenPanel):
-    distances = [".1", ".5", "1", "5", "10", "25", "50"]
+    distances = [".1", "1", "5", "10", "25", "50", "100"]
     distance = distances[-2]
 
     def __init__(self, screen, title):
@@ -33,8 +33,12 @@ class Panel(ScreenPanel):
             "y-": self._gtk.Button("arrow-down", "Y-", "color2"),
             "z+": self._gtk.Button("z-farther", "Z+", "color3"),
             "z-": self._gtk.Button("z-closer", "Z-", "color3"),
-            "home": self._gtk.Button("home", _("Home"), "color4"),
-            "motors_off": self._gtk.Button("motor-off", _("Disable Motors"), "color4"),
+            "home": self._gtk.Button("home", "Paraléllisme", "color4"),
+            "homex": self._gtk.Button("home-x", _('Home X'), "color4"),
+            "homey": self._gtk.Button("home-y", _('Home Y'), "color4"),
+            "homez": self._gtk.Button("home-z", _('Home Z'), "color4"),
+            "homea": self._gtk.Button("home", _('Home All'), "color4"),
+            "motors_off": self._gtk.Button("motor-off", "Moteur OFF", "color4"),
         }
         self.buttons["x+"].connect("clicked", self.move, "X", "+")
         self.buttons["x-"].connect("clicked", self.move, "X", "-")
@@ -42,15 +46,22 @@ class Panel(ScreenPanel):
         self.buttons["y-"].connect("clicked", self.move, "Y", "-")
         self.buttons["z+"].connect("clicked", self.move, "Z", "+")
         self.buttons["z-"].connect("clicked", self.move, "Z", "-")
-        self.buttons["home"].connect("clicked", self.home)
-        script = {"script": "M18"}
-        self.buttons["motors_off"].connect(
-            "clicked",
-            self._screen._confirm_send_action,
-            _("Are you sure you wish to disable motors?"),
-            "printer.gcode.script",
-            script,
-        )
+
+        self.buttons["home"].connect("clicked", self.qgl)
+        self.buttons["homex"].connect("clicked", self.homex)
+        self.buttons["homey"].connect("clicked", self.homey)
+        self.buttons["homez"].connect("clicked", self.homez)
+        self.buttons["homea"].connect("clicked", self.home)
+        self.buttons["motors_off"].connect("clicked", self.motoroff)
+
+        #script = {"script": "M18"}
+        #self.buttons["motors_off"].connect(
+        #    "clicked",
+        #    self._screen._confirm_send_action,
+        #    _("Are you sure you wish to disable motors?"),
+        #    "printer.gcode.script",
+        #    script,
+        #)
         adjust = self._gtk.Button(
             "settings", None, "color2", 1, Gtk.PositionType.LEFT, 1
         )
@@ -90,6 +101,10 @@ class Panel(ScreenPanel):
 
         grid.attach(self.buttons["home"], 0, 0, 1, 1)
         grid.attach(self.buttons["motors_off"], 2, 0, 1, 1)
+        grid.attach(self.buttons["homex"], 0, 2, 1, 1)
+        grid.attach(self.buttons["homey"], 1, 2, 1, 1)
+        grid.attach(self.buttons["homez"], 2, 2, 1, 1)
+        grid.attach(self.buttons["homea"], 3, 2, 1, 1)
 
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
@@ -118,8 +133,11 @@ class Panel(ScreenPanel):
         self.labels["move_menu"] = Gtk.Grid(
             row_homogeneous=True, column_homogeneous=True
         )
+
+        grid.attach(distgrid, 0, 3, 4, 1)
+
         self.labels["move_menu"].attach(grid, 0, 0, 1, 3)
-        self.labels["move_menu"].attach(bottomgrid, 0, 3, 1, 1)
+        #self.labels["move_menu"].attach(bottomgrid, 0, 3, 1, 1)
         self.labels["move_menu"].attach(distgrid, 0, 4, 1, 1)
 
         self.content.add(self.labels["move_menu"])
@@ -264,10 +282,19 @@ class Panel(ScreenPanel):
             self._screen._ws.klippy.gcode_script("G90")
 
     def home(self, widget):
-        if "delta" in self._printer.get_config_section("printer")["kinematics"]:
-            self._screen._send_action(widget, "printer.gcode.script", {"script": "G28"})
-            return
-        name = "homing"
-        disname = self._screen._config.get_menu_name("move", name)
-        menuitems = self._screen._config.get_menu_items("move", name)
-        self._screen.show_panel("menu", disname, items=menuitems)
+        self._screen._send_action(widget, "printer.gcode.script", {"script": "G28"})
+
+    def homex(self, widget):
+        self._screen._send_action(widget, "printer.gcode.script", {"script": "G28 X"})
+
+    def homey(self, widget):
+        self._screen._send_action(widget, "printer.gcode.script", {"script": "G28 Y"})
+
+    def homez(self, widget):
+        self._screen._send_action(widget, "printer.gcode.script", {"script": "G28 Z"})
+
+    def motoroff(self, widget):
+        self._screen._send_action(widget, "printer.gcode.script", {"script": "M18"})
+
+    def qgl(self, widget):
+        self._screen._send_action(widget, "printer.gcode.script", {"script": "ETALONNAGE_PARALLELISME"})
