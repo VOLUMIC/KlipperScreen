@@ -137,6 +137,7 @@ class BedMap(Gtk.DrawingArea):
 
         rows = len(self.bm)
         columns = len(self.bm[0])
+        refer = 0
         for i, row in enumerate(self.bm):
             ty = (gheight / rows * i)
             by = ty + gheight / rows
@@ -146,8 +147,11 @@ class BedMap(Gtk.DrawingArea):
                     continue
                 lx = (gwidth / columns * j) + self.font_size * 2.2
                 rx = lx + gwidth / columns
+                if i == 0 and j == 0:
+                    refer = column
                 # Colors
-                ctx.set_source_rgb(*self.colorbar(column))
+                #ctx.set_source_rgb(*self.colorbar(column))
+                ctx.set_source_rgb(*self.colorbar(column-refer))
                 ctx.move_to(lx, ty)
                 ctx.line_to(lx, by)
                 ctx.line_to(rx, by)
@@ -158,12 +162,19 @@ class BedMap(Gtk.DrawingArea):
                 # Numbers
                 if gwidth / columns < self.font_size * 3:
                     continue
-                ctx.set_source_rgb(0, 0, 0)
+                ctx.set_source_rgb(1, 1, 1)
                 if column > 0:
                     ctx.move_to((lx + rx) / 2 - self.font_size, (ty + by + self.font_size) / 2)
                 else:
                     ctx.move_to((lx + rx) / 2 - self.font_size * 1.2, (ty + by + self.font_size) / 2)
-                ctx.show_text(f"{column:.2f}")
+                #ctx.show_text(f"{column:.2f}")
+                #ctx.show_text(f"{(column*100/0.5)*12/100:.0f}"+"h")
+                nbtour = ((column-refer)*100/0.5)*12/100
+                if nbtour > 0 and nbtour < 1:
+                    nbtour = 0
+                if nbtour > -1 and nbtour < 0:
+                    nbtour = 0
+                ctx.show_text(f"{nbtour:.0f}"+"h")
                 ctx.stroke()
 
     @staticmethod
@@ -180,13 +191,18 @@ class BedMap(Gtk.DrawingArea):
 
     @staticmethod
     def colorbar(value: float):
-        rmax = 0.25
-        color = min(1, max(0, 1 - 1 / rmax * abs(value)))
+        #rmax = 0.25
+        #color = min(1, max(0, 1 - 1 / rmax * abs(value)))
+        color = value
+        if color > 1:
+            color = 1
         if value > 0:
-            return [1, color, color]
+            #return [1, color, color]
+            return [color, 0, 0]
         if value < 0:
-            return [color, color, 1]
-        return [1, 1, 1]
+            #return [color, color, 1]
+            return [0, 0, color]
+        return [0, 0, 0]
 
     def set_inversion(self, x=False, y=False):
         self.invert_x = x
