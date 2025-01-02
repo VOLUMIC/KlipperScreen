@@ -193,7 +193,7 @@ class BedMap(Gtk.DrawingArea):
     def colorbar(value: float):
         #rmax = 0.25
         #color = min(1, max(0, 1 - 1 / rmax * abs(value)))
-        color = value
+        color = abs(value)
         if color > 1:
             color = 1
         if value > 0:
