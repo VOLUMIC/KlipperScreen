@@ -201,7 +201,7 @@ class BedMap(Gtk.DrawingArea):
             return [color, 0, 0]
         if value < 0:
             #return [color, color, 1]
-            return [color, 0.5, 0]
+            return [color, color, 0]
         return [0, 0, 0]
 
     def set_inversion(self, x=False, y=False):
