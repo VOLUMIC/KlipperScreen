@@ -239,8 +239,8 @@ class Panel(ScreenPanel):
     def calibrate_mesh(self, widget):
         widget.set_sensitive(False)
         self._screen.show_popup_message(_("Calibrating"), level=1)
-        if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-            self._screen._ws.klippy.gcode_script("G28")
+        #if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
+        self._screen._ws.klippy.gcode_script("G28")
         #if (
         #    "Z_TILT_ADJUST" in self._printer.available_commands
         #    and not bool(self._printer.get_stat("z_tilt", "applied"))
