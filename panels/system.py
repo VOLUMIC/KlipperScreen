@@ -103,6 +103,7 @@ class Panel(ScreenPanel):
                     "virtualization",
                     "provider",
                     "available_services",
+                    "distribution",
                     "service_state",
                     "instance_ids",
                 )

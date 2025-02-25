@@ -238,9 +238,9 @@ class Panel(ScreenPanel):
 
     def calibrate_mesh(self, widget):
         widget.set_sensitive(False)
-        self._screen.show_popup_message(_("Calibrating"), level=1)
+        #self._screen.show_popup_message(_("Calibrating"), level=1)
         #if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-        self._screen._ws.klippy.gcode_script("G28")
+        #self._screen._ws.klippy.gcode_script("G28")
         #if (
         #    "Z_TILT_ADJUST" in self._printer.available_commands
         #    and not bool(self._printer.get_stat("z_tilt", "applied"))
@@ -251,7 +251,7 @@ class Panel(ScreenPanel):
         #    and not bool(self._printer.get_stat("quad_gantry_level", "applied"))
         #):
         #    self._screen._ws.klippy.gcode_script("QUAD_GANTRY_LEVEL")
-        self._screen._send_action(widget, "printer.gcode.script", {"script": "BED_MESH_CALIBRATE PROFILE=default"})
+        self._screen._send_action(widget, "printer.gcode.script", {"script": "ETALONNAGE_LIT"})
 
     def send_clear_mesh(self, widget):
         self._screen._send_action(widget, "printer.gcode.script", {"script": "BED_MESH_CLEAR"})
