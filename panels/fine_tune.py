@@ -132,7 +132,8 @@ class Panel(ScreenPanel):
 
     def change_babystepping(self, widget, direction):
         if direction == "reset":
-            self.labels['zoffset'].set_label('  0.00mm')
+            #self.labels['zoffset'].set_label('  0.00mm')
+            self.labels['zoffset'].set_label(f'  {float(self.z_savedoffset):.3f}mm')
             self._screen._send_action(widget, "printer.gcode.script", {"script": "SET_GCODE_OFFSET Z=0 MOVE=1"})
             return
         elif direction == "+":
