@@ -9,14 +9,15 @@ from ks_includes.screen_panel import ScreenPanel
 
 
 class Panel(ScreenPanel):
-    z_deltas = ["0.01", "0.05"]
+    z_deltas = ["0.01", "0.05", "0.1"]
     z_delta = z_deltas[-1]
-    speed_deltas = ['5', '25']
+    speed_deltas = ['5', '10', '25']
     s_delta = speed_deltas[-1]
-    extrude_deltas = ['1', '2']
+    extrude_deltas = ['1', '2', '4']
     e_delta = extrude_deltas[-1]
     speed = extrusion = 100
     z_offset = 0.0
+    z_savedoffset = 0.0
 
     def __init__(self, screen, title):
         title = title or _("Fine Tuning")
@@ -117,8 +118,11 @@ class Panel(ScreenPanel):
             return
         if "gcode_move" in data:
             if "homing_origin" in data["gcode_move"]:
-                self.labels['zoffset'].set_label(f'  {data["gcode_move"]["homing_origin"][2]:.3f}mm')
+                #self.labels['zoffset'].set_label(f'  {data["gcode_move"]["homing_origin"][2]:.3f}mm')
+                #self.z_offset = float(data["gcode_move"]["homing_origin"][2])
+                self.z_savedoffset = 0-float(self._printer.get_config_section('probe')['z_offset'])
                 self.z_offset = float(data["gcode_move"]["homing_origin"][2])
+                self.labels['zoffset'].set_label(f'  {float(self.z_offset)+float(self.z_savedoffset):.3f}mm')
             if "extrude_factor" in data["gcode_move"]:
                 self.extrusion = round(float(data["gcode_move"]["extrude_factor"]) * 100)
                 self.labels['extrudefactor'].set_label(f"  {self.extrusion:3}%")
@@ -135,7 +139,8 @@ class Panel(ScreenPanel):
             self.z_offset += float(self.z_delta)
         elif direction == "-":
             self.z_offset -= float(self.z_delta)
-        self.labels['zoffset'].set_label(f'  {self.z_offset:.3f}mm')
+        #self.labels['zoffset'].set_label(f'  {self.z_offset:.3f}mm')
+        self.labels['zoffset'].set_label(f'  {float(self.z_offset)+float(self.z_savedoffset):.3f}mm')
         self._screen._send_action(widget, "printer.gcode.script",
                                   {"script": f"SET_GCODE_OFFSET Z_ADJUST={direction}{self.z_delta} MOVE=1"})
 

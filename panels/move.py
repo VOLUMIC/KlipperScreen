@@ -9,7 +9,7 @@ from ks_includes.screen_panel import ScreenPanel
 
 
 class Panel(ScreenPanel):
-    distances = [".1", "1", "5", "10", "25", "50", "100"]
+    distances = [".1", "1", "5", "10", "25", "50", "100", "200"]
     distance = distances[-2]
 
     def __init__(self, screen, title):
