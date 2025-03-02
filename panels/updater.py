@@ -313,7 +313,7 @@ class Panel(ScreenPanel):
         #    if program == "full"
         #    else _("Starting update for") + f" {program}..."
         #)
-        msg = ("Mise a jour de VyperOS, la machine va s'eteindre une fois terminee.")
+        msg = ("Mise a jour de VyperOS\nVeuillez patienter...\n\nLa machine va s'eteindre une fois terminee\nEteignez et rallumez-la.")
         self._screen._websocket_callback(
             "notify_update_response",
             {"application": {program}, "message": msg, "complete": False},
@@ -326,7 +326,7 @@ class Panel(ScreenPanel):
             self._screen._send_action(widget, "machine.services.stop", {"service": "klipper"})
             self._screen._send_action(widget, "machine.services.stop", {"service": "mainsail"})
             self._screen._send_action(widget, "printer.gcode.script", {"script": 'SET_FAN_SPEED FAN=_Alimentation SPEED=0.6'})
-            os.system('/home/Volumic/VyperOS/vyperos_update.sh &')
+            os.system('/home/Volumic/VyperOS/vyperos_update.sh > vyperos_lastupdate.log &')
         else:
             logging.info(f"Sending machine.update.client name: {program}")
             self._screen._ws.send_method("machine.update.client", {"name": program})
