@@ -33,7 +33,7 @@ msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "La commande FIRMWARE_RESTART peut résoudre le problème."
 
 msgid "ADXL Not Configured"
-msgstr "ADXL non configuré"
+msgstr "Accelerometre non configuré"
 
 msgid "Abort"
 msgstr "Annuler"
@@ -149,7 +149,7 @@ msgid "Channel"
 msgstr "Canal"
 
 msgid "Check ADXL Wiring"
-msgstr "Vérifier le câblage ADXL"
+msgstr "Vérifier le câblage de l'accelerometre"
 
 msgid "Checking for updates, please wait..."
 msgstr "Recherche de mises à jour, veuillez patienter..."
@@ -323,7 +323,7 @@ msgid "Filter"
 msgstr "Filtre"
 
 msgid "Finding ADXL"
-msgstr "Recherche de l’ADXL"
+msgstr "Recherche de l’accelerometre"
 
 msgid "Fine Tuning"
 msgstr "Ajustements"
@@ -449,22 +449,22 @@ msgid "Job Status"
 msgstr "Statut du job"
 
 msgid "Klipper Restart"
-msgstr "Redémarrer Klipper"
+msgstr "Redémarrer VyperOS"
 
 msgid "Klipper has disconnected"
-msgstr "Klipper s'est déconnecté"
+msgstr "VyperOS s'est déconnecté"
 
 msgid "Klipper has encountered an error."
-msgstr "Klipper a rencontré une erreur."
+msgstr "VyperOS a rencontré une erreur."
 
 msgid "Klipper has shutdown"
-msgstr "Klipper s'est arrêté"
+msgstr "VyperOS s'est arrêté"
 
 msgid "Klipper is attempting to start"
-msgstr "Klipper tente de démarrer"
+msgstr "VyperOS tente de démarrer"
 
 msgid "Klipper will reboot"
-msgstr "Klipper va redémarrer"
+msgstr "VyperOS va redémarrer"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
@@ -1174,20 +1174,20 @@ msgstr[1] "secondes"
 #~ msgstr "IPv6"
 
 #~ msgid "Klipper Version"
-#~ msgstr "Version de Klipper"
+#~ msgstr "Version de VyperOS"
 
 #~ msgid ""
 #~ "Klipper has encountered an error with the micro-controller.\n"
 #~ "Please recompile and flash."
 #~ msgstr ""
-#~ "Klipper a rencontré une erreur avec le micro-contrôleur.\n"
+#~ "VyperOS a rencontré une erreur avec le micro-contrôleur.\n"
 #~ "Veuillez recompiler et reflasher."
 
 #~ msgid ""
 #~ "Klipper has encountered an error.\n"
 #~ "Issue a FIRMWARE_RESTART to attempt fixing the issue."
 #~ msgstr ""
-#~ "Klipper a rencontré une erreur. \n"
+#~ "VyperOS a rencontré une erreur. \n"
 #~ "Taper FIRMWARE_RESTART pour fixer l'erreur."
 
 #~ msgid "KlipperScreen Version"
