@@ -1,4 +1,5 @@
 import logging
+import os
 from gettext import ngettext
 
 import gi
@@ -22,7 +23,7 @@ class Panel(ScreenPanel):
                 style="color1",
                 scale=self.bts,
                 position=Gtk.PositionType.LEFT,
-                lines=1,
+                lines=3,
             ),
             "refresh": self._gtk.Button(
                 image_name="arrow-down",
@@ -30,7 +31,7 @@ class Panel(ScreenPanel):
                 style="color3",
                 scale=self.bts,
                 position=Gtk.PositionType.LEFT,
-                lines=1,
+                lines=3,
             ),
         }
         self.buttons["update_all"].connect("clicked", self.show_update_info, "full")
@@ -70,9 +71,9 @@ class Panel(ScreenPanel):
 
             self.buttons[f"{prog}_status"] = self._gtk.Button()
             self.buttons[f"{prog}_status"].set_hexpand(False)
-            self.buttons[f"{prog}_status"].connect(
-                "clicked", self.show_update_info, prog
-            )
+            #self.buttons[f"{prog}_status"].connect(
+            #    "clicked", self.show_update_info, prog
+            #)
 
             try:
                 if prog in self._printer.system_info["available_services"]:
@@ -86,11 +87,11 @@ class Panel(ScreenPanel):
                     self.buttons[f"{prog}_restart"].connect(
                         "clicked", self.restart, prog
                     )
-                    infogrid.attach(self.buttons[f"{prog}_restart"], 0, i, 1, 1)
+                    infogrid.attach(self.buttons[f"{prog}_restart"], 1, i, 1, 1)
             except Exception as e:
                 logging.exception(e)
 
-            infogrid.attach(self.labels[prog], 1, i, 1, 1)
+            infogrid.attach(self.labels[prog], 0, i, 1, 1)
             infogrid.attach(self.buttons[f"{prog}_status"], 2, i, 1, 1)
             self.update_program_info(prog)
         self.clear_scroll()
@@ -307,19 +308,25 @@ class Panel(ScreenPanel):
             ):
                 return
         self._screen.base_panel.show_update_dialog()
-        msg = (
-            _("Updating")
-            if program == "full"
-            else _("Starting update for") + f" {program}..."
-        )
+        #msg = (
+        #    _("Updating")
+        #    if program == "full"
+        #    else _("Starting update for") + f" {program}..."
+        #)
+        msg = ("Mise a jour de VyperOS, la machine va s'eteindre une fois terminee.")
         self._screen._websocket_callback(
             "notify_update_response",
             {"application": {program}, "message": msg, "complete": False},
         )
 
-        if program in ["klipper", "moonraker", "system", "full"]:
+        if program in ["full"]:
             logging.info(f"Sending machine.update.{program}")
-            self._screen._ws.send_method(f"machine.update.{program}")
+            self._screen.base_panel.show_update_dialog()
+            self._screen._send_action(widget, "printer.gcode.script", {"script": 'SET_LED LED="Eclairage_LEDs" RED=1 GREEN=0 BLUE=0 SYNC=0 TRANSMIT=1'})
+            self._screen._send_action(widget, "machine.services.stop", {"service": "klipper"})
+            self._screen._send_action(widget, "machine.services.stop", {"service": "mainsail"})
+            self._screen._send_action(widget, "printer.gcode.script", {"script": 'SET_FAN_SPEED FAN=_Alimentation SPEED=0.6'})
+            os.system('/home/Volumic/VyperOS/vyperos_update.sh &')
         else:
             logging.info(f"Sending machine.update.client name: {program}")
             self._screen._ws.send_method("machine.update.client", {"name": program})
