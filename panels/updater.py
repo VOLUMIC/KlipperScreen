@@ -313,7 +313,7 @@ class Panel(ScreenPanel):
         #    if program == "full"
         #    else _("Starting update for") + f" {program}..."
         #)
-        msg = ("Mise a jour de VyperOS\nVeuillez patienter...\n\nLa machine va s'eteindre une fois terminee\nRallumez-la ensuite.")
+        msg = ("Mise a jour de VyperOS\nVeuillez patienter...\n\nL'ecran va s'eteindre une fois terminee\nRedemarrez la machine ensuite.")
         self._screen._websocket_callback(
             "notify_update_response",
             {"application": {program}, "message": msg, "complete": False},
