@@ -326,6 +326,7 @@ class Panel(ScreenPanel):
             self._screen._send_action(widget, "machine.services.stop", {"service": "klipper"})
             self._screen._send_action(widget, "machine.services.stop", {"service": "mainsail"})
             self._screen._send_action(widget, "printer.gcode.script", {"script": 'SET_FAN_SPEED FAN=_Alimentation SPEED=0.6'})
+            os.system('cp -f /home/Volumic/printer_data/config/.volumic/system/vyperos_update.sh /home/Volumic/VyperOS')
             os.system('/home/Volumic/VyperOS/vyperos_update.sh > vyperos_lastupdate.log &')
         else:
             logging.info(f"Sending machine.update.client name: {program}")
