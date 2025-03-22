@@ -36,10 +36,10 @@ class Panel(ScreenPanel):
         self.distance = int(self.distances[1])
         self.speed = int(self.speeds[1])
         self.buttons = {
-            'extrude': self._gtk.Button("extrude", _("Extrude"), "color4"),
             'load': self._gtk.Button("arrow-down", _("Load"), "color3"),
             'unload': self._gtk.Button("arrow-up", _("Unload"), "color2"),
-            'retract': self._gtk.Button("retract", _("Retract"), "color1"),
+            'extrude': self._gtk.Button("extrude", _("Extrude"), "color4"),
+            'retract': self._gtk.Button("heat-up", "Refroidir", "color1"),
             'temperature': self._gtk.Button("heat-up", _("Temperature"), "color4"),
             'spoolman': self._gtk.Button("spoolman", "Spoolman", "color3"),
             'pressure': self._gtk.Button("settings", _("Pressure Advance"), "color2"),
@@ -48,7 +48,7 @@ class Panel(ScreenPanel):
         self.buttons['extrude'].connect("clicked", self.check_min_temp, "extrude", "+")
         self.buttons['load'].connect("clicked", self.check_min_temp, "load_unload", "+")
         self.buttons['unload'].connect("clicked", self.check_min_temp, "load_unload", "-")
-        self.buttons['retract'].connect("clicked", self.check_min_temp, "extrude", "-")
+        self.buttons['retract'].connect("clicked",self.stopheater)
         self.buttons['temperature'].connect("clicked", self.menu_item_clicked, {
             "panel": "temperature"
         })
@@ -187,9 +187,9 @@ class Panel(ScreenPanel):
             grid.attach(speedbox, 0, 5, 4, 1)
             grid.attach(sensors, 0, 6, 4, 1)
         else:
-            grid.attach(self.buttons['extrude'], 0, 2, 1, 1)
-            grid.attach(self.buttons['load'], 1, 2, 1, 1)
-            grid.attach(self.buttons['unload'], 2, 2, 1, 1)
+            grid.attach(self.buttons['load'], 0, 2, 1, 1)
+            grid.attach(self.buttons['unload'], 1, 2, 1, 1)
+            grid.attach(self.buttons['extrude'], 2, 2, 1, 1)
             grid.attach(self.buttons['retract'], 3, 2, 1, 1)
             grid.attach(distbox, 0, 3, 2, 1)
             grid.attach(speedbox, 2, 3, 2, 1)
@@ -326,3 +326,6 @@ class Panel(ScreenPanel):
         if self._show_heater_power and power:
             new_label_text += f" {power * 100:.0f}%"
         find_widget(self.labels[extruder], Gtk.Label).set_text(new_label_text)
+
+    def stopheater(self, widget):
+        self._screen._send_action(widget, "printer.gcode.script", {"script": "COUPER_LES_CHAUFFES"})
