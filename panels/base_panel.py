@@ -8,6 +8,7 @@ from jinja2 import Environment
 from datetime import datetime
 from math import log
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.sdbus_nm import SdbusNm
 
 try:
     import psutil
@@ -30,6 +31,37 @@ class BasePanel(ScreenPanel):
         self.current_extruder = None
         self.last_usage_report = datetime.now()
         self.usage_report = 0
+
+        # VOLUMIC MODIF
+        try:
+            self.sdbus_nm = SdbusNm(self.popup_callback)
+        except Exception as e:
+            logging.exception("Failed to initialize")
+            self.sdbus_nm = None
+            self.error_box = Gtk.Box(
+                orientation=Gtk.Orientation.VERTICAL,
+                hexpand=True,
+                vexpand=True
+            )
+            message = (
+                _("Failed to initialize") + "\n"
+                + "This panel needs NetworkManager installed into the system\n"
+                + "And the apropriate permissions, without them it will not function.\n"
+                + f"\n{e}\n"
+            )
+            self.error_box.add(
+                Gtk.Label(
+                    label=message,
+                    wrap=True,
+                    wrap_mode=Pango.WrapMode.WORD_CHAR,
+                )
+            )
+            self.error_box.set_valign(Gtk.Align.CENTER)
+            self.content.add(self.error_box)
+            self._screen.panels_reinit.append(self._screen._cur_panels[-1])
+            return
+        # VOLUMIC MODIF
+
         # Action bar buttons
         self.abscale = self.bts * 1.1
         self.control['back'] = self._gtk.Button('back', scale=self.abscale)
@@ -371,7 +403,7 @@ class BasePanel(ScreenPanel):
         except Exception as e:
             logging.debug(f"Error parsing jinja for title: {title}\n{e}")
 
-        self.titlelbl.set_label(f"{printer} {title}")
+        self.titlelbl.set_label(f"{printer} {title} ({self.sdbus_nm.get_ip_address()})")
 
     def update_time(self):
         now = datetime.now()
@@ -459,3 +491,6 @@ class BasePanel(ScreenPanel):
             self._screen.dialogs.remove(self.update_dialog)
         self.update_dialog = None
         self._screen._menu_go_back(home=True)
+
+    def popup_callback(self, msg, level=3):
+        self._screen.show_popup_message(msg, level)

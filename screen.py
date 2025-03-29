@@ -32,8 +32,6 @@ from ks_includes.widgets.prompts import Prompt
 from ks_includes.config import KlipperScreenConfig
 from panels.base_panel import BasePanel
 
-from ks_includes.sdbus_nm import SdbusNm
-
 logging.getLogger("urllib3").setLevel(logging.WARNING)
 
 klipperscreendir = pathlib.Path(__file__).parent.resolve()
@@ -94,36 +92,6 @@ class KlipperScreen(Gtk.Window):
         self.confirm = None
         self.panels_reinit = []
         self.last_popup_time = datetime.now()
-
-        # VOLUMIC MODIF
-        try:
-            self.sdbus_nm = SdbusNm(self.popup_callback)
-        except Exception as e:
-            logging.exception("Failed to initialize")
-            self.sdbus_nm = None
-            self.error_box = Gtk.Box(
-                orientation=Gtk.Orientation.VERTICAL,
-                hexpand=True,
-                vexpand=True
-            )
-            message = (
-                _("Failed to initialize") + "\n"
-                + "This panel needs NetworkManager installed into the system\n"
-                + "And the apropriate permissions, without them it will not function.\n"
-                + f"\n{e}\n"
-            )
-            self.error_box.add(
-                Gtk.Label(
-                    label=message,
-                    wrap=True,
-                    wrap_mode=Pango.WrapMode.WORD_CHAR,
-                )
-            )
-            self.error_box.set_valign(Gtk.Align.CENTER)
-            self.content.add(self.error_box)
-            self._screen.panels_reinit.append(self._screen._cur_panels[-1])
-            return
-        # VOLUMIC MODIF
 
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
 
@@ -370,8 +338,8 @@ class KlipperScreen(Gtk.Window):
             if panel_name not in self.panels:
                 try:
                     #self.panels[panel_name] = self._load_panel(panel).Panel(self, title, **kwargs)
-                    #self.panels[panel_name] = self._load_panel(panel).Panel(self, f"- {title}", **kwargs)
-                    self.panels[panel_name] = self._load_panel(panel).Panel(self, f"- {title} ({self.sdbus_nm.get_ip_address()})", **kwargs)
+                    self.panels[panel_name] = self._load_panel(panel).Panel(self, f"- {title}", **kwargs)
+                    #self.panels[panel_name] = self._load_panel(panel).Panel(self, f"- {title} ({self.sdbus_nm.get_ip_address()})", **kwargs)
                 except Exception as e:
                     self.show_error_modal(f"Unable to load panel {panel}", f"{e}\n\n{traceback.format_exc()}")
                     return
@@ -1321,10 +1289,6 @@ class KlipperScreen(Gtk.Window):
             self.vertical_mode = new_mode
             self.aspect_ratio = new_ratio
             logging.info(f"Vertical mode: {self.vertical_mode}")
-
-    def popup_callback(self, msg, level=3):
-        self.show_popup_message(msg, level)
-
 
 def main():
     parser = argparse.ArgumentParser(description="KlipperScreen - A GUI for Klipper")
