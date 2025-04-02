@@ -64,16 +64,15 @@ class Panel(ScreenPanel):
         infogrid = Gtk.Grid()
         infogrid.get_style_context().add_class("system-program-grid")
         for i, prog in enumerate(sorted(list(self.update_status["version_info"]))):
-            self.labels[prog] = Gtk.Label(
-                hexpand=True, halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END
-            )
+            self.labels[prog] = Gtk.Label(hexpand=True, halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END)
             self.labels[prog].get_style_context().add_class("updater-item")
 
-            self.buttons[f"{prog}_status"] = self._gtk.Button()
-            self.buttons[f"{prog}_status"].set_hexpand(False)
-            #self.buttons[f"{prog}_status"].connect(
-            #    "clicked", self.show_update_info, prog
-            #)
+            #self.buttons[f"{prog}_status"] = self._gtk.Button()
+            #self.buttons[f"{prog}_status"].set_hexpand(False)
+            #self.buttons[f"{prog}_status"].connect("clicked", self.show_update_info, prog)
+
+            self.labels[f"{prog}_status"] = Gtk.Label(hexpand=True, halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END)
+            self.labels[f"{prog}_status"].get_style_context().add_class("updater-item")
 
             try:
                 if prog in self._printer.system_info["available_services"]:
@@ -87,12 +86,13 @@ class Panel(ScreenPanel):
                     self.buttons[f"{prog}_restart"].connect(
                         "clicked", self.restart, prog
                     )
-                    infogrid.attach(self.buttons[f"{prog}_restart"], 1, i, 1, 1)
+                    infogrid.attach(self.buttons[f"{prog}_restart"], 2, i, 1, 1)
             except Exception as e:
                 logging.exception(e)
 
             infogrid.attach(self.labels[prog], 0, i, 1, 1)
-            infogrid.attach(self.buttons[f"{prog}_status"], 2, i, 1, 1)
+            #infogrid.attach(self.buttons[f"{prog}_status"], 2, i, 1, 1)
+            infogrid.attach(self.labels[f"{prog}_status"], 1, i, 1, 1)
             self.update_program_info(prog)
         self.clear_scroll()
         self.scroll.add(infogrid)
@@ -323,9 +323,9 @@ class Panel(ScreenPanel):
             logging.info(f"Sending machine.update.{program}")
             self._screen.base_panel.show_update_dialog()
             self._screen._send_action(widget, "printer.gcode.script", {"script": 'SET_LED LED="Eclairage_LEDs" RED=1 GREEN=0 BLUE=0 SYNC=0 TRANSMIT=1'})
+            self._screen._send_action(widget, "printer.gcode.script", {"script": 'SET_FAN_SPEED FAN=_Alimentation SPEED=0.6'})
             self._screen._send_action(widget, "machine.services.stop", {"service": "klipper"})
             self._screen._send_action(widget, "machine.services.stop", {"service": "mainsail"})
-            self._screen._send_action(widget, "printer.gcode.script", {"script": 'SET_FAN_SPEED FAN=_Alimentation SPEED=0.6'})
             #os.system('cp -f /home/Volumic/printer_data/config/.volumic/system/vyperos_update.sh /home/Volumic/VyperOS')
             os.system('/home/Volumic/VyperOS/vyperos_update.sh > vyperos_lastupdate.log &')
         else:
@@ -358,7 +358,7 @@ class Panel(ScreenPanel):
                 if info["version"] == info["remote_version"]:
                     self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']}")
                     self._already_updated(p)
-                    self.buttons[f"{p}_status"].get_style_context().remove_class(
+                    self.labels[f"{p}_status"].get_style_context().remove_class(
                         "invalid"
                     )
                 else:
@@ -369,9 +369,10 @@ class Panel(ScreenPanel):
             else:
                 logging.info(f"Invalid {p} {info['version']}")
                 self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']}")
-                self.buttons[f"{p}_status"].set_label(_("Invalid"))
-                self.buttons[f"{p}_status"].get_style_context().add_class("invalid")
-                self.buttons[f"{p}_status"].set_sensitive(True)
+                #self.labels[f"{p}_status"].set_label(_("Invalid"))
+                self.labels[f"{p}_status"].set_label(_("Update"))
+                self.labels[f"{p}_status"].get_style_context().add_class("invalid")
+                self.labels[f"{p}_status"].set_sensitive(True)
         elif "version" in info and info["version"] == info["remote_version"]:
             self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']}")
             self._already_updated(p)
@@ -382,12 +383,12 @@ class Panel(ScreenPanel):
             self._needs_update(p, info["version"], info["remote_version"])
 
     def _already_updated(self, p):
-        self.buttons[f"{p}_status"].set_label(_("Up To Date"))
-        self.buttons[f"{p}_status"].get_style_context().remove_class("update")
-        self.buttons[f"{p}_status"].set_sensitive(False)
+        self.labels[f"{p}_status"].set_label(_("Up To Date"))
+        self.labels[f"{p}_status"].get_style_context().remove_class("update")
+        self.labels[f"{p}_status"].set_sensitive(False)
 
     def _needs_update(self, p, local="", remote=""):
         logging.info(f"{p} {local} -> {remote}")
-        self.buttons[f"{p}_status"].set_label(_("Update"))
-        self.buttons[f"{p}_status"].get_style_context().add_class("update")
-        self.buttons[f"{p}_status"].set_sensitive(True)
+        self.labels[f"{p}_status"].set_label(_("Update"))
+        self.labels[f"{p}_status"].get_style_context().add_class("update")
+        self.labels[f"{p}_status"].set_sensitive(True)
