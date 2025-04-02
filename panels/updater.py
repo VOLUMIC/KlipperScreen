@@ -43,9 +43,7 @@ class Panel(ScreenPanel):
         top_box.pack_start(self.buttons["update_all"], True, True, 0)
         top_box.pack_start(self.buttons["refresh"], True, True, 0)
 
-        self.update_msg = Gtk.Label(
-            label=_("Checking for updates, please wait..."), vexpand=True
-        )
+        self.update_msg = Gtk.Label(label=_("Checking for updates, please wait..."), vexpand=True)
 
         self.scroll = self._gtk.ScrolledWindow()
         self.scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
