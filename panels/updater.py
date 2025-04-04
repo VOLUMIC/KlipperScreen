@@ -250,7 +250,7 @@ class Panel(ScreenPanel):
 
         buttons = [
             {
-                "name": _("Update"),
+                "name": _("Accept"),
                 "response": Gtk.ResponseType.OK,
                 "style": "dialog-info",
             },
