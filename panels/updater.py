@@ -55,6 +55,22 @@ class Panel(ScreenPanel):
 
         self.content.add(self.main_box)
 
+        section = self._printer.get_macro("VOLUMIC_Type")
+        if section:
+          if "variable_mcutype" in section:
+            mcutype = section["variable_mcutype"]
+          else:
+            mcutype = 1
+        if mcutype == "0":
+           os.system('mkdir /home/Volumic/VyperOS/SAM3X8E')
+           os.system('rmdir /home/Volumic/VyperOS/STM32H723')
+        elif mcutype == "1":
+           os.system('mkdir /home/Volumic/VyperOS/SAM3X8E')
+           os.system('rmdir /home/Volumic/VyperOS/STM32H723')
+        else:
+           os.system('rmdir /home/Volumic/VyperOS/SAM3X8E')
+           os.system('mkdir /home/Volumic/VyperOS/STM32H723')
+
     def activate(self):
         self._screen._ws.send_method("machine.update.status", callback=self.get_updates)
 
