@@ -29,7 +29,7 @@ window {
 }
 
 window {
-	background-image: url("/home/Volumic/KlipperScreen/styles/Volumic/images/background.png");
+	background-image: url("./styles/Volumic/images/background.png");
 }
 
 .title_bar {
@@ -112,7 +112,7 @@ switch:checked {
 }
 
 treeview.view check:checked {
-    -gtk-icon-source: url("./styles/material-dark/images/complete.svg");
+    -gtk-icon-source: url("./styles/Volumic/images/complete.svg");
 }
 
 entry {
