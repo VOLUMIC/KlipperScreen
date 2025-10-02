@@ -8,7 +8,6 @@ from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.widgets.bedmap import BedMap
 
-
 class Panel(ScreenPanel):
 
     def __init__(self, screen, title):
@@ -33,6 +32,12 @@ class Panel(ScreenPanel):
         topbar.add(self.buttons['clear'])
         topbar.add(self.buttons['calib'])
 
+        machinetype = 1
+        section = self._printer.get_macro("VOLUMIC_Type")
+        if section:
+          if "variable_machinetype" in section:
+            machinetype = section["variable_machinetype"]
+
         # Create a grid for all profiles
         self.labels['profiles'] = Gtk.Grid(valign=Gtk.Align.CENTER)
 
@@ -43,7 +48,7 @@ class Panel(ScreenPanel):
 
         grid = Gtk.Grid(column_homogeneous=True)
         grid.attach(topbar, 0, 0, 2, 1)
-        self.labels['map'] = BedMap(self._gtk.font_size, self.active_mesh)
+        self.labels['map'] = BedMap(self._gtk.font_size, self.active_mesh,machinetype)
         if self._screen.vertical_mode:
             grid.attach(self.labels['map'], 0, 2, 2, 1)
             grid.attach(scroll, 0, 3, 2, 1)

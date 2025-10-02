@@ -6,7 +6,7 @@ from gi.repository import Gtk
 
 
 class BedMap(Gtk.DrawingArea):
-    def __init__(self, font_size, bm):
+    def __init__(self, font_size, bm, machinetype):
         super().__init__()
         self.set_hexpand(True)
         self.set_vexpand(True)
@@ -20,6 +20,7 @@ class BedMap(Gtk.DrawingArea):
         self.mesh_min = [0, 0]
         self.mesh_max = [0, 0]
         self.mesh_radius = 0
+        self.machinetype = int(machinetype)
 
     def update_bm(self, bm, radius=None):
         if not bm:
@@ -138,44 +139,103 @@ class BedMap(Gtk.DrawingArea):
         rows = len(self.bm)
         columns = len(self.bm[0])
         refer = 0
-        for i, row in enumerate(self.bm):
-            ty = (gheight / rows * i)
-            by = ty + gheight / rows
-            column: float
-            for j, column in enumerate(row):
-                if self.mesh_radius > 0 and self.round_bed_skip(i, j, row, rows, columns):
-                    continue
-                lx = (gwidth / columns * j) + self.font_size * 2.2
-                rx = lx + gwidth / columns
-                if i == 0 and j == 0:
-                    refer = column
-                # Colors
-                #ctx.set_source_rgb(*self.colorbar(column))
-                ctx.set_source_rgb(*self.colorbar(column-refer))
-                ctx.move_to(lx, ty)
-                ctx.line_to(lx, by)
-                ctx.line_to(rx, by)
-                ctx.line_to(rx, ty)
-                ctx.close_path()
-                ctx.fill()
-                ctx.stroke()
-                # Numbers
-                #if gwidth / columns < self.font_size * 3:
-                #    continue
-                ctx.set_source_rgb(1, 1, 1)
-                if column > 0:
-                    ctx.move_to((lx + rx) / 2 - self.font_size, (ty + by + self.font_size) / 2)
-                else:
-                    ctx.move_to((lx + rx) / 2 - self.font_size * 1.2, (ty + by + self.font_size) / 2)
-                #ctx.show_text(f"{column:.2f}")
-                #ctx.show_text(f"{(column*100/0.5)*12/100:.0f}"+"h")
-                nbtour = ((column-refer)*100/0.5)*12/100
-                if nbtour > 0 and nbtour < 1:
-                    nbtour = 0
-                if nbtour > -1 and nbtour < 0:
-                    nbtour = 0
-                ctx.show_text(f"{nbtour:.0f}"+"h")
-                ctx.stroke()
+
+        if self.machinetype >= 30 and self.machinetype <= 39: # for VS30 display
+          for i, row in enumerate(self.bm):
+              ty = (gheight / rows * i)
+              by = ty + gheight / rows
+              column: float
+              for j, column in enumerate(row):
+                  if self.mesh_radius > 0 and self.round_bed_skip(i, j, row, rows, columns):
+                      continue
+                  lx = (gwidth / columns * j) + self.font_size * 2.2
+                  rx = lx + gwidth / columns
+                  if i == 0 and j == 0:
+                      refer = column
+                  # Colors
+                  #ctx.set_source_rgb(*self.colorbar(column))
+                  ctx.set_source_rgb(*self.colorbar(column-refer))
+                  ctx.move_to(lx, ty)
+                  ctx.line_to(lx, by)
+                  ctx.line_to(rx, by)
+                  ctx.line_to(rx, ty)
+                  ctx.close_path()
+                  ctx.fill()
+                  ctx.stroke()
+                  # Numbers
+                  #if gwidth / columns < self.font_size * 3:
+                  #    continue
+                  ctx.set_source_rgb(0.3, 0.3, 0.3)
+                  if column > 0:
+                      ctx.move_to((lx + rx) / 2 - self.font_size, (ty + by + self.font_size) / 2)
+                  else:
+                      ctx.move_to((lx + rx) / 2 - self.font_size * 1.2, (ty + by + self.font_size) / 2)
+                  #ctx.show_text(f"{column:.2f}")
+                  #ctx.show_text(f"{(column*100/0.5)*12/100:.0f}"+"h")
+                  nbtour = ((column-refer)*100/0.5)*12/100
+                  if nbtour > 0 and nbtour < 1:
+                      nbtour = 0
+                  if nbtour > -1 and nbtour < 0:
+                      nbtour = 0
+                  dsp = 0
+                  if i == 0 and j == 0:
+                    dsp = 1
+                  elif i == 0 and j == 4:
+                    dsp = 1
+                  elif i == 1 and j == 2:
+                    dsp = 1
+                  elif i == 2 and j == 0:
+                    dsp = 2
+                  elif i == 2 and j == 4:
+                    dsp = 2
+
+                  if dsp == 1:
+                    ctx.set_source_rgb(1, 1, 1)
+                    ctx.show_text(f"{nbtour:.0f}"+"h")
+                  elif dsp == 2:
+                    ctx.set_source_rgb(1, 1, 1)
+                    ctx.show_text(f"{0-nbtour:.0f}"+"h")
+                  ctx.stroke()
+
+        else: # normal display
+          for i, row in enumerate(self.bm):
+              ty = (gheight / rows * i)
+              by = ty + gheight / rows
+              column: float
+              for j, column in enumerate(row):
+                  if self.mesh_radius > 0 and self.round_bed_skip(i, j, row, rows, columns):
+                      continue
+                  lx = (gwidth / columns * j) + self.font_size * 2.2
+                  rx = lx + gwidth / columns
+                  if i == 0 and j == 0:
+                      refer = column
+                  # Colors
+                  #ctx.set_source_rgb(*self.colorbar(column))
+                  ctx.set_source_rgb(*self.colorbar(column-refer))
+                  ctx.move_to(lx, ty)
+                  ctx.line_to(lx, by)
+                  ctx.line_to(rx, by)
+                  ctx.line_to(rx, ty)
+                  ctx.close_path()
+                  ctx.fill()
+                  ctx.stroke()
+                  # Numbers
+                  #if gwidth / columns < self.font_size * 3:
+                  #    continue
+                  ctx.set_source_rgb(1, 1, 1)
+                  if column > 0:
+                      ctx.move_to((lx + rx) / 2 - self.font_size, (ty + by + self.font_size) / 2)
+                  else:
+                      ctx.move_to((lx + rx) / 2 - self.font_size * 1.2, (ty + by + self.font_size) / 2)
+                  #ctx.show_text(f"{column:.2f}")
+                  #ctx.show_text(f"{(column*100/0.5)*12/100:.0f}"+"h")
+                  nbtour = ((column-refer)*100/0.5)*12/100
+                  if nbtour > 0 and nbtour < 1:
+                      nbtour = 0
+                  if nbtour > -1 and nbtour < 0:
+                      nbtour = 0
+                  ctx.show_text(f"{nbtour:.0f}"+"h")
+                  ctx.stroke()
 
     @staticmethod
     def round_bed_skip(i, j, row, rows, columns):
