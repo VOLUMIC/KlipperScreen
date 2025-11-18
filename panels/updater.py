@@ -55,12 +55,13 @@ class Panel(ScreenPanel):
 
         self.content.add(self.main_box)
 
-        section = self._printer.get_macro("VOLUMIC_Type")
-        if section:
-          if "variable_mcutype" in section:
-            mcutype = section["variable_mcutype"]
-          else:
-            mcutype = 1
+        mcutype = 2
+        try:
+            section = self._printer.get_macro("VOLUMIC_Type")
+            if "variable_mcutype" in section:
+                mcutype = section["variable_mcutype"]
+        except Exception as e:
+            logging.exception(e)
         if mcutype == "0":
            os.system('mkdir /home/Volumic/VyperOS/SAM3X8E')
            os.system('rmdir /home/Volumic/VyperOS/STM32H723')

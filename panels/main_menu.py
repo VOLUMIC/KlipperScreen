@@ -39,14 +39,15 @@ class Panel(MenuPanel):
             self.main_menu.attach(scroll, 1, 0, 1, 1)
         self.content.add(self.main_menu)
 
-        section = self._printer.get_macro("VOLUMIC_Type")
-        if section:
-          if "variable_machinetype" in section:
-            machinetype = section["variable_machinetype"]
-          else:
-            machinetype = 1
-          os.system('rmdir /home/Volumic/VyperOS/type_*')
-          os.system(f"mkdir /home/Volumic/VyperOS/type_{machinetype}")
+        machinetype = 0
+        try:
+            section = self._printer.get_macro("VOLUMIC_Type")
+            if "variable_machinetype" in section:
+                machinetype = section["variable_machinetype"]
+        except Exception as e:
+            logging.exception(e)
+        os.system('rmdir /home/Volumic/VyperOS/type_*')
+        os.system(f"mkdir /home/Volumic/VyperOS/type_{machinetype}")
 
     def update_graph_visibility(self, force_hide=True):
         if self.left_panel is None:
