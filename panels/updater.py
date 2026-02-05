@@ -65,14 +65,18 @@ class Panel(ScreenPanel):
         if mcutype == "0":
            os.system('mkdir /home/Volumic/VyperOS/SAM3X8E')
            os.system('rmdir /home/Volumic/VyperOS/STM32H723')
+           os.system('rmdir /home/Volumic/VyperOS/STM32H723M8')
         elif mcutype == "1":
            os.system('mkdir /home/Volumic/VyperOS/SAM3X8E')
            os.system('rmdir /home/Volumic/VyperOS/STM32H723')
+           os.system('rmdir /home/Volumic/VyperOS/STM32H723M8')
         elif mcutype == "3":
            os.system('rmdir /home/Volumic/VyperOS/SAM3X8E')
+           os.system('rmdir /home/Volumic/VyperOS/STM32H723')
            os.system('mkdir /home/Volumic/VyperOS/STM32H723M8')
         else:
            os.system('rmdir /home/Volumic/VyperOS/SAM3X8E')
+           os.system('rmdir /home/Volumic/VyperOS/STM32H723M8')
            os.system('mkdir /home/Volumic/VyperOS/STM32H723')
 
     def activate(self):
