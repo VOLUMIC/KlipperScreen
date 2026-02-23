@@ -39,7 +39,7 @@ class Panel(ScreenPanel):
             'load': self._gtk.Button("arrow-down", _("Load"), "color3"),
             'unload': self._gtk.Button("arrow-up", _("Unload"), "color2"),
             'extrude': self._gtk.Button("extrude", _("Extrude"), "color4"),
-            'retract': self._gtk.Button("heat-up", "Refroidir", "color1"),
+            'retract': self._gtk.Button("heat-up", _("Cooldown"), "color1"),
             'temperature': self._gtk.Button("heat-up", _("Temperature"), "color4"),
             'spoolman': self._gtk.Button("spoolman", "Spoolman", "color3"),
             'pressure': self._gtk.Button("settings", _("Pressure Advance"), "color2"),

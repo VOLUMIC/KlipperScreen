@@ -33,12 +33,12 @@ class Panel(ScreenPanel):
             "y-": self._gtk.Button("arrow-down", "Y-", "color2"),
             "z+": self._gtk.Button("z-farther", "Z+", "color3"),
             "z-": self._gtk.Button("z-closer", "Z-", "color3"),
-            "home": self._gtk.Button("home", "Paraléllisme", "color4"),
+            "home": self._gtk.Button("home", _("Quad Gantry Level"), "color4"),
             "homex": self._gtk.Button("home-x", _('Home X'), "color4"),
             "homey": self._gtk.Button("home-y", _('Home Y'), "color4"),
             "homez": self._gtk.Button("home-z", _('Home Z'), "color4"),
             "homea": self._gtk.Button("home", _('Home All'), "color4"),
-            "motors_off": self._gtk.Button("motor-off", "Moteur OFF", "color4"),
+            "motors_off": self._gtk.Button("motor-off", _("Disable Motors"), "color4"),
         }
         self.buttons["x+"].connect("clicked", self.move, "X", "+")
         self.buttons["x-"].connect("clicked", self.move, "X", "-")
