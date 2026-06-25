@@ -1,6 +1,7 @@
 import logging
 import os
 import gi
+import time
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
@@ -28,8 +29,8 @@ class Panel(ScreenPanel):
         self.sort_items = {
             "name": _("Name"),
             "date": _("Date"),
-            "size": _("Size"),
         }
+        #    "size": _("Size"),
         if sortdir[0] not in self.sort_items or sortdir[1] not in ["asc", "desc"]:
             sortdir = ["name", "asc"]
         self.sort_current = [sortdir[0], 0 if sortdir[1] == "asc" else 1]  # 0 for asc, 1 for desc
@@ -53,12 +54,41 @@ class Panel(ScreenPanel):
             self.headerbox.add(s)
             n += 1
 
+        # Bouton USB - monter et naviguer vers la cle USB
+        self.copyusb = self._gtk.Button(
+            "usb", "Lire USB",
+            style=f"color{n % 4 + 1}",
+            scale=self.bts,
+            position=Gtk.PositionType.RIGHT,
+            lines=1
+        )
+        self.copyusb.get_style_context().add_class("buttons_slim")
+        self.copyusb.connect('clicked', self._copy_files)
+        self.labels['copyusb'] = self.copyusb
+        n += 1
+        self.headerbox.add(self.copyusb)
+
+        # Bouton USB Copy - copier tous les .gcode de la cle vers gcodes/
+        self.usbcopy = self._gtk.Button(
+            "usb", _("Copier USB"),
+            style=f"color{n % 4 + 1}",
+            scale=self.bts,
+            position=Gtk.PositionType.RIGHT,
+            lines=1
+        )
+        self.usbcopy.get_style_context().add_class("buttons_slim")
+        self.usbcopy.connect('clicked', self._usb_copy_files)
+        self.labels['usbcopy'] = self.usbcopy
+        n += 1
+        self.headerbox.add(self.usbcopy)
+
         self.refresh = self._gtk.Button("refresh", style=f"color{n % 4 + 1}", scale=self.bts)
         self.refresh.get_style_context().add_class("buttons_slim")
         self.refresh.connect('clicked', self._refresh_files)
         n += 1
         self.headerbox.add(self.refresh)
 
+        # mode
         self.switch_mode = self._gtk.Button("fine-tune", style=f"color{n % 4 + 1}", scale=self.bts)
         self.switch_mode.get_style_context().add_class("buttons_slim")
         self.switch_mode.connect('clicked', self.switch_view_mode)
@@ -493,6 +523,125 @@ class Panel(ScreenPanel):
         for child in self.flowbox.get_children():
             self.flowbox.remove(child)
         self._screen._ws.klippy.get_dir_info(self.load_files, self.cur_directory)
+
+    def _copy_files(self, *args):
+        self.set_loading(True)
+        for child in self.flowbox.get_children():
+            self.flowbox.remove(child)
+        self.change_dir()
+        os.system('/home/Volumic/VyperOS/mountusb.sh &')
+        #self._refresh_files()
+
+    def _usb_copy_files(self, widget):
+        import threading
+        import subprocess
+        from gi.repository import GLib
+
+        # --- Contenu du dialog "copie en cours" ---
+        box = Gtk.Box(
+            orientation=Gtk.Orientation.VERTICAL,
+            spacing=16,
+            margin=24,
+            halign=Gtk.Align.CENTER,
+            valign=Gtk.Align.CENTER,
+        )
+
+        spinner = Gtk.Spinner()
+        spinner.set_size_request(48, 48)
+        spinner.start()
+
+        lbl_title = Gtk.Label()
+        lbl_title.set_markup("<big><b>Copie USB en cours...</b></big>")
+
+        lbl_sub = Gtk.Label(label="Ne pas retirer la cle USB")
+
+        box.pack_start(spinner,   False, False, 0)
+        box.pack_start(lbl_title, False, False, 0)
+        box.pack_start(lbl_sub,   False, False, 0)
+        box.show_all()
+
+        # Dialog sans bouton fermable - callback vide obligatoire pour KlippyGtk
+        dialog = self._gtk.Dialog("Copie USB", None, box, lambda *a: None)
+
+        # Griser tous les boutons de la headerbox pendant la copie
+        for child in self.headerbox.get_children():
+            child.set_sensitive(False)
+
+        def _run_copy():
+            # Thread secondaire - pas de GTK ici
+            result = subprocess.run(
+                ['/home/Volumic/VyperOS/copyusb.sh'],
+                capture_output=False,
+            )
+            # Lire le resume depuis le log
+            logfile = '/home/Volumic/printer_data/logs/copyusb.log'
+            summary = ""
+            try:
+                with open(logfile, 'r', encoding='utf-8', errors='replace') as f:
+                    lines = f.readlines()
+                logging.info(f"copyusb log lines: {len(lines)}")
+                for line in reversed(lines):
+                    logging.info(f"copyusb log line: {repr(line)}")
+                    if 'SULTAT' in line or 'Copies' in line:
+                        summary = line.strip().split('] ', 1)[-1]
+                        logging.info(f"copyusb summary found: {summary}")
+                        break
+            except Exception as e:
+                logging.exception(f"copyusb log read error: {e}")
+                summary = ""
+            GLib.idle_add(_on_done, result.returncode, summary)
+
+        def _on_done(returncode, summary):
+            # Retour dans le thread GTK principal
+            spinner.stop()
+            self._gtk.remove_dialog(dialog)
+
+            # Reactiver les boutons
+            for child in self.headerbox.get_children():
+                child.set_sensitive(True)
+
+            # Contenu du dialog de resultat
+            # summary contient ex: "Copies : 3 | Ignores : 1 | Erreurs : 0"
+            if returncode == 0:
+                if summary:
+                    msg = "Copie USB terminee !\n\n" + summary
+                else:
+                    msg = "Copie terminee avec succes."
+                style = "color3"
+            else:
+                if summary:
+                    msg = "Erreur lors de la copie.\n\n" + summary + "\n\nConsulter : printer_data/logs/copyusb.log"
+                else:
+                    msg = "Erreur lors de la copie.\nConsulter : printer_data/logs/copyusb.log"
+                style = "color1"
+
+            result_lbl = Gtk.Label()
+            result_lbl.set_text(msg)
+            result_lbl.set_line_wrap(True)
+            result_lbl.set_justify(Gtk.Justification.CENTER)
+            result_lbl.show()
+
+            result_box = Gtk.Box(
+                orientation=Gtk.Orientation.VERTICAL,
+                spacing=16, margin=24,
+                halign=Gtk.Align.CENTER, valign=Gtk.Align.CENTER,
+            )
+            result_box.pack_start(result_lbl, False, False, 0)
+            result_box.show_all()
+
+            def _close_result(result_dialog, *a):
+                self._gtk.remove_dialog(result_dialog)
+                self._refresh_files()
+
+            self._gtk.Dialog(
+                "Copie USB",
+                [{'name': _("OK"), 'response': Gtk.ResponseType.OK, 'style': style}],
+                result_box,
+                _close_result,
+            )
+            return False
+
+        threading.Thread(target=_run_copy, daemon=True).start()
 
     def set_loading(self, loading):
         self.loading = loading
