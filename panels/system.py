@@ -1,4 +1,6 @@
 import logging
+import os
+import subprocess
 import gi
 
 gi.require_version("Gtk", "3.0")
@@ -67,7 +69,16 @@ class Panel(ScreenPanel):
 
         scroll = self._gtk.ScrolledWindow()
         scroll.add(self.grid)
-        return scroll
+
+        # Bouton de securite reset reseau - toujours visible en bas
+        btn_reset = self._gtk.Button("network", "RESET NETWORK", "color1")
+        btn_reset.connect("clicked", self._on_reset_network)
+
+        wrapper = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        wrapper.pack_start(scroll,     True,  True,  0)
+        wrapper.pack_start(btn_reset,  False, False, 4)
+
+        return wrapper
 
     def set_mem_multiplier(self, data):
         memory_units = data.get("memory_units", "kB").lower()
@@ -141,6 +152,31 @@ class Panel(ScreenPanel):
                             )
                     else:
                         self.add_label_to_grid(f"{self.prettify(key)}: {value}", 1)
+
+    def _on_reset_network(self, widget):
+        lbl = Gtk.Label()
+        lbl.set_text(
+            "Reinitialiser le reseau en DHCP ?\n\n"
+            "La machine va redemarrer apres le reset.\n"
+            "Toutes les connexions seront coupees."
+        )
+        self._gtk.Dialog(
+            "RESET NETWORK",
+            [
+                {"name": _("Annuler"),   "response": Gtk.ResponseType.CANCEL},
+                {"name": _("Confirmer"), "response": Gtk.ResponseType.OK, "style": "color1"},
+            ],
+            lbl,
+            self._confirm_reset_network,
+        )
+
+    def _confirm_reset_network(self, dialog, response):
+        self._gtk.remove_dialog(dialog)
+        if response == Gtk.ResponseType.OK:
+            script = os.path.join(
+                os.path.expanduser("~"), "VyperOS", "resetnetwork.sh"
+            )
+            subprocess.Popen(["bash", script])
 
     def process_update(self, action, data):
         if not self.sysinfo:
