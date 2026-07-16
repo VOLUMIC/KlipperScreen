@@ -1,5 +1,6 @@
 import logging
 import os
+import subprocess
 from gettext import ngettext
 
 import gi
@@ -346,10 +347,17 @@ class Panel(ScreenPanel):
             self._screen.base_panel.show_update_dialog()
             self._screen._send_action(widget, "printer.gcode.script", {"script": 'SET_LED LED="Eclairage_LEDs" RED=1 GREEN=0 BLUE=0 SYNC=0 TRANSMIT=1'})
             self._screen._send_action(widget, "printer.gcode.script", {"script": 'SET_FAN_SPEED FAN=_Alimentation SPEED=0.6'})
-            self._screen._send_action(widget, "machine.services.stop", {"service": "klipper"})
-            self._screen._send_action(widget, "machine.services.stop", {"service": "mainsail"})
-            #os.system('cp -f /home/Volumic/printer_data/config/.volumic/system/vyperos_update.sh /home/Volumic/VyperOS')
-            os.system('/home/Volumic/VyperOS/vyperos_update.sh > vyperos_lastupdate.log &')
+            #self._screen._send_action(widget, "machine.services.stop", {"service": "klipper"})
+            #self._screen._send_action(widget, "machine.services.stop", {"service": "mainsail"})
+            try:
+                logfile = open('/home/Volumic/VyperOS/vyperos_lastupdate.log', 'w')
+                subprocess.Popen(
+                    ['sudo', 'bash', '/home/Volumic/VyperOS/vyperos_update.sh'],
+                    stdout=logfile,
+                    stderr=logfile,
+                )
+            except Exception as e:
+                logging.error(f"updater: launch failed: {e}")
         else:
             logging.info(f"Sending machine.update.client name: {program}")
             self._screen._ws.send_method("machine.update.client", {"name": program})
