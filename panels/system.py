@@ -67,18 +67,17 @@ class Panel(ScreenPanel):
         self.current_row += 1
         self.populate_info()
 
-        scroll = self._gtk.ScrolledWindow()
-        scroll.add(self.grid)
-        scroll.set_vexpand(True)
+        self.grid.attach(Gtk.Separator(), 0, self.current_row, 2, 1)
+        self.current_row += 1
 
         btn_reset = self._gtk.Button("network", "RESET NETWORK", "color1")
         btn_reset.connect("clicked", self._on_reset_network)
+        self.grid.attach(btn_reset, 0, self.current_row, 2, 1)
+        self.current_row += 1
 
-        wrapper = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
-        wrapper.pack_start(scroll,    True,  True,  0)
-        wrapper.pack_start(btn_reset, False, False, 4)
-
-        return wrapper
+        scroll = self._gtk.ScrolledWindow()
+        scroll.add(self.grid)
+        return scroll
 
     def set_mem_multiplier(self, data):
         memory_units = data.get("memory_units", "kB").lower()
@@ -176,7 +175,14 @@ class Panel(ScreenPanel):
             script = os.path.join(
                 os.path.expanduser("~"), "VyperOS", "resetnetwork.sh"
             )
-            subprocess.Popen(["bash", script])
+            try:
+                subprocess.Popen(
+                    ["sudo", "bash", script],
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                )
+            except Exception as e:
+                logging.error("reset_network: %s", e)
 
     def process_update(self, action, data):
         if not self.sysinfo:
