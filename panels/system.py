@@ -69,14 +69,14 @@ class Panel(ScreenPanel):
 
         scroll = self._gtk.ScrolledWindow()
         scroll.add(self.grid)
+        scroll.set_vexpand(True)
 
-        # Bouton de securite reset reseau - toujours visible en bas
         btn_reset = self._gtk.Button("network", "RESET NETWORK", "color1")
         btn_reset.connect("clicked", self._on_reset_network)
 
         wrapper = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
-        wrapper.pack_start(scroll,     True,  True,  0)
-        wrapper.pack_start(btn_reset,  False, False, 4)
+        wrapper.pack_start(scroll,    True,  True,  0)
+        wrapper.pack_start(btn_reset, False, False, 4)
 
         return wrapper
 
