@@ -22,17 +22,17 @@ class Panel(ScreenPanel):
                 image_name="arrow-up",
                 label=_("Full Update"),
                 style="color1",
-                scale=self.bts,
+                scale=self.bts * 0.8,
                 position=Gtk.PositionType.LEFT,
-                lines=3,
+                lines=2,
             ),
             "refresh": self._gtk.Button(
                 image_name="arrow-down",
                 label=_("Refresh"),
                 style="color3",
-                scale=self.bts,
+                scale=self.bts * 0.8,
                 position=Gtk.PositionType.LEFT,
-                lines=3,
+                lines=2,
             ),
         }
         self.buttons["update_all"].connect("clicked", self.show_update_info, "full")
@@ -84,6 +84,8 @@ class Panel(ScreenPanel):
         self.clear_scroll()
         self.scroll.add(self.update_msg)
         self.update_msg.show()
+        self.buttons["update_all"].set_sensitive(False)
+        self.buttons["refresh"].set_sensitive(False)
         logging.info("Auto-refresh on activate")
         self._screen._ws.send_method(
             "machine.update.refresh", callback=self.get_updates
@@ -96,31 +98,24 @@ class Panel(ScreenPanel):
             self.labels[prog] = Gtk.Label(hexpand=True, halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END)
             self.labels[prog].get_style_context().add_class("updater-item")
 
-            #self.buttons[f"{prog}_status"] = self._gtk.Button()
-            #self.buttons[f"{prog}_status"].set_hexpand(False)
-            #self.buttons[f"{prog}_status"].connect("clicked", self.show_update_info, prog)
-
             self.labels[f"{prog}_status"] = Gtk.Label(hexpand=True, halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END)
             self.labels[f"{prog}_status"].get_style_context().add_class("updater-item")
 
-            try:
-                if prog in self._printer.system_info["available_services"]:
-                    self.buttons[f"{prog}_restart"] = self._gtk.Button(
-                        "refresh",
-                        _("Restart"),
-                        "color2",
-                        position=Gtk.PositionType.LEFT,
-                        scale=self.bts,
-                    )
-                    self.buttons[f"{prog}_restart"].connect(
-                        "clicked", self.restart, prog
-                    )
-                    infogrid.attach(self.buttons[f"{prog}_restart"], 2, i, 1, 1)
-            except Exception as e:
-                logging.exception(e)
+            # Bouton "Mettre a jour" - desactive par defaut, active par _needs_update
+            self.buttons[f"{prog}_update"] = self._gtk.Button(
+                "arrow-up",
+                _("Update"),
+                "color1",
+                position=Gtk.PositionType.LEFT,
+                scale=self.bts,
+            )
+            self.buttons[f"{prog}_update"].set_sensitive(False)
+            self.buttons[f"{prog}_update"].connect(
+                "clicked", self._update_single, prog
+            )
+            infogrid.attach(self.buttons[f"{prog}_update"], 2, i, 1, 1)
 
             infogrid.attach(self.labels[prog], 0, i, 1, 1)
-            #infogrid.attach(self.buttons[f"{prog}_status"], 2, i, 1, 1)
             infogrid.attach(self.labels[f"{prog}_status"], 1, i, 1, 1)
             self.update_program_info(prog)
         self.clear_scroll()
@@ -133,6 +128,8 @@ class Panel(ScreenPanel):
     def refresh_updates(self, widget=None):
         self.clear_scroll()
         self.scroll.add(self.update_msg)
+        self.buttons["update_all"].set_sensitive(False)
+        self.buttons["refresh"].set_sensitive(False)
         self._gtk.Button_busy(widget, True)
         logging.info("Sending machine.update.refresh")
         self._screen._ws.send_method(
@@ -141,6 +138,7 @@ class Panel(ScreenPanel):
 
     def get_updates(self, response, method, params):
         self._gtk.Button_busy(self.buttons["refresh"], False)
+        self.buttons["refresh"].set_sensitive(True)
         logging.info(response)
         if not response or "result" not in response:
             self.buttons["update_all"].set_sensitive(False)
@@ -173,6 +171,78 @@ class Panel(ScreenPanel):
             self._screen._send_action(
                 widget, "machine.services.restart", {"service": program}
             )
+
+    # Mapping programme Moonraker -> script bash dans updater/
+    UPDATE_SCRIPTS = {
+        "klipper":          "update_klipper.sh",
+        "moonraker":        "update_moonraker.sh",
+        "KlipperScreen":    "update_klipperscreen.sh",
+        "mainsail":         "update_mainsail.sh",
+        "moonraker-obico":  "update_obico.sh",
+        "system":           "update_system.sh",
+        "configurations":   "update_configurations.sh",
+    }
+    SCRIPTS_DIR = "/home/Volumic/VyperOS"
+
+    def _update_single(self, widget, program):
+        script_name = self.UPDATE_SCRIPTS.get(program)
+        if not script_name:
+            logging.warning(f"updater: pas de script pour {program}")
+            lbl = Gtk.Label()
+            lbl.set_text(f"Aucun script defini pour :\n{program}")
+            self._gtk.Dialog(
+                "Info",
+                [{"name": _("OK"), "response": Gtk.ResponseType.OK}],
+                lbl, lambda d, r: self._gtk.remove_dialog(d),
+            )
+            return
+
+        script_path = os.path.join(self.SCRIPTS_DIR, script_name)
+        if not os.path.exists(script_path):
+            logging.warning(f"updater: script introuvable : {script_path}")
+            lbl = Gtk.Label()
+            lbl.set_text(f"Script introuvable :\n{script_path}")
+            self._gtk.Dialog(
+                "Erreur",
+                [{"name": _("OK"), "response": Gtk.ResponseType.OK, "style": "color1"}],
+                lbl, lambda d, r: self._gtk.remove_dialog(d),
+            )
+            return
+
+        lbl = Gtk.Label()
+        lbl.set_text(f"\n\nMettre a jour {program} ?")
+        self._gtk.Dialog(
+            "Mise a jour",
+            [
+                {"name": _("Annuler"),   "response": Gtk.ResponseType.CANCEL},
+                {"name": _("Confirmer"), "response": Gtk.ResponseType.OK, "style": "color1"},
+            ],
+            lbl,
+            self._confirm_update_single,
+            program,
+            script_path,
+        )
+
+    def _confirm_update_single(self, dialog, response, program, script_path):
+        self._gtk.remove_dialog(dialog)
+        if response != Gtk.ResponseType.OK:
+            return
+        logging.info(f"updater: mise a jour {program} via {script_path}")
+        self._screen.base_panel.show_update_dialog()
+        msg = f"Mise a jour de {program}\nVeuillez patienter..."
+        self._screen._websocket_callback(
+            "notify_update_response",
+            {"application": {program}, "message": msg, "complete": False},
+        )
+        try:
+            logfile = open(f'/home/Volumic/VyperOS/update_{program}.log', 'w')
+            subprocess.Popen(
+                ['sudo', 'bash', script_path],
+                stdout=logfile,
+                stderr=logfile,
+            )
+        except Exception as e:
+            logging.error(f"updater: lancement echoue : {e}")
 
     def show_update_info(self, widget, program):
         info = (
@@ -337,11 +407,6 @@ class Panel(ScreenPanel):
             ):
                 return
         self._screen.base_panel.show_update_dialog()
-        #msg = (
-        #    _("Updating")
-        #    if program == "full"
-        #    else _("Starting update for") + f" {program}..."
-        #)
         #msg = ("Mise a jour de VyperOS\nVeuillez patienter...")
         msg = ("Mise a jour de VyperOS\nVeuillez patienter...\n\nSi l'écran devient entièrement noir et ne change plus\nou si la machine ne redémarre pas correctement\néteignez-la et rallumez-la.")
         self._screen._websocket_callback(
@@ -406,10 +471,11 @@ class Panel(ScreenPanel):
             else:
                 logging.info(f"Invalid {p} {info['version']}")
                 self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']}")
-                #self.labels[f"{p}_status"].set_label(_("Invalid"))
-                self.labels[f"{p}_status"].set_label(_("Update"))
+                self.labels[f"{p}_status"].set_label(_("Updating"))
                 self.labels[f"{p}_status"].get_style_context().add_class("invalid")
                 self.labels[f"{p}_status"].set_sensitive(True)
+                if f"{p}_update" in self.buttons:
+                    self.buttons[f"{p}_update"].set_sensitive(True)
         elif "version" in info and info["version"] == info["remote_version"]:
             self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']}")
             self._already_updated(p)
@@ -423,9 +489,13 @@ class Panel(ScreenPanel):
         self.labels[f"{p}_status"].set_label(_("Up To Date"))
         self.labels[f"{p}_status"].get_style_context().remove_class("update")
         self.labels[f"{p}_status"].set_sensitive(False)
+        if f"{p}_update" in self.buttons:
+            self.buttons[f"{p}_update"].set_sensitive(False)
 
     def _needs_update(self, p, local="", remote=""):
         logging.info(f"{p} {local} -> {remote}")
-        self.labels[f"{p}_status"].set_label(_("Update"))
+        self.labels[f"{p}_status"].set_label(_("Updating"))
         self.labels[f"{p}_status"].get_style_context().add_class("update")
         self.labels[f"{p}_status"].set_sensitive(True)
+        if f"{p}_update" in self.buttons:
+            self.buttons[f"{p}_update"].set_sensitive(True)
