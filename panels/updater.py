@@ -228,21 +228,52 @@ class Panel(ScreenPanel):
         if response != Gtk.ResponseType.OK:
             return
         logging.info(f"updater: mise a jour {program} via {script_path}")
-        self._screen.base_panel.show_update_dialog()
-        msg = f"Mise a jour de {program}\nVeuillez patienter..."
-        self._screen._websocket_callback(
-            "notify_update_response",
-            {"application": {program}, "message": msg, "complete": False},
-        )
-        try:
-            logfile = open(f'/home/Volumic/VyperOS/update_{program}.log', 'w')
-            subprocess.Popen(
-                ['sudo', 'bash', script_path],
-                stdout=logfile,
-                stderr=logfile,
-            )
-        except Exception as e:
-            logging.error(f"updater: lancement echoue : {e}")
+
+        # Afficher un spinner dans le scroll pendant la mise a jour
+        # sans bloquer KlipperScreen (pas de show_update_dialog)
+        spinner = Gtk.Spinner()
+        spinner.set_size_request(48, 48)
+        spinner.start()
+        lbl = Gtk.Label()
+        lbl.set_text(f"Mise a jour de {program} en cours...")
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+        box.set_halign(Gtk.Align.CENTER)
+        box.set_valign(Gtk.Align.CENTER)
+        box.pack_start(spinner, False, False, 0)
+        box.pack_start(lbl,     False, False, 0)
+        box.show_all()
+        self.clear_scroll()
+        self.scroll.add(box)
+        self.scroll.show_all()
+
+        # Desactiver les boutons pendant la mise a jour
+        self.buttons["update_all"].set_sensitive(False)
+        self.buttons["refresh"].set_sensitive(False)
+
+        import threading
+        from gi.repository import GLib
+
+        def _run():
+            try:
+                logfile = open(f'/home/Volumic/VyperOS/update_{program}.log', 'w')
+                proc = subprocess.Popen(
+                    ['sudo', 'bash', script_path],
+                    stdout=logfile,
+                    stderr=logfile,
+                )
+                proc.wait()   # attendre la fin du script
+            except Exception as e:
+                logging.error(f"updater: lancement echoue : {e}")
+            finally:
+                GLib.idle_add(_on_done)
+
+        def _on_done():
+            spinner.stop()
+            # Relancer le refresh pour mettre a jour l'affichage
+            self.activate()
+            return False
+
+        threading.Thread(target=_run, daemon=True).start()
 
     def show_update_info(self, widget, program):
         info = (
