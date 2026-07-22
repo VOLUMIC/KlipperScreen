@@ -81,7 +81,13 @@ class Panel(ScreenPanel):
            os.system('mkdir /home/Volumic/VyperOS/STM32H723')
 
     def activate(self):
-        self._screen._ws.send_method("machine.update.status", callback=self.get_updates)
+        self.clear_scroll()
+        self.scroll.add(self.update_msg)
+        self.update_msg.show()
+        logging.info("Auto-refresh on activate")
+        self._screen._ws.send_method(
+            "machine.update.refresh", callback=self.get_updates
+        )
 
     def create_info_grid(self):
         infogrid = Gtk.Grid()
