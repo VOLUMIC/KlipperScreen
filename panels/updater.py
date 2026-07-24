@@ -44,7 +44,19 @@ class Panel(ScreenPanel):
         top_box.pack_start(self.buttons["update_all"], True, True, 0)
         top_box.pack_start(self.buttons["refresh"], True, True, 0)
 
-        self.update_msg = Gtk.Label(label=_("Checking for updates, please wait..."), vexpand=True)
+        # Widget d'attente avec spinner - utilise pendant refresh ET activate
+        self._wait_spinner = Gtk.Spinner()
+        self._wait_spinner.set_size_request(48, 48)
+        wait_lbl = Gtk.Label(label=_("Checking for updates, please wait..."))
+        self.update_msg = Gtk.Box(
+            orientation=Gtk.Orientation.VERTICAL,
+            spacing=12,
+            vexpand=True,
+            halign=Gtk.Align.CENTER,
+            valign=Gtk.Align.CENTER,
+        )
+        self.update_msg.pack_start(self._wait_spinner, False, False, 0)
+        self.update_msg.pack_start(wait_lbl,           False, False, 0)
 
         self.scroll = self._gtk.ScrolledWindow()
         self.scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
@@ -81,15 +93,29 @@ class Panel(ScreenPanel):
            os.system('mkdir /home/Volumic/VyperOS/STM32H723')
 
     def activate(self):
+        from gi.repository import GLib
         self.clear_scroll()
+        self.update_msg.show_all()
         self.scroll.add(self.update_msg)
-        self.update_msg.show()
+        self.scroll.show_all()
         self.buttons["update_all"].set_sensitive(False)
         self.buttons["refresh"].set_sensitive(False)
+        # Laisser GTK terminer le rendu du panel avant de demarrer le spinner et le refresh
+        GLib.idle_add(self._activate_deferred)
+
+    def _activate_deferred(self):
+        from gi.repository import GLib
+        self._wait_spinner.start()
+        # Second idle_add pour laisser le spinner s'afficher avant le refresh reseau
+        GLib.idle_add(self._do_refresh)
+        return False
+
+    def _do_refresh(self):
         logging.info("Auto-refresh on activate")
         self._screen._ws.send_method(
             "machine.update.refresh", callback=self.get_updates
         )
+        return False
 
     def create_info_grid(self):
         infogrid = Gtk.Grid()
@@ -127,7 +153,12 @@ class Panel(ScreenPanel):
 
     def refresh_updates(self, widget=None):
         self.clear_scroll()
+        self.update_msg.show_all()
         self.scroll.add(self.update_msg)
+        self.scroll.show_all()
+        self._wait_spinner.start()
+        while Gtk.events_pending():
+            Gtk.main_iteration_do(False)
         self.buttons["update_all"].set_sensitive(False)
         self.buttons["refresh"].set_sensitive(False)
         self._gtk.Button_busy(widget, True)
@@ -137,6 +168,7 @@ class Panel(ScreenPanel):
         )
 
     def get_updates(self, response, method, params):
+        self._wait_spinner.stop()
         self._gtk.Button_busy(self.buttons["refresh"], False)
         self.buttons["refresh"].set_sensitive(True)
         logging.info(response)
@@ -438,8 +470,7 @@ class Panel(ScreenPanel):
             ):
                 return
         self._screen.base_panel.show_update_dialog()
-        #msg = ("Mise a jour de VyperOS\nVeuillez patienter...")
-        msg = ("Mise a jour de VyperOS\nVeuillez patienter...\n\nSi l'écran devient entièrement noir et ne change plus\nou si la machine ne redémarre pas correctement\néteignez-la et rallumez-la.")
+        msg = ("Mise a jour de VyperOS\n\nVeuillez patienter, cela peut durer plusieurs minutes...")
         self._screen._websocket_callback(
             "notify_update_response",
             {"application": {program}, "message": msg, "complete": False},
@@ -447,11 +478,8 @@ class Panel(ScreenPanel):
 
         if program in ["full"]:
             logging.info(f"Sending machine.update.{program}")
-            self._screen.base_panel.show_update_dialog()
             self._screen._send_action(widget, "printer.gcode.script", {"script": 'SET_LED LED="Eclairage_LEDs" RED=1 GREEN=0 BLUE=0 SYNC=0 TRANSMIT=1'})
             self._screen._send_action(widget, "printer.gcode.script", {"script": 'SET_FAN_SPEED FAN=_Alimentation SPEED=0.6'})
-            #self._screen._send_action(widget, "machine.services.stop", {"service": "klipper"})
-            #self._screen._send_action(widget, "machine.services.stop", {"service": "mainsail"})
             try:
                 logfile = open('/home/Volumic/VyperOS/vyperos_lastupdate.log', 'w')
                 subprocess.Popen(
