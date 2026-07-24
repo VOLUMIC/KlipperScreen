@@ -483,9 +483,11 @@ class Panel(ScreenPanel):
             try:
                 logfile = open('/home/Volumic/VyperOS/vyperos_lastupdate.log', 'w')
                 subprocess.Popen(
-                    ['sudo', 'bash', '/home/Volumic/VyperOS/vyperos_update.sh'],
+                    ['sudo', 'systemd-run', '--no-block', '--collect',
+                     'bash', '/home/Volumic/VyperOS/vyperos_update.sh'],
                     stdout=logfile,
                     stderr=logfile,
+                    start_new_session=True,
                 )
             except Exception as e:
                 logging.error(f"updater: launch failed: {e}")
