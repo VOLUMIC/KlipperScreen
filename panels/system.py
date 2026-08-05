@@ -38,38 +38,51 @@ class Panel(ScreenPanel):
 
     def create_layout(self):
         self.cpu_count = int(self.sysinfo["cpu_info"]["cpu_count"])
+
+        # CSS pour forcer la hauteur des ProgressBar - set_size_request ne suffit pas
+        from gi.repository import Gdk
+        css = b"""
+        progressbar.slim-bar { min-height: 6px; }
+        progressbar.slim-bar trough { min-height: 6px; }
+        progressbar.slim-bar progress { min-height: 6px; }
+        """
+        provider = Gtk.CssProvider()
+        provider.load_from_data(css)
+        Gtk.StyleContext.add_provider_for_screen(
+            Gdk.Screen.get_default(),
+            provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
+        )
+
+        # CPU global
         self.labels["cpu_usage"] = Gtk.Label(label="", xalign=0)
         self.grid.attach(self.labels["cpu_usage"], 0, self.current_row, 1, 1)
-        self.scales["cpu_usage"] = Gtk.ProgressBar(
-            hexpand=True, show_text=False, fraction=0
-        )
+        self.scales["cpu_usage"] = Gtk.ProgressBar(hexpand=True, show_text=False, fraction=0)
+        self.scales["cpu_usage"].get_style_context().add_class("slim-bar")
         self.grid.attach(self.scales["cpu_usage"], 1, self.current_row, 1, 1)
         self.current_row += 1
 
+        # CPU par coeur
         for i in range(self.cpu_count):
             self.labels[f"cpu_usage_{i}"] = Gtk.Label(label="", xalign=0)
             self.grid.attach(self.labels[f"cpu_usage_{i}"], 0, self.current_row, 1, 1)
-            self.scales[f"cpu_usage_{i}"] = Gtk.ProgressBar(
-                hexpand=True, show_text=False, fraction=0
-            )
+            self.scales[f"cpu_usage_{i}"] = Gtk.ProgressBar(hexpand=True, show_text=False, fraction=0)
+            self.scales[f"cpu_usage_{i}"].get_style_context().add_class("slim-bar")
             self.grid.attach(self.scales[f"cpu_usage_{i}"], 1, self.current_row, 1, 1)
             self.current_row += 1
 
+        # Memoire
         self.labels["memory_usage"] = Gtk.Label(label="", xalign=0)
         self.grid.attach(self.labels["memory_usage"], 0, self.current_row, 1, 1)
-        self.scales["memory_usage"] = Gtk.ProgressBar(
-            hexpand=True, show_text=False, fraction=0
-        )
+        self.scales["memory_usage"] = Gtk.ProgressBar(hexpand=True, show_text=False, fraction=0)
+        self.scales["memory_usage"].get_style_context().add_class("slim-bar")
         self.grid.attach(self.scales["memory_usage"], 1, self.current_row, 1, 1)
         self.current_row += 1
 
-        self.grid.attach(Gtk.Separator(), 0, self.current_row, 2, 1)
-        self.current_row += 1
-        self.populate_info()
+        # Fuseau horaire
+        self._build_timezone_row()
 
-        self.grid.attach(Gtk.Separator(), 0, self.current_row, 2, 1)
-        self.current_row += 1
-
+        # Bouton reset reseau
         btn_reset = self._gtk.Button("network", "RESET NETWORK", "color1")
         btn_reset.connect("clicked", self._on_reset_network)
         self.grid.attach(btn_reset, 0, self.current_row, 2, 1)
@@ -78,6 +91,114 @@ class Panel(ScreenPanel):
         scroll = self._gtk.ScrolledWindow()
         scroll.add(self.grid)
         return scroll
+
+    def _build_timezone_row(self):
+        """Liste les timezones et permet de changer en temps reel."""
+        import subprocess as _sp
+
+        # Recuperer la timezone courante
+        try:
+            current_tz = _sp.check_output(
+                ["timedatectl", "show", "--property=Timezone", "--value"],
+                stderr=_sp.DEVNULL
+            ).decode().strip()
+        except Exception:
+            current_tz = "UTC"
+
+        # Recuperer la liste des timezones
+        try:
+            tz_list = _sp.check_output(
+                ["timedatectl", "list-timezones"],
+                stderr=_sp.DEVNULL
+            ).decode().strip().splitlines()
+        except Exception:
+            tz_list = ["UTC"]
+
+        # Label
+        lbl = Gtk.Label(label="Fuseau horaire", xalign=0)
+        lbl.set_markup("<b>Fuseau horaire</b>")
+        self.grid.attach(lbl, 0, self.current_row, 1, 1)
+
+        # Label timezone actuelle
+        self.labels["current_tz"] = Gtk.Label(xalign=0)
+        self.labels["current_tz"].set_markup(
+            "<span foreground='#96FF00'>" + current_tz + "</span>"
+        )
+        self.grid.attach(self.labels["current_tz"], 1, self.current_row, 1, 1)
+        self.current_row += 1
+
+        # ComboBox avec liste des timezones
+        tz_store = Gtk.ListStore(str)
+        current_index = 0
+        for i, tz in enumerate(tz_list):
+            tz_store.append([tz])
+            if tz == current_tz:
+                current_index = i
+
+        combo = Gtk.ComboBox.new_with_model(tz_store)
+        renderer = Gtk.CellRendererText()
+        combo.pack_start(renderer, True)
+        combo.add_attribute(renderer, "text", 0)
+        combo.set_active(current_index)
+        combo.connect("changed", self._on_tz_changed, tz_list)
+        self.labels["tz_combo"] = combo
+
+        self.grid.attach(combo, 0, self.current_row, 2, 1)
+        self.current_row += 1
+
+    def _on_tz_changed(self, combo, tz_list):
+        idx = combo.get_active()
+        if idx < 0 or idx >= len(tz_list):
+            return
+        tz = tz_list[idx]
+
+        lbl = Gtk.Label()
+        lbl.set_text(
+            "Parametrer la zone sur :\n\n"
+            + tz
+            + "\n\nLa machine doit redemarrer pour appliquer les modifications."
+        )
+        self._gtk.Dialog(
+            "Fuseau horaire",
+            [
+                {"name": _("Annuler"), "response": Gtk.ResponseType.CANCEL},
+                {"name": _("OK"),      "response": Gtk.ResponseType.OK, "style": "color3"},
+            ],
+            lbl,
+            self._confirm_tz_change,
+            tz,
+        )
+
+    def _confirm_tz_change(self, dialog, response, tz):
+        self._gtk.remove_dialog(dialog)
+        if response != Gtk.ResponseType.OK:
+            return
+        try:
+            result = subprocess.run(
+                ["sudo", "timedatectl", "set-timezone", tz],
+                capture_output=True,
+            )
+            if result.returncode == 0:
+                logging.info(f"system: timezone changee en {tz}")
+                self.labels["current_tz"].set_markup(
+                    "<span foreground='#96FF00'>" + tz + "</span>"
+                )
+                subprocess.Popen(
+                    ["sudo", "reboot"],
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                )
+            else:
+                logging.error(f"system: echec timezone : {result.stderr.decode()}")
+                lbl_err = Gtk.Label()
+                lbl_err.set_text("Erreur lors du changement de zone :\n" + result.stderr.decode())
+                self._gtk.Dialog(
+                    "Erreur",
+                    [{"name": _("OK"), "response": Gtk.ResponseType.OK, "style": "color1"}],
+                    lbl_err, lambda d, r: self._gtk.remove_dialog(d),
+                )
+        except Exception as e:
+            logging.error(f"system: timezone exception : {e}")
 
     def set_mem_multiplier(self, data):
         memory_units = data.get("memory_units", "kB").lower()
@@ -98,27 +219,13 @@ class Panel(ScreenPanel):
         self.current_row += 1
 
     def populate_info(self):
-        for category, data in self.sysinfo.items():
-            if category == "python":
-                self.add_label_to_grid(self.prettify(category), 0, bold=True)
-                self.current_row -= 1
-                self.add_label_to_grid(
-                    f'Version: {data["version_string"].split(" ")[0]}', 1
-                )
-                continue
+        # Categories a afficher - on exclut python, sd_info et tout le reste
+        ALLOWED = ("network_info",)
 
-            if (
-                category
-                in (
-                    "virtualization",
-                    "provider",
-                    "available_services",
-                    "distribution",
-                    "service_state",
-                    "instance_ids",
-                )
-                or not self.sysinfo[category]
-            ):
+        for category, data in self.sysinfo.items():
+            if category not in ALLOWED:
+                continue
+            if not self.sysinfo[category]:
                 continue
 
             self.add_label_to_grid(self.prettify(category), 0, bold=True)
