@@ -283,17 +283,43 @@ class Panel(ScreenPanel):
         self.buttons["refresh"].set_sensitive(False)
 
         import threading
+        import time
         from gi.repository import GLib
+
+        # Seul klipper arrete KS - utiliser systemd-run + flag pour lui uniquement
+        needs_detach = (program == "klipper")
+        flag_file = f'/tmp/vyper_update_{program}.done'
 
         def _run():
             try:
                 logfile = open(f'/home/Volumic/VyperOS/update_{program}.log', 'w')
-                proc = subprocess.Popen(
-                    ['sudo', 'bash', script_path],
-                    stdout=logfile,
-                    stderr=logfile,
-                )
-                proc.wait()   # attendre la fin du script
+                if needs_detach:
+                    # Supprimer le flag precedent
+                    try:
+                        os.remove(flag_file)
+                    except Exception:
+                        pass
+                    subprocess.Popen(
+                        ['sudo', 'systemd-run', '--no-block', '--collect',
+                         'bash', '-c',
+                         f'bash {script_path} ; touch {flag_file}'],
+                        stdout=logfile,
+                        stderr=logfile,
+                        start_new_session=True,
+                    )
+                    # Attendre le fichier flag (max 10 min)
+                    for _ in range(600):
+                        if os.path.exists(flag_file):
+                            break
+                        time.sleep(1)
+                else:
+                    # Script simple - attendre la fin directement
+                    proc = subprocess.Popen(
+                        ['sudo', 'bash', script_path],
+                        stdout=logfile,
+                        stderr=logfile,
+                    )
+                    proc.wait()
             except Exception as e:
                 logging.error(f"updater: lancement echoue : {e}")
             finally:
