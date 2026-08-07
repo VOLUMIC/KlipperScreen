@@ -120,7 +120,22 @@ class Panel(ScreenPanel):
     def create_info_grid(self):
         infogrid = Gtk.Grid()
         infogrid.get_style_context().add_class("system-program-grid")
-        for i, prog in enumerate(sorted(list(self.update_status["version_info"]))):
+
+        # Ordre d'affichage personnalise
+        PREFERRED_ORDER = [
+            "configurations",
+            "KlipperScreen",
+            "klipper",
+            "mainsail",
+            "moonraker",
+            "system",
+        ]
+        available = list(self.update_status["version_info"])
+        # Modules dans l'ordre voulu, puis les autres alphabetiquement
+        ordered = [p for p in PREFERRED_ORDER if p in available]
+        ordered += sorted([p for p in available if p not in PREFERRED_ORDER])
+
+        for i, prog in enumerate(ordered):
             self.labels[prog] = Gtk.Label(hexpand=True, halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END)
             self.labels[prog].get_style_context().add_class("updater-item")
 
