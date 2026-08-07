@@ -299,12 +299,13 @@ class Panel(ScreenPanel):
                         os.remove(flag_file)
                     except Exception:
                         pass
+                    log_path = f'/home/Volumic/VyperOS/update_{program}.log'
                     subprocess.Popen(
                         ['sudo', 'systemd-run', '--no-block', '--collect',
+                         f'--property=StandardOutput=file:{log_path}',
+                         f'--property=StandardError=file:{log_path}',
                          'bash', '-c',
                          f'bash {script_path} ; touch {flag_file}'],
-                        stdout=logfile,
-                        stderr=logfile,
                         start_new_session=True,
                     )
                     # Attendre le fichier flag (max 10 min)
@@ -507,12 +508,12 @@ class Panel(ScreenPanel):
             self._screen._send_action(widget, "printer.gcode.script", {"script": 'SET_LED LED="Eclairage_LEDs" RED=1 GREEN=0 BLUE=0 SYNC=0 TRANSMIT=1'})
             self._screen._send_action(widget, "printer.gcode.script", {"script": 'SET_FAN_SPEED FAN=_Alimentation SPEED=0.6'})
             try:
-                logfile = open('/home/Volumic/VyperOS/vyperos_lastupdate.log', 'w')
+                log_path = '/home/Volumic/VyperOS/vyperos_lastupdate.log'
                 subprocess.Popen(
                     ['sudo', 'systemd-run', '--no-block', '--collect',
+                     f'--property=StandardOutput=file:{log_path}',
+                     f'--property=StandardError=file:{log_path}',
                      'bash', '/home/Volumic/VyperOS/vyperos_update.sh'],
-                    stdout=logfile,
-                    stderr=logfile,
                     start_new_session=True,
                 )
             except Exception as e:
