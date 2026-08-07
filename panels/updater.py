@@ -117,6 +117,18 @@ class Panel(ScreenPanel):
         )
         return False
 
+    DISPLAY_NAMES = {
+        "configurations": "VyperOS",
+        "KlipperScreen":  "Affichage",
+        "klipper":        "Noyau",
+        "mainsail":       "Interface Web",
+        "moonraker":      "API",
+        "system":         "Systeme d'exploitation",
+    }
+
+    def _display_name(self, prog):
+        return self.DISPLAY_NAMES.get(prog, prog)
+
     def create_info_grid(self):
         infogrid = Gtk.Grid()
         infogrid.get_style_context().add_class("system-program-grid")
@@ -544,15 +556,10 @@ class Panel(ScreenPanel):
             return
 
         info = self.update_status["version_info"][p]
+        dn = self._display_name(p)
 
         if p == "system":
-            distro = (
-                self._printer.system_info["distribution"]["name"]
-                if "distribution" in self._printer.system_info
-                and "name" in self._printer.system_info["distribution"]
-                else _("System")
-            )
-            self.labels[p].set_markup(f"<b>{distro}</b>")
+            self.labels[p].set_markup(f"<b>{dn}</b>")
             if info["package_count"] == 0:
                 self._already_updated(p)
             else:
@@ -561,30 +568,30 @@ class Panel(ScreenPanel):
         elif "configured_type" in info and info["configured_type"] == "git_repo":
             if info["is_valid"] and not info["is_dirty"]:
                 if info["version"] == info["remote_version"]:
-                    self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']}")
+                    self.labels[p].set_markup(f"<b>{dn}</b>\n{info['version']}")
                     self._already_updated(p)
                     self.labels[f"{p}_status"].get_style_context().remove_class(
                         "invalid"
                     )
                 else:
                     self.labels[p].set_markup(
-                        f"<b>{p}</b>\n{info['version']} -> {info['remote_version']}"
+                        f"<b>{dn}</b>\n{info['version']} -> {info['remote_version']}"
                     )
                     self._needs_update(p, info["version"], info["remote_version"])
             else:
                 logging.info(f"Invalid {p} {info['version']}")
-                self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']}")
+                self.labels[p].set_markup(f"<b>{dn}</b>\n{info['version']}")
                 self.labels[f"{p}_status"].set_label(_("Updating"))
                 self.labels[f"{p}_status"].get_style_context().add_class("invalid")
                 self.labels[f"{p}_status"].set_sensitive(True)
                 if f"{p}_update" in self.buttons:
                     self.buttons[f"{p}_update"].set_sensitive(True)
         elif "version" in info and info["version"] == info["remote_version"]:
-            self.labels[p].set_markup(f"<b>{p}</b>\n{info['version']}")
+            self.labels[p].set_markup(f"<b>{dn}</b>\n{info['version']}")
             self._already_updated(p)
         else:
             self.labels[p].set_markup(
-                f"<b>{p}</b>\n{info['version']} -> {info['remote_version']}"
+                f"<b>{dn}</b>\n{info['version']} -> {info['remote_version']}"
             )
             self._needs_update(p, info["version"], info["remote_version"])
 
