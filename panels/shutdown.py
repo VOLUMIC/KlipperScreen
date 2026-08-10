@@ -1,11 +1,27 @@
 import logging
 import os
+import subprocess
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 from ks_includes.screen_panel import ScreenPanel
 
+POWEROFF_SCRIPT = "/home/Volumic/VyperOS/poweroff.sh"
+POWEROFF_CMD = [
+    "sudo", "systemd-run", "--no-block", "--collect",
+    "--property=StandardOutput=file:/home/Volumic/printer_data/logs/poweroff.log",
+    "--property=StandardError=file:/home/Volumic/printer_data/logs/poweroff.log",
+    "bash", POWEROFF_SCRIPT
+]
+
+def _do_poweroff():
+    """Lance poweroff.sh si present, sinon shutdown standard."""
+    if os.path.isfile(POWEROFF_SCRIPT):
+        subprocess.Popen(POWEROFF_CMD, start_new_session=True)
+    else:
+        logging.warning("poweroff.sh non trouve, shutdown standard")
+        os.system("systemctl poweroff -i")
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
@@ -64,15 +80,14 @@ class Panel(ScreenPanel):
                 self._screen._ws.send_method("machine.reboot")
                 os.system("systemctl reboot -i")
             else:
-                self._screen._ws.send_method("machine.shutdown")
-                os.system("systemctl poweroff -i")
+                _do_poweroff()
         elif response_id == Gtk.ResponseType.OK:
             if method == "reboot":
                 os.system("systemctl reboot -i")
             else:
-                os.system("systemctl poweroff -i")
+                _do_poweroff()
         elif response_id == Gtk.ResponseType.APPLY:
             if method == "reboot":
                 self._screen._ws.send_method("machine.reboot")
             else:
-                self._screen._ws.send_method("machine.shutdown")
+                _do_poweroff()
