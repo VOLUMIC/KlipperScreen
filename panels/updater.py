@@ -68,29 +68,31 @@ class Panel(ScreenPanel):
 
         self.content.add(self.main_box)
 
-        mcutype = 2
+        mcutype = "2"
         try:
             section = self._printer.get_macro("VOLUMIC_Type")
             if "variable_mcutype" in section:
-                mcutype = section["variable_mcutype"]
+                mcutype = str(section["variable_mcutype"]).split("#")[0].strip()
         except Exception as e:
             logging.exception(e)
-        if mcutype == "0":
-           os.system('mkdir /home/Volumic/VyperOS/SAM3X8E')
-           os.system('rmdir /home/Volumic/VyperOS/STM32H723')
-           os.system('rmdir /home/Volumic/VyperOS/STM32H723M8')
-        elif mcutype == "1":
-           os.system('mkdir /home/Volumic/VyperOS/SAM3X8E')
-           os.system('rmdir /home/Volumic/VyperOS/STM32H723')
-           os.system('rmdir /home/Volumic/VyperOS/STM32H723M8')
-        elif mcutype == "3":
-           os.system('rmdir /home/Volumic/VyperOS/SAM3X8E')
-           os.system('rmdir /home/Volumic/VyperOS/STM32H723')
-           os.system('mkdir /home/Volumic/VyperOS/STM32H723M8')
-        else:
-           os.system('rmdir /home/Volumic/VyperOS/SAM3X8E')
-           os.system('rmdir /home/Volumic/VyperOS/STM32H723M8')
-           os.system('mkdir /home/Volumic/VyperOS/STM32H723')
+        self._set_mcu_marker(mcutype)
+
+    # Repere de type de carte lu par vyperos_update.sh (un seul dossier present a la fois)
+    # 0 = UL, 1 = SL, 2 = HL, 3 = M8 / OCTO, 4 = STM32F103
+    MCU_MARKERS = {"0": "SAM3X8E", "1": "SAM3X8E", "3": "STM32H723M8", "4": "STM32F103"}
+
+    def _set_mcu_marker(self, mcutype):
+        base = "/home/Volumic/VyperOS"
+        wanted = self.MCU_MARKERS.get(mcutype, "STM32H723")
+        for name in ("SAM3X8E", "STM32H723", "STM32H723M8", "STM32F103"):
+            path = os.path.join(base, name)
+            try:
+                if name == wanted:
+                    os.makedirs(path, exist_ok=True)
+                elif os.path.isdir(path):
+                    os.rmdir(path)
+            except OSError as e:
+                logging.warning(f"Repere carte {path} : {e}")
 
     def activate(self):
         from gi.repository import GLib

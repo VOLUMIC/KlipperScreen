@@ -1,0 +1,8 @@
+# Toujours LF dans le depot et a l extraction (fichiers executes sous Linux)
+* text=auto eol=lf
+*.bin binary
+*.db binary
+*.png binary
+*.jpg binary
+*.svg text eol=lf
+*.mo binary
