@@ -32,34 +32,15 @@ class BasePanel(ScreenPanel):
         self.last_usage_report = datetime.now()
         self.usage_report = 0
 
-        # VOLUMIC MODIF
+        # VOLUMIC MODIF : IP dans la barre de titre. Sans NetworkManager, on continue sans IP
+        # (avant : "return" ici -> barre de titre jamais construite -> KlipperScreen ne demarrait pas)
+        self._ip_cache = ""
+        self._ip_cache_time = None
         try:
             self.sdbus_nm = SdbusNm(self.popup_callback)
         except Exception as e:
-            logging.exception("Failed to initialize")
+            logging.warning(f"NetworkManager indisponible, IP non affichee : {e}")
             self.sdbus_nm = None
-            self.error_box = Gtk.Box(
-                orientation=Gtk.Orientation.VERTICAL,
-                hexpand=True,
-                vexpand=True
-            )
-            message = (
-                _("Failed to initialize") + "\n"
-                + "This panel needs NetworkManager installed into the system\n"
-                + "And the apropriate permissions, without them it will not function.\n"
-                + f"\n{e}\n"
-            )
-            self.error_box.add(
-                Gtk.Label(
-                    label=message,
-                    wrap=True,
-                    wrap_mode=Pango.WrapMode.WORD_CHAR,
-                )
-            )
-            self.error_box.set_valign(Gtk.Align.CENTER)
-            self.content.add(self.error_box)
-            self._screen.panels_reinit.append(self._screen._cur_panels[-1])
-            return
         # VOLUMIC MODIF
 
         # Action bar buttons
@@ -403,7 +384,25 @@ class BasePanel(ScreenPanel):
         except Exception as e:
             logging.debug(f"Error parsing jinja for title: {title}\n{e}")
 
-        self.titlelbl.set_label(f"{printer} {title} ({self.sdbus_nm.get_ip_address()})")
+        ip = self.get_ip_text()
+        self.titlelbl.set_label(f"{printer} {title} ({ip})" if ip else f"{printer} {title}")
+
+    # VOLUMIC MODIF : IP mise en cache 10 s (evite 3 lectures D-Bus a chaque changement de panneau)
+    # et jamais d'exception (pas encore d'IPv4, NetworkManager arrete...)
+    def get_ip_text(self):
+        if self.sdbus_nm is None:
+            return ""
+        now = datetime.now()
+        if self._ip_cache_time and (now - self._ip_cache_time).total_seconds() < 10:
+            return self._ip_cache
+        try:
+            ip = self.sdbus_nm.get_ip_address()
+        except Exception as e:
+            logging.debug(f"IP indisponible : {e}")
+            ip = "?"
+        self._ip_cache = ip
+        self._ip_cache_time = now
+        return ip
 
     def update_time(self):
         now = datetime.now()
