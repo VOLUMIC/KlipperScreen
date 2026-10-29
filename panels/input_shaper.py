@@ -26,7 +26,9 @@ class Panel(ScreenPanel):
         self.calibrate_btn.set_sensitive(False)
         self.status = Gtk.Label(hexpand=True, vexpand=False, halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END)
         self.calibrating_axis = None
-        self.calibrating_axis = None
+        # VOLUMIC MODIF : IDRE (dual_carriage) -> calibration et reglages par les macros VOLUMIC
+        # (Klipper refuse les reglages dans [input_shaper] avec un dual_carriage)
+        self.is_idex = bool(self._printer.get_config_section("dual_carriage"))
 
         auto_calibration_label = Gtk.Label(hexpand=True)
         auto_calibration_label.set_markup('<big><b>Auto Calibration</b></big>')
@@ -93,6 +95,13 @@ class Panel(ScreenPanel):
 
     def start_calibration(self, widget, method):
         self.labels['popover'].popdown()
+        if self.is_idex:
+            # VOLUMIC MODIF : X et Y avec la tete T0, enregistrement dans variables.cfg, redemarrage
+            self.calibrating_axis = "both"
+            self._screen._send_action(self.calibrate_btn, "printer.gcode.script",
+                                      {"script": "CALIBRATION_ZERO_VIBRATION"})
+            self.calibrate_btn.set_label(_v('Calibrating...'))
+            return
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
             self._screen._ws.klippy.gcode_script("G28")
         self.calibrating_axis = method
@@ -110,6 +119,13 @@ class Panel(ScreenPanel):
         shaper_type_x = self.freq_xy_combo['shaper_type_x'].get_active_text()
         shaper_type_y = self.freq_xy_combo['shaper_type_y'].get_active_text()
 
+        if self.is_idex:
+            # VOLUMIC MODIF : enregistre les valeurs (variables.cfg) et les applique aux deux tetes
+            self._screen._ws.klippy.gcode_script(
+                f'VOLUMIC_SHAPER_SET TYPE_X={shaper_type_x} FREQ_X={shaper_freq_x} '
+                f'TYPE_Y={shaper_type_y} FREQ_Y={shaper_freq_y}'
+            )
+            return
         self._screen._ws.klippy.gcode_script(
             f'SET_INPUT_SHAPER '
             f'SHAPER_FREQ_X={shaper_freq_x} '
@@ -161,7 +177,8 @@ class Panel(ScreenPanel):
             if self.calibrating_axis == results['axis'] or (self.calibrating_axis == "both" and results['axis'] == 'y'):
                 self.calibrate_btn.set_sensitive(True)
                 self.calibrate_btn.set_label(_('Calibrated'))
-                self.save_config()
+                if not self.is_idex:  # VOLUMIC MODIF : sur IDRE la macro enregistre et redemarre
+                    self.save_config()
         # shaper_type_y:ei shaper_freq_y:48.400 damping_ratio_y:0.100000
         if 'shaper_type_' in data:
             if results := re.search(
