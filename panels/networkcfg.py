@@ -8,6 +8,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.vyper_i18n import _v  # VOLUMIC MODIF : textes VOLUMIC traduits
 
 INTERFACES_FILE    = "/etc/network/interfaces"
 INTERFACES_DEFAULT = "/etc/network/interfaces.default"
@@ -174,7 +175,7 @@ class IpWidget(Gtk.Box):
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
-        title = title or _("Reseau")
+        title = title or _v("Network")
         super().__init__(screen, title)
         self.labels = {}
 
@@ -308,7 +309,7 @@ class Panel(ScreenPanel):
         lbl_iface.set_halign(Gtk.Align.START)
         lbl_ip = Gtk.Label()
         lbl_ip.set_markup(
-            "<span size='large' weight='bold'>" + (ip_current or "Non connecte") + "</span>"
+            "<span size='large' weight='bold'>" + (ip_current or _v("Not connected")) + "</span>"
         )
         lbl_ip.set_halign(Gtk.Align.START)
         self.labels[iface_name + "_ip"] = lbl_ip
@@ -334,9 +335,9 @@ class Panel(ScreenPanel):
         self.labels[iface_name + "_fields_box"] = fields_box
 
         fields = [
-            ("address", "Adresse IP", field_defaults.get("address", "0.0.0.0")),
-            ("netmask", "Masque",     field_defaults.get("netmask", "255.255.255.0")),
-            ("gateway", "Passerelle", field_defaults.get("gateway", "0.0.0.0")),
+            ("address", _v("IP address"), field_defaults.get("address", "0.0.0.0")),
+            ("netmask", _v("Netmask"),   field_defaults.get("netmask", "255.255.255.0")),
+            ("gateway", _v("Gateway"), field_defaults.get("gateway", "0.0.0.0")),
             ("dns",     "DNS",        field_defaults.get("dns",     "8.8.8.8")),
         ]
         for key, label_text, default_val in fields:
@@ -400,10 +401,10 @@ class Panel(ScreenPanel):
         main_box.pack_start(Gtk.Separator(), False, False, 2)
 
         btn_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
-        btn_reset = self._gtk.Button("refresh", "Defaut en DHCP", "color1")
+        btn_reset = self._gtk.Button("refresh", _v("Reset to DHCP"), "color1")
         btn_reset.connect("clicked", self._on_reset)
         btn_reset.set_hexpand(True)
-        btn_save = self._gtk.Button("complete", "Sauvegarder", "color3")
+        btn_save = self._gtk.Button("complete", _v("Save"), "color3")
         btn_save.connect("clicked", self._on_save)
         btn_save.set_hexpand(True)
         btn_box.pack_start(btn_reset, True, True, 0)
@@ -448,12 +449,12 @@ class Panel(ScreenPanel):
     # ------------------------------------------------------------------
     def _on_reset(self, widget):
         self._gtk.Dialog(
-            "Reset reseau",
+            _v("Network reset"),
             [
-                {"name": _("Annuler"),   "response": Gtk.ResponseType.CANCEL},
-                {"name": _("Confirmer"), "response": Gtk.ResponseType.OK, "style": "color1"},
+                {"name": _("Cancel"),   "response": Gtk.ResponseType.CANCEL},
+                {"name": _v("Confirm"), "response": Gtk.ResponseType.OK, "style": "color1"},
             ],
-            self._centered_content("Reinitialiser toutes les interfaces en DHCP ?"),
+            self._centered_content(_v("Reset all interfaces to DHCP?")),
             self._confirm_reset,
         )
 
@@ -471,9 +472,9 @@ class Panel(ScreenPanel):
     def _on_save(self, widget):
         # Dialog immediat "en cours" pendant l'ecriture
         self._wait_dialog = self._gtk.Dialog(
-            "Reseau",
+            _v("Network"),
             None,
-            self._centered_content("Application de la configuration en cours..."),
+            self._centered_content(_v("Applying the configuration...")),
             lambda *a: None,
         )
 
@@ -589,24 +590,24 @@ class Panel(ScreenPanel):
             if "eth0_ip" in self.labels:
                 ip = _get_iface_ip("eth0")
                 self.labels["eth0_ip"].set_markup(
-                    "<span size='large' weight='bold'>" + (ip or "Non connecte") + "</span>"
+                    "<span size='large' weight='bold'>" + (ip or _v("Not connected")) + "</span>"
                 )
             if "wlan0_ip" in self.labels:
                 ip = _get_iface_ip("wlan0")
                 self.labels["wlan0_ip"].set_markup(
-                    "<span size='large' weight='bold'>" + (ip or "Non connecte") + "</span>"
+                    "<span size='large' weight='bold'>" + (ip or _v("Not connected")) + "</span>"
                 )
             self._gtk.Dialog(
-                "Reseau",
+                _v("Network"),
                 [{"name": _("OK"), "response": Gtk.ResponseType.OK, "style": "color3"}],
-                self._centered_content("Configuration sauvegardee.\nLa machine va redemarrer pour appliquer."),
+                self._centered_content(_v("Configuration saved.\nThe machine will restart to apply it.")),
                 self._on_reboot_confirm,
             )
         else:
             self._gtk.Dialog(
-                "Erreur",
+                _("Error"),
                 [{"name": _("OK"), "response": Gtk.ResponseType.OK, "style": "color1"}],
-                self._centered_content("Erreur :\n" + error_msg),
+                self._centered_content(_v("Error:") + "\n" + error_msg),
                 lambda d, r: self._gtk.remove_dialog(d),
             )
         return False

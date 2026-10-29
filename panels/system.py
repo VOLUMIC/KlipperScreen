@@ -6,6 +6,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.vyper_i18n import _v  # VOLUMIC MODIF : textes VOLUMIC traduits
 
 
 class Panel(ScreenPanel):
@@ -83,7 +84,7 @@ class Panel(ScreenPanel):
         self._build_timezone_row()
 
         # Bouton reset reseau
-        btn_reset = self._gtk.Button("network", "RESET NETWORK", "color1")
+        btn_reset = self._gtk.Button("network", _v("RESET NETWORK"), "color1")
         btn_reset.connect("clicked", self._on_reset_network)
         self.grid.attach(btn_reset, 0, self.current_row, 2, 1)
         self.current_row += 1
@@ -116,7 +117,7 @@ class Panel(ScreenPanel):
 
         # Label
         lbl = Gtk.Label(label="Fuseau horaire", xalign=0)
-        lbl.set_markup("<b>Fuseau horaire</b>")
+        lbl.set_markup("<b>" + _v("Time zone") + "</b>")
         self.grid.attach(lbl, 0, self.current_row, 1, 1)
 
         # Label timezone actuelle
@@ -154,14 +155,14 @@ class Panel(ScreenPanel):
 
         lbl = Gtk.Label()
         lbl.set_text(
-            "Parametrer la zone sur :\n\n"
+            _v("Set the time zone to:") + "\n\n"
             + tz
-            + "\n\nLa machine doit redemarrer pour appliquer les modifications."
+            + "\n\n" + _v("The machine must restart to apply the changes.")
         )
         self._gtk.Dialog(
-            "Fuseau horaire",
+            _v("Time zone"),
             [
-                {"name": _("Annuler"), "response": Gtk.ResponseType.CANCEL},
+                {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL},
                 {"name": _("OK"),      "response": Gtk.ResponseType.OK, "style": "color3"},
             ],
             lbl,
@@ -191,9 +192,9 @@ class Panel(ScreenPanel):
             else:
                 logging.error(f"system: echec timezone : {result.stderr.decode()}")
                 lbl_err = Gtk.Label()
-                lbl_err.set_text("Erreur lors du changement de zone :\n" + result.stderr.decode())
+                lbl_err.set_text(_v("Error while changing the time zone:") + "\n" + result.stderr.decode())
                 self._gtk.Dialog(
-                    "Erreur",
+                    _("Error"),
                     [{"name": _("OK"), "response": Gtk.ResponseType.OK, "style": "color1"}],
                     lbl_err, lambda d, r: self._gtk.remove_dialog(d),
                 )
@@ -262,15 +263,13 @@ class Panel(ScreenPanel):
     def _on_reset_network(self, widget):
         lbl = Gtk.Label()
         lbl.set_text(
-            "Reinitialiser le reseau en DHCP ?\n\n"
-            "La machine va redemarrer apres le reset.\n"
-            "Toutes les connexions seront coupees."
+            _v("Reset the network to DHCP?\n\nThe machine will restart after the reset.\nAll connections will be cut.")
         )
         self._gtk.Dialog(
-            "RESET NETWORK",
+            _v("RESET NETWORK"),
             [
-                {"name": _("Annuler"),   "response": Gtk.ResponseType.CANCEL},
-                {"name": _("Confirmer"), "response": Gtk.ResponseType.OK, "style": "color1"},
+                {"name": _("Cancel"),   "response": Gtk.ResponseType.CANCEL},
+                {"name": _v("Confirm"), "response": Gtk.ResponseType.OK, "style": "color1"},
             ],
             lbl,
             self._confirm_reset_network,

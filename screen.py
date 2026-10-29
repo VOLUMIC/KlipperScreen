@@ -22,6 +22,10 @@ from signal import SIGTERM
 from datetime import datetime
 
 from ks_includes import functions
+# VOLUMIC MODIF - traduction des erreurs
+from ks_includes import vyper_errors
+from ks_includes.vyper_i18n import _v
+# END VOLUMIC MODIF
 from ks_includes.KlippyWebsocket import KlippyWebsocket
 from ks_includes.KlippyRest import KlippyRest
 from ks_includes.files import KlippyFiles
@@ -99,6 +103,7 @@ class KlipperScreen(Gtk.Window):
         self.lang_ltr = set_text_direction(self._config.get_main_config().get("language", None))
         self.env = Environment(extensions=["jinja2.ext.i18n"], autoescape=True)
         self.env.install_gettext_translations(self._config.get_lang())
+        self.env.globals["vgettext"] = _v  # VOLUMIC MODIF : noms de menus du catalogue volumic
 
         self.connect("key-press-event", self._key_press_event)
         self.connect("configure_event", self.update_size)
@@ -759,9 +764,9 @@ class KlipperScreen(Gtk.Window):
         self.show_panel("printer_select", remove_all=True)
 
     def websocket_connection_cancel(self):
+        # VOLUMIC MODIF - message traduit
         self.printer_initializing(
-            _("Cannot connect to Moonraker") + '\n\n'
-            + f'{self.apiclient.status}'
+            vyper_errors.format_message(self.apiclient.status, "moonraker")
         )
 
     def websocket_connected(self):
@@ -794,13 +799,10 @@ class KlipperScreen(Gtk.Window):
         self._init_printer(_("Klipper has disconnected"), go_to_splash=True)
 
     def state_error(self):
-        msg = _("Klipper has encountered an error.") + "\n"
+        # VOLUMIC MODIF - message traduit avec actions pour le client
         state = self.printer.get_stat("webhooks", "state_message")
-        if "FIRMWARE_RESTART" in state:
-            msg += _("A FIRMWARE_RESTART may fix the issue.") + "\n"
-        elif "micro-controller" in state:
-            msg += _("Please recompile and flash the micro-controller.") + "\n"
-        self.printer_initializing(msg + "\n" + state, go_to_splash=True)
+        self.printer_initializing(
+            vyper_errors.format_message(state, "error"), go_to_splash=True)
 
     def state_paused(self):
         self.state_printing()
@@ -827,7 +829,9 @@ class KlipperScreen(Gtk.Window):
     def state_shutdown(self):
         self.printer.stop_tempstore_updates()
         msg = self.printer.get_stat("webhooks", "state_message")
-        self.printer_initializing(_("Klipper has shutdown") + "\n\n" + msg, go_to_splash=True)
+        # VOLUMIC MODIF - message traduit avec actions pour le client
+        self.printer_initializing(
+            vyper_errors.format_message(msg, "shutdown"), go_to_splash=True)
         #self.printer_initializing(_("Klipper has shutdown"), go_to_splash=True)
 
     def toggle_shortcut(self, show):
@@ -894,7 +898,10 @@ class KlipperScreen(Gtk.Window):
         elif action == "notify_update_response":
             if 'message' in data and 'Error' in data['message']:
                 logging.error(f"{action}:{data['message']}")
-                self.show_popup_message(data['message'], 3, from_ws=True)
+                # VOLUMIC MODIF - message traduit
+                self.show_popup_message(
+                    vyper_errors.format_message(data['message'], fallback=False),
+                    3, from_ws=True)
                 if "KlipperScreen" in data['message']:
                     self.restart_ks()
         elif action == "notify_power_changed":
@@ -912,17 +919,23 @@ class KlipperScreen(Gtk.Window):
             elif "!! Extrude below minimum temp" in data:
                 if self._cur_panels[-1] != "temperature":
                     self.show_panel("temperature", extra=self.printer.get_stat("toolhead", "extruder"))
-                self.show_popup_message(_("Temperature too low to extrude"))
+                # VOLUMIC MODIF - message traduit
+                self.show_popup_message(vyper_errors.format_message(
+                    "Temperature too low to extrude", show_ref=False))
                 return
             elif data.startswith("!! "):
-                self.show_popup_message(data[3:], 3, from_ws=True)
+                # VOLUMIC MODIF - message traduit (inchange si inconnu)
+                self.show_popup_message(vyper_errors.format_message(
+                    data, fallback=False, show_ref=False), 3, from_ws=True)
             elif (
                 "unknown" in data.lower()
                 and "TESTZ" not in data
                 and "MEASURE_AXES_NOISE" not in data
                 and "ACCELEROMETER_QUERY" not in data
             ):
-                self.show_popup_message(data, from_ws=True)
+                # VOLUMIC MODIF - message traduit (inchange si inconnu)
+                self.show_popup_message(vyper_errors.format_message(
+                    data, fallback=False, show_ref=False), from_ws=True)
             elif "SAVE_CONFIG" in data and self.printer.state == "ready":
                 script = {"script": "SAVE_CONFIG"}
                 self._confirm_send_action(
@@ -1045,8 +1058,9 @@ class KlipperScreen(Gtk.Window):
         self.initializing = True
         if self.reinit_count > self.max_retries or 'printer_select' in self._cur_panels:
             logging.info("Stopping Retries")
-            self.printer_initializing(_("Cannot connect to Moonraker") + "\n\n"
-                                      + f'{self.apiclient.status}')
+            # VOLUMIC MODIF - message traduit
+            self.printer_initializing(
+                vyper_errors.format_message(self.apiclient.status, "moonraker"))
             self.initializing = False
             return False
         self.server_info = self.apiclient.get_server_info()
@@ -1066,17 +1080,22 @@ class KlipperScreen(Gtk.Window):
     def init_moonraker_components(self):
         popup = ''
         level = 2
+        # VOLUMIC MODIF - avertissements traduits
         if self.server_info["warnings"]:
-            popup += '\nMoonraker warnings:\n'
+            popup += '\n' + _v('API service warnings:') + '\n'
             for warning in self.server_info["warnings"]:
-                warning = warning.replace('<br>', '').replace('<br/>', '\n').replace('</br>', '\n').replace(':', ':\n')
-                popup += f"{warning}\n"
+                warning = warning.replace('<br>', '').replace('<br/>', '\n').replace('</br>', '\n')
+                info = vyper_errors.translate(warning)
+                if info:
+                    popup += f"- {info['title']}\n"
+                else:
+                    popup += f"{warning.replace(':', ':' + chr(10))}\n"
         if self.server_info["failed_components"]:
-            popup += '\nMoonraker failed components:\n'
+            popup += '\n' + _v('Failed API service modules:') + '\n'
             for failed in self.server_info["failed_components"]:
                 popup += f'[{failed}]\n'
         if self.server_info["missing_klippy_requirements"]:
-            popup += '\nMissing Klipper configuration:\n'
+            popup += '\n' + _v('Incomplete VyperOS configuration:') + '\n'
             for missing in self.server_info["missing_klippy_requirements"]:
                 popup += f'[{missing}]\n'
                 level = 3
@@ -1102,7 +1121,9 @@ class KlipperScreen(Gtk.Window):
         logging.info(f"Moonraker info {self.server_info}")
         if self.server_info['klippy_connected'] is False:
             msg = _("Moonraker: connected") + "\n\n"
-            msg += f"Klipper: {self.server_info['klippy_state']}" + "\n\n"
+            # VOLUMIC MODIF - etat traduit
+            msg += "VyperOS: " + vyper_errors.klippy_state_label(
+                self.server_info['klippy_state']) + "\n\n"
             if self.reinit_count <= self.max_retries:
                 msg += _("Retrying") + f' #{self.reinit_count}'
             self.printer_initializing(msg)
@@ -1110,7 +1131,9 @@ class KlipperScreen(Gtk.Window):
             return False
         printer_info = self.apiclient.get_printer_info()
         if printer_info is False:
-            self._init_printer("Unable to get printer info from moonraker")
+            # VOLUMIC MODIF - message traduit
+            self._init_printer(vyper_errors.format_message(
+                "Unable to get printer info from moonraker"))
             return False
         config = self.apiclient.send_request("printer/objects/query?configfile")
         if config is False:

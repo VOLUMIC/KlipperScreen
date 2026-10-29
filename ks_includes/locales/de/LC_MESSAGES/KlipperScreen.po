@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2026-10-27 18:20+0100\n"
 "PO-Revision-Date: 2024-09-07 00:09+0000\n"
 "Last-Translator: Leart Dukaj <premtimdukaj@hotmail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/de/>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/klipperscreen/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,12 +27,6 @@ msgstr "(Standard)"
 
 msgid "24 Hour Time"
 msgstr "24h-Zeit"
-
-msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr "Ein FIRMWARE_RESTART könnte das Problem beheben."
-
-msgid "ADXL Not Configured"
-msgstr "ADXL nicht konfiguriert"
 
 msgid "Abort"
 msgstr "Abbrechen"
@@ -73,9 +66,6 @@ msgstr "Bist du sicher, dass du den Not-Aus ausführen möchtest?"
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Möchtest du diesen Druck wirklich abbrechen?"
 
-msgid "Are you sure you wish to disable motors?"
-msgstr "Möchtest du die Motoren wirklich deaktivieren?"
-
 msgid "Are you sure you wish to reboot the system?"
 msgstr "Möchtest du das System wirklich neu starten?"
 
@@ -87,9 +77,6 @@ msgstr "Bestätigung vorm Stoppen erfragen"
 
 msgid "Auto"
 msgstr "Auto"
-
-msgid "Auto-calibrate"
-msgstr "Automatisch kalibrieren"
 
 msgid "Auto-close notifications"
 msgstr "Benachrichtigungen automatisch schließen"
@@ -114,9 +101,6 @@ msgstr "Kalibrieren"
 
 msgid "Calibrated"
 msgstr "Kalibriert"
-
-msgid "Calibrating"
-msgstr "Kalibriere"
 
 msgid "Camera"
 msgstr "Kamera"
@@ -143,13 +127,10 @@ msgid "Changes how the interface looks"
 msgstr "Ändert das Aussehen der Benutzeroberfläche"
 
 msgid "Changes how the time remaining is calculated"
-msgstr "Ändert die Berechnungsweiße der Restzeit"
+msgstr "Ändert die Berechnungsweise der Restzeit"
 
 msgid "Channel"
 msgstr "Kanal"
-
-msgid "Check ADXL Wiring"
-msgstr "Überprüfe die ADXL-Verkabelung"
 
 msgid "Checking for updates, please wait..."
 msgstr "Suche nach Updates, bitte warten..."
@@ -177,7 +158,7 @@ msgstr "Verbinden"
 
 #, python-format
 msgid "Connecting to %s"
-msgstr "Verbinden zu %s"
+msgstr "Verbinde mit %s"
 
 msgid "Connection failed"
 msgstr "Verbindung fehlgeschlagen"
@@ -230,7 +211,7 @@ msgstr "Wollen Sie %s vergessen oder trennen?"
 
 #, python-format
 msgid "Do you want to recover %s?"
-msgstr "Möchtest du zurück zu %s?"
+msgstr "Möchtest du %s wiederherstellen?"
 
 msgid "Elapsed:"
 msgstr "Laufzeit:"
@@ -263,7 +244,7 @@ msgid "Estimated Time"
 msgstr "Geschätzte Zeit"
 
 msgid "Estimated Time Method"
-msgstr "Verbleibende Zeit"
+msgstr "Berechnung der Restzeit"
 
 msgid "Example"
 msgstr "Beispiel"
@@ -322,17 +303,11 @@ msgstr "Datei:"
 msgid "Filter"
 msgstr "Filter"
 
-msgid "Finding ADXL"
-msgstr "ADXL finden"
-
 msgid "Fine Tuning"
 msgstr "Feintuning"
 
 msgid "Finish"
 msgstr "Fertig"
-
-msgid "Firmware Restart"
-msgstr "Firmware Neustart"
 
 msgid "Flow:"
 msgstr "Fluss:"
@@ -344,7 +319,7 @@ msgid "Font Size"
 msgstr "Schriftgröße"
 
 msgid "For mouse control or to verify touchscreen accuracy"
-msgstr ""
+msgstr "Für die Maussteuerung oder zur Überprüfung der Touchscreen-Genauigkeit"
 
 msgid "Forget"
 msgstr "Vergessen"
@@ -369,9 +344,6 @@ msgstr "Verstecken"
 
 msgid "Hide sensors in Temp."
 msgstr "Sensoren in Temp ausblenden."
-
-msgid "Home"
-msgstr "Grundposition"
 
 msgid "Home All"
 msgstr "Alle Achsen referenzieren"
@@ -400,9 +372,6 @@ msgstr "ID"
 msgid "Icon Theme"
 msgstr "Icon Theme"
 
-msgid "Initializing printer..."
-msgstr "Drucker wird initialisiert..."
-
 msgid "Initiate a PID calibration for:"
 msgstr "Initiieren einer PID-Kalibrierung für:"
 
@@ -415,16 +384,11 @@ msgstr "Unzureichende Rechte"
 msgid "Interface"
 msgstr "Oberfläche"
 
-msgid "Invalid"
-msgstr "Ungültig"
-
 msgid "Invalid password"
 msgstr "Ungültiges Passwort"
 
-#, fuzzy
-#| msgid "Temperature"
 msgid "Invalid temperature"
-msgstr "Temperatur"
+msgstr "Ungültige Temperatur"
 
 msgid "Inversely affects the icon size"
 msgstr "Beeinflusst die Symbolgröße umgekehrt"
@@ -448,28 +412,19 @@ msgid "Job Status"
 msgstr "Auftragsstatus"
 
 msgid "Klipper Restart"
-msgstr "Klipper Neustart"
+msgstr "VyperOS neu starten"
 
 msgid "Klipper has disconnected"
-msgstr "Verbindung zu Klipper getrennt"
-
-msgid "Klipper has encountered an error."
-msgstr "Klipper hat einen Fehler festgestellt."
-
-msgid "Klipper has shutdown"
-msgstr "Klipper abgeschaltet"
+msgstr "Verbindung zu VyperOS getrennt"
 
 msgid "Klipper is attempting to start"
-msgstr "Klipper versucht zu starten"
+msgstr "VyperOS versucht zu starten"
 
 msgid "Klipper will reboot"
-msgstr "Klipper startet neu"
+msgstr "VyperOS startet neu"
 
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"Filament_Laden/Filament_Entladen sind versteckt und sollten von extrudieren "
-"aus verwendet werden"
+msgid "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT sind ausgeblendet und sollten über Extrudieren verwendet werden"
 
 msgid "Language"
 msgstr "Sprache"
@@ -478,7 +433,7 @@ msgid "Large"
 msgstr "Groß"
 
 msgid "Last Duration"
-msgstr "Letze Dauer"
+msgstr "Letzte Dauer"
 
 msgid "Last Used"
 msgstr "Zuletzt verwendet"
@@ -627,12 +582,15 @@ msgstr "Benachrichtigungen"
 msgid "Nozzle diameter"
 msgstr "Düsendurchmesser"
 
+msgid "OK"
+msgstr "OK"
+
 msgid "Only for the move panel"
 msgstr "Nur für das Bewegungspanel"
 
 #, python-format
 msgid "Outdated by %d"
-msgstr "Veraltet von %d"
+msgstr "Veraltet um %d"
 
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
@@ -642,10 +600,8 @@ msgstr[1] "Pakete werden aktualisiert"
 msgid "Part Fan"
 msgstr "Bauteil Lüfter"
 
-#, fuzzy
-#| msgid "Password saved"
 msgid "Password"
-msgstr "Passwort gespeichert"
+msgstr "Passwort"
 
 msgid "Password saved"
 msgstr "Passwort gespeichert"
@@ -662,14 +618,11 @@ msgstr "Vollständiges Upgrade durchführen?"
 msgid "Pins"
 msgstr "Pins"
 
-msgid "Please recompile and flash the micro-controller."
-msgstr "Bitte neukomplieren und Controller neubespielen."
-
 msgid "Please wait"
 msgstr "Bitte warten"
 
 msgid "Power"
-msgstr "Ein"
+msgstr "Stromversorgung"
 
 msgid "Power On Printer"
 msgstr "Drucker einschalten"
@@ -681,7 +634,7 @@ msgid "Pressure Advance:"
 msgstr "Druckvorlauf:"
 
 msgid "Pressure advance"
-msgstr "Druckvorschub"
+msgstr "Druckvorlauf"
 
 msgid "Print"
 msgstr "Druck"
@@ -717,13 +670,13 @@ msgid "Raise Nozzle"
 msgstr "Düse anheben"
 
 msgid "Recover"
-msgstr "Rücksetzen"
+msgstr "Wiederherstellen"
 
 msgid "Recover Hard"
-msgstr "Rücksetzen (Hard)"
+msgstr "Wiederherstellen (Hard)"
 
 msgid "Recover Soft"
-msgstr "Rücksetzen (Soft)"
+msgstr "Wiederherstellen (Soft)"
 
 msgid "Reference"
 msgstr "Referenz"
@@ -735,16 +688,13 @@ msgid "Remove network"
 msgstr "Netzwerk entfernen"
 
 msgid "Rename/Move:"
-msgstr "Umbenennen/Bewegen:"
+msgstr "Umbenennen/Verschieben:"
 
 msgid "Restart"
 msgstr "Neustart"
 
 msgid "Resume"
 msgstr "Fortsetzen"
-
-msgid "Retract"
-msgstr "Zurückziehen"
 
 msgid "Retraction"
 msgstr "Rückzug"
@@ -793,7 +743,7 @@ msgid "Screws Adjust"
 msgstr "Schrauben Einstellen"
 
 msgid "Screws not used:"
-msgstr "nicht genutzte Schrauben:"
+msgstr "Nicht genutzte Schrauben:"
 
 msgid "Send"
 msgstr "Senden"
@@ -814,7 +764,7 @@ msgid "Show Scrollbars Buttons"
 msgstr "Zeige Scrollbar Schaltfläche"
 
 msgid "Show cursor"
-msgstr ""
+msgstr "Cursor anzeigen"
 
 msgid "Show only devices that are able to be set"
 msgstr "Zeige nur Geräte die eingestellt werden können"
@@ -835,7 +785,7 @@ msgid "Small"
 msgstr "Klein"
 
 msgid "Smooth time"
-msgstr "Erweichungsdauer"
+msgstr "Glättungszeit"
 
 msgid "Speed (mm/s)"
 msgstr "Geschwindigkeit (mm/s)"
@@ -861,13 +811,8 @@ msgstr "Starten"
 msgid "Starting recovery for"
 msgstr "Starte Wiederherstellung für"
 
-msgid "Starting update for"
-msgstr "Starte Update für"
-
 msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr ""
-"Vertauscht Tasten, wenn sie übereinander liegen, wirkt sich auf andere "
-"Bedienfelder aus"
+msgstr "Vertauscht Tasten, wenn sie übereinander liegen, wirkt sich auf andere Bedienfelder aus"
 
 msgid "System"
 msgstr "System"
@@ -886,9 +831,6 @@ msgstr "Temp (°C)"
 
 msgid "Temperature"
 msgstr "Temperatur"
-
-msgid "Temperature too low to extrude"
-msgstr ""
 
 msgid "The system doesn't meet the minimum requirement"
 msgstr "Das System erfüllt die minimalen Anforderungen nicht"
@@ -929,19 +871,19 @@ msgid "Up To Date"
 msgstr "Aktuell"
 
 msgid "Update"
-msgstr "Aktualsieren"
+msgstr "Aktualisieren"
 
 msgid "Updating"
-msgstr "Aktualisiere"
+msgstr "Aktualisierung läuft"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "Nützlich für nicht reagierende Touchscreens"
 
 msgid "User"
-msgstr ""
+msgstr "Benutzer"
 
 msgid "WebRTC is not supported by the backend trying Stream"
-msgstr "WebRTC wird vom Backend nicht unterstützt"
+msgstr "WebRTC wird vom Backend nicht unterstützt, versuche Stream"
 
 msgid "Working"
 msgstr "Arbeitet"
@@ -1013,8 +955,56 @@ msgstr "s"
 
 msgid "second"
 msgid_plural "seconds"
-msgstr[0] "sekunde"
-msgstr[1] "sekunden"
+msgstr[0] "Sekunde"
+msgstr[1] "Sekunden"
+
+#~ msgid "A FIRMWARE_RESTART may fix the issue."
+#~ msgstr "Ein FIRMWARE_RESTART könnte das Problem beheben."
+
+#~ msgid "ADXL Not Configured"
+#~ msgstr "ADXL nicht konfiguriert"
+
+#~ msgid "Are you sure you wish to disable motors?"
+#~ msgstr "Möchtest du die Motoren wirklich deaktivieren?"
+
+#~ msgid "Auto-calibrate"
+#~ msgstr "Automatisch kalibrieren"
+
+#~ msgid "Calibrating"
+#~ msgstr "Kalibriere"
+
+#~ msgid "Check ADXL Wiring"
+#~ msgstr "Überprüfe die ADXL-Verkabelung"
+
+#~ msgid "Finding ADXL"
+#~ msgstr "ADXL finden"
+
+#~ msgid "Firmware Restart"
+#~ msgstr "Firmware Neustart"
+
+#~ msgid "Home"
+#~ msgstr "Grundposition"
+
+#~ msgid "Initializing printer..."
+#~ msgstr "Drucker wird initialisiert..."
+
+#~ msgid "Invalid"
+#~ msgstr "Ungültig"
+
+#~ msgid "Klipper has encountered an error."
+#~ msgstr "Klipper hat einen Fehler festgestellt."
+
+#~ msgid "Klipper has shutdown"
+#~ msgstr "Klipper abgeschaltet"
+
+#~ msgid "Please recompile and flash the micro-controller."
+#~ msgstr "Bitte neukomplieren und Controller neubespielen."
+
+#~ msgid "Retract"
+#~ msgstr "Zurückziehen"
+
+#~ msgid "Starting update for"
+#~ msgstr "Starte Update für"
 
 #~ msgid "Hide temp."
 #~ msgstr "Temp. ausblenden"
@@ -1061,12 +1051,8 @@ msgstr[1] "sekunden"
 #~ msgid "Bed screw configuration:"
 #~ msgstr "Bettschraubenkonfiguration:"
 
-#~ msgid ""
-#~ "Not supported for auto-detection, it needs to be configured in "
-#~ "klipperscreen.conf"
-#~ msgstr ""
-#~ "Wird für die automatische Erkennung nicht unterstützt, muss in "
-#~ "Klipperscreen.conf konfiguriert werden"
+#~ msgid "Not supported for auto-detection, it needs to be configured in klipperscreen.conf"
+#~ msgstr "Wird für die automatische Erkennung nicht unterstützt, muss in Klipperscreen.conf konfiguriert werden"
 
 #~ msgid "Unknown screw position"
 #~ msgstr "Unbekannte Schraubenposition"

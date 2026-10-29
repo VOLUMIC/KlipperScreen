@@ -1,0 +1,889 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the VyperOS package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: VyperOS\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-27 18:27+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "A module of the API service did not start"
+msgstr ""
+
+msgid "A print in progress cannot be resumed: restart it from the beginning."
+msgstr ""
+
+msgid "A print is already in progress"
+msgstr ""
+
+msgid ""
+"A temperature sensor reports an abnormal value (overheating, disconnected or "
+"faulty sensor)."
+msgstr ""
+
+msgid "API"
+msgstr ""
+
+msgid "API service configuration warning"
+msgstr ""
+
+msgid "API service warnings:"
+msgstr ""
+
+#, python-brace-format
+msgid "Abnormal temperature of the printer's computer ({temp} °C)"
+msgstr ""
+
+#, python-brace-format
+msgid "Abnormal temperature, {label}: {temp} °C (allowed: {min} to {max} °C)"
+msgstr ""
+
+msgid "Accelerometer problem"
+msgstr ""
+
+msgid "Access denied by the API service (Moonraker)"
+msgstr ""
+
+msgid "Adjust the bed screws (Bed Level menu), then start again."
+msgstr ""
+
+msgid "Applying the configuration..."
+msgstr ""
+
+msgid "Auto-calibration"
+msgstr ""
+
+#, python-brace-format
+msgid "Bed mesh '{profile}' not found"
+msgstr ""
+
+msgid "Bed tilted too much"
+msgstr ""
+
+msgid "Calibrating..."
+msgstr ""
+
+msgid "Check that its fans are running and that the vents are not blocked."
+msgstr ""
+
+msgid "Check that nothing blocks the axes."
+msgstr ""
+
+msgid "Check that nothing blocks the axis movement."
+msgstr ""
+
+msgid "Check that nothing obstructs the axis mechanics."
+msgstr ""
+
+msgid ""
+"Check that nothing obstructs the machine, then press \"Restart VyperOS\"."
+msgstr ""
+
+msgid ""
+"Check that the USB cable is properly plugged in and does not run along the "
+"motor cables."
+msgstr ""
+
+msgid "Check that the USB cable of the board is properly plugged in."
+msgstr ""
+
+msgid "Check that the bed is firmly fixed and that nothing vibrates."
+msgstr ""
+
+msgid ""
+"Check that the electronics enclosure fans are running and that the vents are "
+"clear."
+msgstr ""
+
+msgid "Check that the electronics enclosure ventilation is working."
+msgstr ""
+
+msgid "Check that the motor cable is not damaged, pinched or badly plugged in."
+msgstr ""
+
+msgid "Check that the nozzle is not already touching the bed."
+msgstr ""
+
+msgid ""
+"Check that the part cooling fan does not blow directly on the heater block."
+msgstr ""
+
+msgid "Check that the part fits in the print volume."
+msgstr ""
+
+msgid "Check that the printer is connected to the Internet."
+msgstr ""
+
+msgid "Check that the printer is switched on (main switch)."
+msgstr ""
+
+msgid "Check that the room is not too cold or exposed to a draught."
+msgstr ""
+
+msgid "Check that the room temperature is normal."
+msgstr ""
+
+msgid "Check that the sensor is not blocked, dirty or disconnected."
+msgstr ""
+
+msgid "Check that the silicone sock of the nozzle is in place."
+msgstr ""
+
+msgid ""
+"Check the USB cable of the board and that it does not run along the motor "
+"cables."
+msgstr ""
+
+msgid "Check the custom start / end code in your slicer."
+msgstr ""
+
+msgid "Check the heating element and its temperature sensor."
+msgstr ""
+
+msgid "Check the main switch and the printer power supply."
+msgstr ""
+
+msgid "Check the material temperature in your slicer."
+msgstr ""
+
+msgid "Check the sensor cable and connector."
+msgstr ""
+
+msgid "Clean the nozzle (no drop of filament) and the bed."
+msgstr ""
+
+msgid "Clean the nozzle and the bed."
+msgstr ""
+
+msgid ""
+"Common cause: USB cable badly plugged in or disturbed, or a brief power cut."
+msgstr ""
+
+msgid "Communication lost during homing"
+msgstr ""
+
+msgid "Configuration automatic backup corrupted"
+msgstr ""
+
+msgid ""
+"Configuration saved.\n"
+"The machine will restart to apply it."
+msgstr ""
+
+msgid "Confirm"
+msgstr ""
+
+msgid "Copy USB"
+msgstr ""
+
+msgid "Copy completed successfully."
+msgstr ""
+
+msgid "Copy it again (USB stick or web interface) and restart the print."
+msgstr ""
+
+msgid "Core"
+msgstr ""
+
+msgid "Display"
+msgstr ""
+
+msgid "Do not remove the USB stick"
+msgstr ""
+
+msgid "Do not unplug the printer during the whole update."
+msgstr ""
+
+msgid ""
+"During a print, avoid large file transfers, the webcam and multiple tabs of "
+"the web interface."
+msgstr ""
+
+msgid "During a print: check the temperature requested in the file."
+msgstr ""
+
+msgid "Emergency stop"
+msgstr ""
+
+msgid "Error during the copy."
+msgstr ""
+
+msgid "Error in the printer configuration"
+msgstr ""
+
+msgid "Error while changing the time zone:"
+msgstr ""
+
+msgid "Error:"
+msgstr ""
+
+msgid "Failed API service modules:"
+msgstr ""
+
+#, python-brace-format
+msgid "Fault on the {stepper_l} driver"
+msgstr ""
+
+msgid "Fine tuning"
+msgstr ""
+
+msgid "For the Z axis: clean the nozzle (no stuck filament)."
+msgstr ""
+
+msgid ""
+"From a computer, open the printer's web interface and update the Display "
+"module (KlipperScreen)."
+msgstr ""
+
+msgid "Gateway"
+msgstr ""
+
+msgid ""
+"Heat the nozzle to the filament temperature before loading, unloading or "
+"extruding."
+msgstr ""
+
+msgid "Heater calibration (PID) interrupted"
+msgstr ""
+
+msgid "Home all axes before moving the head."
+msgstr ""
+
+msgid "Homing interrupted by a safety shutdown"
+msgstr ""
+
+msgid "Homing required"
+msgstr ""
+
+msgid "IP address"
+msgstr ""
+
+msgid "IP configuration"
+msgstr ""
+
+msgid ""
+"If the configuration (printer.cfg) was modified, undo the last change from "
+"the web interface."
+msgstr ""
+
+msgid ""
+"If the problem persists, contact VOLUMIC support and attach the logs, which "
+"can be downloaded from the web interface."
+msgstr ""
+
+msgid ""
+"If the problem persists, contact VOLUMIC support with a photo of this "
+"message."
+msgstr ""
+
+msgid ""
+"If this happens at the start of a print: the slicer start code must contain "
+"G28."
+msgstr ""
+
+msgid ""
+"In the slicer, check the filament diameter, the extrusion width and the "
+"layer height."
+msgstr ""
+
+msgid "Incompatible electronic board firmware"
+msgstr ""
+
+msgid "Incomplete VyperOS configuration for the API service"
+msgstr ""
+
+msgid "Incomplete VyperOS configuration:"
+msgstr ""
+
+msgid "Inconsistent probe measurements"
+msgstr ""
+
+msgid "Information"
+msgstr ""
+
+#, python-brace-format
+msgid "Intermittent communication with the {mcu_l}"
+msgstr ""
+
+#, python-brace-format
+msgid "Internal communication fault on the {mcu_l}"
+msgstr ""
+
+msgid "Internal software error"
+msgstr ""
+
+#, python-brace-format
+msgid "Invalid parameter for the command {cmd}"
+msgstr ""
+
+msgid "It will disappear at the next update of the VyperOS module."
+msgstr ""
+
+msgid "Let it cool down, then press \"Restart VyperOS\"."
+msgstr ""
+
+msgid ""
+"Let the printer cool down, switched off, for 15 minutes and check the sensor "
+"connectors."
+msgstr ""
+
+msgid "Let the printer cool down, switched off, for 15 minutes."
+msgstr ""
+
+#, python-brace-format
+msgid "Lost communication with the {mcu_l}"
+msgstr ""
+
+msgid "Malformed command in the file"
+msgstr ""
+
+msgid "Manual calibration"
+msgstr ""
+
+#, python-brace-format
+msgid "Missing configuration file: {file}"
+msgstr ""
+
+msgid ""
+"Most common cause: the power supply (24V) is off while the screen is on."
+msgstr ""
+
+msgid "Movement outside the print area"
+msgstr ""
+
+#, python-brace-format
+msgid "Movement queue full on the {mcu_l}"
+msgstr ""
+
+#, python-brace-format
+msgid "Movement too fast requested from the {mcu_l}"
+msgstr ""
+
+msgid "NOTE: edit printer.cfg to change the values manually."
+msgstr ""
+
+msgid "Netmask"
+msgstr ""
+
+msgid "Network"
+msgstr ""
+
+msgid "Network reset"
+msgstr ""
+
+msgid "No accelerometer"
+msgstr ""
+
+#, python-brace-format
+msgid ""
+"No script defined for:\n"
+"{program}"
+msgstr ""
+
+msgid "Not connected"
+msgstr ""
+
+msgid "Not up to date"
+msgstr ""
+
+msgid "Nozzle too cold to extrude"
+msgstr ""
+
+msgid "Often due to a momentary overload or to the USB cable."
+msgstr ""
+
+msgid "Operating system"
+msgstr ""
+
+msgid "Otherwise, extrude in several short lengths."
+msgstr ""
+
+msgid "Otherwise, update the VyperOS module from the Update menu."
+msgstr ""
+
+#, python-brace-format
+msgid "Overheating of the {stepper_l} driver"
+msgstr ""
+
+msgid "Overheating, or short-circuited temperature sensor."
+msgstr ""
+
+msgid ""
+"Plug the printer directly into a wall socket, without a power strip shared "
+"with powerful appliances."
+msgstr ""
+
+msgid "Plug the printer directly into a wall socket."
+msgstr ""
+
+#, python-brace-format
+msgid "Power loss on the {stepper_l} driver"
+msgstr ""
+
+msgid "Press \"Restart VyperOS\" at the bottom of the screen."
+msgstr ""
+
+msgid "Printing is still possible, some functions may be missing."
+msgstr ""
+
+msgid "RESET NETWORK"
+msgstr ""
+
+msgid "Read USB"
+msgstr ""
+
+#, python-brace-format
+msgid "Ref: {ref}"
+msgstr ""
+
+msgid "Remove the filament or material stuck under the nozzle."
+msgstr ""
+
+#, python-brace-format
+msgid "Requested extrusion too long ({req} mm, maximum {max} mm)"
+msgstr ""
+
+msgid "Requested material flow too high"
+msgstr ""
+
+#, python-brace-format
+msgid "Requested temperature not possible: {req} °C (maximum {max} °C)"
+msgstr ""
+
+#, python-brace-format
+msgid "Required setting missing: {opt} in [{sect}]"
+msgstr ""
+
+msgid "Reset all interfaces to DHCP?"
+msgstr ""
+
+msgid ""
+"Reset the network to DHCP?\n"
+"\n"
+"The machine will restart after the reset.\n"
+"All connections will be cut."
+msgstr ""
+
+msgid "Reset to DHCP"
+msgstr ""
+
+msgid "Run a \"Full Update\" from the Update menu."
+msgstr ""
+
+msgid "Run a \"Full Update\"."
+msgstr ""
+
+msgid "Run a \"Full Update\": it reprograms the board automatically."
+msgstr ""
+
+msgid "Run a new bed calibration from the Bed Mesh menu, then save."
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+#, python-brace-format
+msgid ""
+"Script not found:\n"
+"{path}"
+msgstr ""
+
+msgid "Searching for accelerometer"
+msgstr ""
+
+#, python-brace-format
+msgid "See: {log}"
+msgstr ""
+
+msgid "Set the time zone to:"
+msgstr ""
+
+#, python-brace-format
+msgid "Short circuit detected on the {stepper_l}"
+msgstr ""
+
+msgid ""
+"Start the calibration again without using the printer during the operation."
+msgstr ""
+
+msgid "Start the calibration again."
+msgstr ""
+
+msgid "Start the homing again."
+msgstr ""
+
+msgid ""
+"Start the update again without switching the machine off during the "
+"operation."
+msgstr ""
+
+msgid "Starting..."
+msgstr ""
+
+msgid ""
+"Switch the printer off at the power switch, wait 30 seconds, then switch it "
+"back on."
+msgstr ""
+
+msgid "Switch the printer off immediately."
+msgstr ""
+
+#, python-brace-format
+msgid "System overloaded: the {mcu_l} has put itself in safe mode"
+msgstr ""
+
+#, python-brace-format
+msgid "Temperature out of limits detected by the {mcu_l}"
+msgstr ""
+
+msgid "Temperature sensor fault (thermocouple)"
+msgstr ""
+
+msgid "The API service (Moonraker) is not responding"
+msgstr ""
+
+msgid "The API service (Moonraker) is taking too long to respond"
+msgstr ""
+
+msgid "The API service is not sending the printer information"
+msgstr ""
+
+msgid "The accelerometer is not responding"
+msgstr ""
+
+msgid "The automatic parallelism adjustment failed"
+msgstr ""
+
+msgid "The cause is given in the previous error message."
+msgstr ""
+
+msgid "The electronic board configuration must be reloaded"
+msgstr ""
+
+msgid "The electronic board no longer responds"
+msgstr ""
+
+msgid "The electronics enclosure has overheated."
+msgstr ""
+
+msgid ""
+"The emergency stop was triggered (button, web interface or M112 command)."
+msgstr ""
+
+msgid "The emergency stop was triggered (screen, web interface or file)."
+msgstr ""
+
+msgid ""
+"The file contains a command the printer does not know (file prepared for "
+"another printer?)."
+msgstr ""
+
+msgid "The file contains too many very small movements."
+msgstr ""
+
+msgid "The file is probably corrupted: generate it again and copy it again."
+msgstr ""
+
+msgid "The file may have been deleted, renamed or be corrupted."
+msgstr ""
+
+msgid "The file or the command moves the head outside the allowed area."
+msgstr ""
+
+msgid ""
+"The file or the command requests a temperature outside the machine limits."
+msgstr ""
+
+msgid "The file requests more material than the nozzle can deliver."
+msgstr ""
+
+msgid "The file requests speeds or accelerations that are too high."
+msgstr ""
+
+msgid "The machine must restart to apply the changes."
+msgstr ""
+
+msgid ""
+"The motor driver lost its power supply (brief power cut or voltage drop)."
+msgstr ""
+
+msgid "The printer could not start"
+msgstr ""
+
+msgid "The printer has put itself in safe mode"
+msgstr ""
+
+msgid "The printer's computer could not keep up."
+msgstr ""
+
+msgid "The probe was already triggered before the measurement"
+msgstr ""
+
+msgid ""
+"The screen and the API service are no longer compatible, usually after a "
+"partial update."
+msgstr ""
+
+msgid "The screen cannot reach the API service"
+msgstr ""
+
+msgid "The system will restart"
+msgstr ""
+
+msgid "The temperature sensor seems to be disconnected, cut or faulty."
+msgstr ""
+
+#, python-brace-format
+msgid "The {endstop_l} remains triggered"
+msgstr ""
+
+#, python-brace-format
+msgid "The {endstop_l} was not triggered"
+msgstr ""
+
+#, python-brace-format
+msgid "The {heater_l} is not heating up normally"
+msgstr ""
+
+#, python-brace-format
+msgid "The {mcu_l} has frozen"
+msgstr ""
+
+#, python-brace-format
+msgid "The {mcu_l} has put itself in safe mode"
+msgstr ""
+
+#, python-brace-format
+msgid "The {mcu_l} restarted by itself"
+msgstr ""
+
+#, python-brace-format
+msgid "The {repo} module cannot be updated automatically"
+msgstr ""
+
+#, python-brace-format
+msgid "The {stepper_l} driver does not start"
+msgstr ""
+
+#, python-brace-format
+msgid "The {stepper_l} driver is not responding"
+msgstr ""
+
+msgid "Then press \"Retry\"."
+msgstr ""
+
+msgid "This alert does not stop the print."
+msgstr ""
+
+msgid "This message does not prevent printing."
+msgstr ""
+
+msgid "Time zone"
+msgstr ""
+
+msgid "Timeout during homing"
+msgstr ""
+
+msgid "To load or unload the filament, use the Extrude menu."
+msgstr ""
+
+msgid "USB copy"
+msgstr ""
+
+msgid "USB copy complete!"
+msgstr ""
+
+msgid "USB copy in progress..."
+msgstr ""
+
+#, python-brace-format
+msgid "Unable to connect to the {mcu_l}"
+msgstr ""
+
+msgid "Unable to open the print file"
+msgstr ""
+
+#, python-brace-format
+msgid "Unknown command in the file: {cmd}"
+msgstr ""
+
+#, python-brace-format
+msgid "Unknown configuration section: [{sect}]"
+msgstr ""
+
+#, python-brace-format
+msgid "Unknown setting: {opt} in [{sect}]"
+msgstr ""
+
+#, python-brace-format
+msgid "Unreadable value: {opt} in [{sect}]"
+msgstr ""
+
+msgid "Update failed"
+msgstr ""
+
+#, python-brace-format
+msgid "Update {name}?"
+msgstr ""
+
+msgid ""
+"Updating VyperOS\n"
+"\n"
+"Please wait, this may take several minutes..."
+msgstr ""
+
+#, python-brace-format
+msgid "Updating {name}..."
+msgstr ""
+
+msgid ""
+"Use the VOLUMIC profile of your slicer for YOUR model, then generate the "
+"file again."
+msgstr ""
+
+msgid "Usually caused by a voltage drop or an electrical disturbance."
+msgstr ""
+
+#, python-brace-format
+msgid "Value out of limits: {opt} in [{sect}]"
+msgstr ""
+
+msgid "VyperOS"
+msgstr ""
+
+msgid "VyperOS is not connected to the API service"
+msgstr ""
+
+msgid "VyperOS was updated but not the firmware of the electronic board."
+msgstr ""
+
+msgid "Wait 1 minute, startup may be in progress."
+msgstr ""
+
+msgid "Wait 1 to 2 minutes (startup or file transfer in progress)."
+msgstr ""
+
+msgid "Wait 1 to 2 minutes, then press \"Retry\"."
+msgstr ""
+
+msgid "Wait 1 to 2 minutes: the service may be starting or updating."
+msgstr ""
+
+msgid ""
+"Wait for the current print to finish or cancel it before starting another "
+"one."
+msgstr ""
+
+msgid "Web interface"
+msgstr ""
+
+msgid "What to do:"
+msgstr ""
+
+msgid ""
+"With the printer switched off, check the accelerometer cable connection."
+msgstr ""
+
+msgid "With the printer switched off, check the bed connections."
+msgstr ""
+
+msgid ""
+"With the printer switched off, check the connectors of the heater cartridge "
+"and of the sensor on the head."
+msgstr ""
+
+msgid "With the printer switched off, check the sensor connection."
+msgstr ""
+
+#, python-brace-format
+msgid "With the printer switched off, check the sensor connector: {label}."
+msgstr ""
+
+msgid "With the printer switched off, check the thermocouple connection."
+msgstr ""
+
+msgid "accelerometer board"
+msgstr ""
+
+msgid "chamber sensor"
+msgstr ""
+
+msgid "electronic board"
+msgstr ""
+
+#, python-brace-format
+msgid "electronic board '{name}'"
+msgstr ""
+
+msgid "endstop"
+msgstr ""
+
+msgid "extruder motor"
+msgstr ""
+
+msgid "heated bed"
+msgstr ""
+
+msgid "heater"
+msgstr ""
+
+msgid "in error"
+msgstr ""
+
+msgid "in safe mode"
+msgstr ""
+
+msgid "main electronic board"
+msgstr ""
+
+msgid "motor"
+msgstr ""
+
+#, python-brace-format
+msgid "motor '{name}'"
+msgstr ""
+
+#, python-brace-format
+msgid "motor {axis}"
+msgstr ""
+
+msgid "print head (nozzle)"
+msgstr ""
+
+#, python-brace-format
+msgid "print head {num} (nozzle)"
+msgstr ""
+
+msgid "probe"
+msgstr ""
+
+msgid "ready"
+msgstr ""
+
+#, python-brace-format
+msgid "sensor '{name}'"
+msgstr ""
+
+#, python-brace-format
+msgid "sensor '{name}' (electronics enclosure)"
+msgstr ""
+
+msgid "starting up"
+msgstr ""
+
+msgid "waiting for connection"
+msgstr ""
+
+#, python-brace-format
+msgid "{axis} axis endstop"
+msgstr ""

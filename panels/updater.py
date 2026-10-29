@@ -8,6 +8,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.vyper_i18n import _v, N_  # VOLUMIC MODIF : textes VOLUMIC traduits
 
 
 class Panel(ScreenPanel):
@@ -120,16 +121,16 @@ class Panel(ScreenPanel):
         return False
 
     DISPLAY_NAMES = {
-        "configurations": "VyperOS",
-        "KlipperScreen":  "Affichage",
-        "klipper":        "Noyau",
-        "mainsail":       "Interface Web",
-        "moonraker":      "API",
-        "system":         "Systeme d'exploitation",
+        "configurations": N_("VyperOS"),
+        "KlipperScreen":  N_("Display"),
+        "klipper":        N_("Core"),
+        "mainsail":       N_("Web interface"),
+        "moonraker":      N_("API"),
+        "system":         N_("Operating system"),
     }
 
     def _display_name(self, prog):
-        return self.DISPLAY_NAMES.get(prog, prog)
+        return _v(self.DISPLAY_NAMES[prog]) if prog in self.DISPLAY_NAMES else prog
 
     def create_info_grid(self):
         infogrid = Gtk.Grid()
@@ -250,9 +251,9 @@ class Panel(ScreenPanel):
         if not script_name:
             logging.warning(f"updater: pas de script pour {program}")
             lbl = Gtk.Label()
-            lbl.set_text(f"Aucun script defini pour :\n{program}")
+            lbl.set_text(_v("No script defined for:\n{program}").format(program=program))
             self._gtk.Dialog(
-                "Info",
+                _v("Information"),
                 [{"name": _("OK"), "response": Gtk.ResponseType.OK}],
                 lbl, lambda d, r: self._gtk.remove_dialog(d),
             )
@@ -262,21 +263,21 @@ class Panel(ScreenPanel):
         if not os.path.exists(script_path):
             logging.warning(f"updater: script introuvable : {script_path}")
             lbl = Gtk.Label()
-            lbl.set_text(f"Script introuvable :\n{script_path}")
+            lbl.set_text(_v("Script not found:\n{path}").format(path=script_path))
             self._gtk.Dialog(
-                "Erreur",
+                _("Error"),
                 [{"name": _("OK"), "response": Gtk.ResponseType.OK, "style": "color1"}],
                 lbl, lambda d, r: self._gtk.remove_dialog(d),
             )
             return
 
         lbl = Gtk.Label()
-        lbl.set_text(f"\n\nMettre a jour {program} ?")
+        lbl.set_text("\n\n" + _v("Update {name}?").format(name=self._display_name(program)))
         self._gtk.Dialog(
-            "Mise a jour",
+            _("Update"),
             [
-                {"name": _("Annuler"),   "response": Gtk.ResponseType.CANCEL},
-                {"name": _("Confirmer"), "response": Gtk.ResponseType.OK, "style": "color1"},
+                {"name": _("Cancel"),   "response": Gtk.ResponseType.CANCEL},
+                {"name": _v("Confirm"), "response": Gtk.ResponseType.OK, "style": "color1"},
             ],
             lbl,
             self._confirm_update_single,
@@ -296,7 +297,7 @@ class Panel(ScreenPanel):
         spinner.set_size_request(48, 48)
         spinner.start()
         lbl = Gtk.Label()
-        lbl.set_text(f"Mise a jour de {program} en cours...")
+        lbl.set_text(_v("Updating {name}...").format(name=self._display_name(program)))
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
         box.set_halign(Gtk.Align.CENTER)
         box.set_valign(Gtk.Align.CENTER)
@@ -526,7 +527,7 @@ class Panel(ScreenPanel):
             ):
                 return
         self._screen.base_panel.show_update_dialog()
-        msg = ("Mise a jour de VyperOS\n\nVeuillez patienter, cela peut durer plusieurs minutes...")
+        msg = _v("Updating VyperOS\n\nPlease wait, this may take several minutes...")
         self._screen._websocket_callback(
             "notify_update_response",
             {"application": {program}, "message": msg, "complete": False},
@@ -583,7 +584,7 @@ class Panel(ScreenPanel):
             else:
                 logging.info(f"Invalid {p} {info['version']}")
                 self.labels[p].set_markup(f"<b>{dn}</b>\n{info['version']}")
-                self.labels[f"{p}_status"].set_label(_("Updating"))
+                self.labels[f"{p}_status"].set_label(_v("Not up to date"))
                 self.labels[f"{p}_status"].get_style_context().add_class("invalid")
                 self.labels[f"{p}_status"].set_sensitive(True)
                 if f"{p}_update" in self.buttons:
@@ -606,7 +607,7 @@ class Panel(ScreenPanel):
 
     def _needs_update(self, p, local="", remote=""):
         logging.info(f"{p} {local} -> {remote}")
-        self.labels[f"{p}_status"].set_label(_("Updating"))
+        self.labels[f"{p}_status"].set_label(_v("Not up to date"))
         self.labels[f"{p}_status"].get_style_context().add_class("update")
         self.labels[f"{p}_status"].set_sensitive(True)
         if f"{p}_update" in self.buttons:

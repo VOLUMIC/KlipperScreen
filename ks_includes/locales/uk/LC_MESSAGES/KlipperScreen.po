@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 24-10-14 10.00\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2026-10-27 18:20+0100\n"
 "PO-Revision-Date: 2024-10-14 09:59+0300\n"
 "Last-Translator: Andrii Komarovskyi\n"
 "Language-Team: Andrii Komarovskyi\n"
@@ -15,8 +15,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 3.4.1\n"
 
 #, python-format
@@ -28,12 +27,6 @@ msgstr "(за замовчуванням)"
 
 msgid "24 Hour Time"
 msgstr "24-годинний час"
-
-msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr "РЕСТАРТ ПРОШИВКИ може вирішити проблему."
-
-msgid "ADXL Not Configured"
-msgstr "ADXL не налаштовано"
 
 msgid "Abort"
 msgstr "Перервати"
@@ -73,9 +66,6 @@ msgstr "Ви впевнені, що хочете зробити аварійну
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Ви впевнені, що хочете скасувати друк?"
 
-msgid "Are you sure you wish to disable motors?"
-msgstr "Ви дійсно бажаєте вимкнути двигуни?"
-
 msgid "Are you sure you wish to reboot the system?"
 msgstr "Ви впевнені, що хочете перезавантажити систему?"
 
@@ -87,9 +77,6 @@ msgstr "Запитує підтвердження перед зупинкою"
 
 msgid "Auto"
 msgstr "Автоматично"
-
-msgid "Auto-calibrate"
-msgstr "Автоматичне калібрування"
 
 msgid "Auto-close notifications"
 msgstr "Автоматичне закриття сповіщень"
@@ -115,14 +102,11 @@ msgstr "Калібрування"
 msgid "Calibrated"
 msgstr "Відкалібрований"
 
-msgid "Calibrating"
-msgstr "Калібрування"
-
 msgid "Camera"
 msgstr "Камера"
 
 msgid "Can't set above the maximum:"
-msgstr "Не можна встановити вище максимум:"
+msgstr "Не можна встановити вище максимуму:"
 
 msgid "Cancel"
 msgstr "Скасувати"
@@ -137,7 +121,7 @@ msgid "Cancelling"
 msgstr "Скасування"
 
 msgid "Cannot connect to Moonraker"
-msgstr "Не можливо підключитися до Moonraker"
+msgstr "Неможливо підключитися до Moonraker"
 
 msgid "Changes how the interface looks"
 msgstr "Змінює вигляд інтерфейсу"
@@ -147,9 +131,6 @@ msgstr "Змінює спосіб розрахунку часу, що залиш
 
 msgid "Channel"
 msgstr "Канал"
-
-msgid "Check ADXL Wiring"
-msgstr "Перевірте підключення ADXL"
 
 msgid "Checking for updates, please wait..."
 msgstr "Перевірка оновлень, зачекайте..."
@@ -216,7 +197,7 @@ msgid "Disable Motors"
 msgstr "Вимкнути мотори"
 
 msgid "Disable for 12hs with am / pm"
-msgstr "Вимкнути на 12 годин за допомогою am / pm"
+msgstr "Вимкніть для 12-годинного формату з am / pm"
 
 msgid "Disconnect"
 msgstr "Від'єднатись"
@@ -251,13 +232,13 @@ msgid "Error getting active spool"
 msgstr "Помилка отримання активної котушки"
 
 msgid "Error setting active spool"
-msgstr "Помилка налаштування активної катушки"
+msgstr "Помилка налаштування активної котушки"
 
 msgid "Error trying to fetch spools"
-msgstr "Помилка спроби вибору котушки"
+msgstr "Помилка отримання списку котушок"
 
 msgid "Error: Couldn't get a position to probe"
-msgstr "Помилка: не вдалося отримати позицію для проби"
+msgstr "Помилка: не вдалося отримати позицію для зондування"
 
 msgid "Estimated Time"
 msgstr "Розрахований час"
@@ -281,10 +262,10 @@ msgid "Extruders"
 msgstr "Екструдери"
 
 msgid "Extrusion +"
-msgstr "Видавити +"
+msgstr "Екструзія +"
 
 msgid "Extrusion -"
-msgstr "Втягнути -"
+msgstr "Екструзія -"
 
 msgid "Failed to delete connection"
 msgstr "Не вдалося видалити з'єднання"
@@ -322,17 +303,11 @@ msgstr "Файл:"
 msgid "Filter"
 msgstr "Фільтр"
 
-msgid "Finding ADXL"
-msgstr "Знаходження ADXL"
-
 msgid "Fine Tuning"
 msgstr "Точне налаштування"
 
 msgid "Finish"
-msgstr "Фініш"
-
-msgid "Firmware Restart"
-msgstr "Перезавантаження прошивки"
+msgstr "Завершити"
 
 msgid "Flow:"
 msgstr "Потік:"
@@ -370,23 +345,20 @@ msgstr "Сховати"
 msgid "Hide sensors in Temp."
 msgstr "Сховати датчик t°."
 
-msgid "Home"
-msgstr "Домашня сторінка"
-
 msgid "Home All"
-msgstr "Дім Всі"
+msgstr "Паркування XYZ"
 
 msgid "Home X"
-msgstr "Дім Х"
+msgstr "Паркування X"
 
 msgid "Home XY"
-msgstr "Дім XY"
+msgstr "Паркування XY"
 
 msgid "Home Y"
-msgstr "Дім Y"
+msgstr "Паркування Y"
 
 msgid "Home Z"
-msgstr "Дім Z"
+msgstr "Паркування Z"
 
 msgid "Host"
 msgstr "Хост"
@@ -400,9 +372,6 @@ msgstr "ID"
 msgid "Icon Theme"
 msgstr "Тема оформлення"
 
-msgid "Initializing printer..."
-msgstr "Ініціалізація принтера..."
-
 msgid "Initiate a PID calibration for:"
 msgstr "Почати калібрування PID для:"
 
@@ -414,9 +383,6 @@ msgstr "Недостатні привілеї"
 
 msgid "Interface"
 msgstr "Інтерфейс"
-
-msgid "Invalid"
-msgstr "Недійсний"
 
 msgid "Invalid password"
 msgstr "Недійсний пароль"
@@ -446,28 +412,19 @@ msgid "Job Status"
 msgstr "Стан завдання"
 
 msgid "Klipper Restart"
-msgstr "Перезапуск Klipper"
+msgstr "Перезапуск VyperOS"
 
 msgid "Klipper has disconnected"
-msgstr "Klipper загубив зв'язок"
-
-msgid "Klipper has encountered an error."
-msgstr "У Klipper сталася помилка."
-
-msgid "Klipper has shutdown"
-msgstr "Klipper вимкнувся"
+msgstr "VyperOS від'єднався"
 
 msgid "Klipper is attempting to start"
-msgstr "Кліппер намагається стартувати"
+msgstr "VyperOS намагається запуститися"
 
 msgid "Klipper will reboot"
-msgstr "Klipper перезавантажиться"
+msgstr "VyperOS буде перезапущено"
 
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT приховані, і їх слід використовувати з меню "
-"Заміна пластику"
+msgid "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr "LOAD_FILAMENT/UNLOAD_FILAMENT приховані, їх слід використовувати з панелі «Видавити»"
 
 msgid "Language"
 msgstr "Мова"
@@ -512,7 +469,7 @@ msgid "Macro shortcut on sidebar"
 msgstr "Ярлик макросу на бічній панелі"
 
 msgid "Macros"
-msgstr "Макрос"
+msgstr "Макроси"
 
 msgid "Main Menu"
 msgstr "Головне Меню"
@@ -596,7 +553,7 @@ msgid "New"
 msgstr "Новий"
 
 msgid "No elegible macros:"
-msgstr "Непридатний макрос:"
+msgstr "Немає доступних макросів:"
 
 msgid "No info available"
 msgstr "Немає інформації"
@@ -625,6 +582,9 @@ msgstr "Сповіщення"
 msgid "Nozzle diameter"
 msgstr "Діаметр сопла"
 
+msgid "OK"
+msgstr "OK"
+
 msgid "Only for the move panel"
 msgstr "Лише для панелі переміщення"
 
@@ -651,16 +611,13 @@ msgid "Pause"
 msgstr "Пауза"
 
 msgid "Paused"
-msgstr "Зупинено"
+msgstr "Призупинено"
 
 msgid "Perform a full upgrade?"
 msgstr "Виконати повне оновлення?"
 
 msgid "Pins"
 msgstr "Піни"
-
-msgid "Please recompile and flash the micro-controller."
-msgstr "Будь ласка, перекомпілюйте та перепрошійте мікроконтролер."
 
 msgid "Please wait"
 msgstr "Очікуйте, будь ласка"
@@ -723,13 +680,13 @@ msgid "Recover Soft"
 msgstr "Відновити легко"
 
 msgid "Reference"
-msgstr "Довідка"
+msgstr "Опорний"
 
 msgid "Refresh"
-msgstr "Оновити"
+msgstr "Перевірити"
 
 msgid "Remove network"
-msgstr "Вийняти мережу"
+msgstr "Видалити мережу"
 
 msgid "Rename/Move:"
 msgstr "Перейменувати/перемістити:"
@@ -739,9 +696,6 @@ msgstr "Перезапуск"
 
 msgid "Resume"
 msgstr "ВІДНОВИТИ"
-
-msgid "Retract"
-msgstr "Втягнути"
 
 msgid "Retraction"
 msgstr "Втягування"
@@ -847,7 +801,7 @@ msgid "Speed:"
 msgstr "Швидкість:"
 
 msgid "Square Corner Velocity"
-msgstr "Квадратно кутова швидкість"
+msgstr "Швидкість на прямих кутах"
 
 msgid "Standby"
 msgstr "Очікування"
@@ -858,16 +812,11 @@ msgstr "СТАРТ"
 msgid "Starting recovery for"
 msgstr "Початок відновлення для"
 
-msgid "Starting update for"
-msgstr "Початок оновлення для"
-
 msgid "Swaps buttons if they are on top of each other, affects other panels"
-msgstr ""
-"Міняти місцями кнопки, якщо вони розташовані одна поверх іншої. Впливає на "
-"решту панелей"
+msgstr "Міняти місцями кнопки, якщо вони розташовані одна поверх іншої. Впливає на решту панелей"
 
 msgid "System"
-msgstr "Системна"
+msgstr "Система"
 
 msgid "System Restart"
 msgstr "Перезавантаження системи"
@@ -879,13 +828,10 @@ msgid "System:"
 msgstr "Система:"
 
 msgid "Temp (°C)"
-msgstr "Teмп (°C)"
+msgstr "Темп (°C)"
 
 msgid "Temperature"
 msgstr "Температура"
-
-msgid "Temperature too low to extrude"
-msgstr "Занизька температура для видавлювання"
 
 msgid "The system doesn't meet the minimum requirement"
 msgstr "Система не відповідає мінімальним вимогам"
@@ -915,7 +861,7 @@ msgid "Unload"
 msgstr "Вийняти"
 
 msgid "Unretract Extra Length"
-msgstr "Додаткова довжина втягування"
+msgstr "Додаткова довжина повернення"
 
 msgid "Unretract Speed"
 msgstr "Швидкість повернення"
@@ -927,7 +873,7 @@ msgid "Update"
 msgstr "Оновити"
 
 msgid "Updating"
-msgstr "Оновлення"
+msgstr "Триває оновлення"
 
 msgid "Useful for un-responsive touchscreens"
 msgstr "Корисно для сенсорних екранів, які не реагують"
@@ -936,7 +882,7 @@ msgid "User"
 msgstr "Користувач"
 
 msgid "WebRTC is not supported by the backend trying Stream"
-msgstr "WebRTC не підтримується бекендом, який намагається використати Stream"
+msgstr "WebRTC не підтримується сервером, спроба режиму Stream"
 
 msgid "Working"
 msgstr "Працює"
@@ -1005,7 +951,7 @@ msgid "mm/s²"
 msgstr "мм/с²"
 
 msgid "mm³/s"
-msgstr "мм/с³"
+msgstr "мм³/с"
 
 msgid "s"
 msgstr "с"
@@ -1015,6 +961,57 @@ msgid_plural "seconds"
 msgstr[0] "секунда"
 msgstr[1] "секунди"
 msgstr[2] "секунд"
+
+#~ msgid "A FIRMWARE_RESTART may fix the issue."
+#~ msgstr "РЕСТАРТ ПРОШИВКИ може вирішити проблему."
+
+#~ msgid "ADXL Not Configured"
+#~ msgstr "ADXL не налаштовано"
+
+#~ msgid "Are you sure you wish to disable motors?"
+#~ msgstr "Ви дійсно бажаєте вимкнути двигуни?"
+
+#~ msgid "Auto-calibrate"
+#~ msgstr "Автоматичне калібрування"
+
+#~ msgid "Calibrating"
+#~ msgstr "Калібрування"
+
+#~ msgid "Check ADXL Wiring"
+#~ msgstr "Перевірте підключення ADXL"
+
+#~ msgid "Finding ADXL"
+#~ msgstr "Знаходження ADXL"
+
+#~ msgid "Firmware Restart"
+#~ msgstr "Перезавантаження прошивки"
+
+#~ msgid "Home"
+#~ msgstr "Домашня сторінка"
+
+#~ msgid "Initializing printer..."
+#~ msgstr "Ініціалізація принтера..."
+
+#~ msgid "Invalid"
+#~ msgstr "Недійсний"
+
+#~ msgid "Klipper has encountered an error."
+#~ msgstr "У Klipper сталася помилка."
+
+#~ msgid "Klipper has shutdown"
+#~ msgstr "Klipper вимкнувся"
+
+#~ msgid "Please recompile and flash the micro-controller."
+#~ msgstr "Будь ласка, перекомпілюйте та перепрошійте мікроконтролер."
+
+#~ msgid "Retract"
+#~ msgstr "Втягнути"
+
+#~ msgid "Starting update for"
+#~ msgstr "Початок оновлення для"
+
+#~ msgid "Temperature too low to extrude"
+#~ msgstr "Занизька температура для видавлювання"
 
 #~ msgid "Hide temp."
 #~ msgstr "Приховати темп."
@@ -1061,12 +1058,8 @@ msgstr[2] "секунд"
 #~ msgid "Bed screw configuration:"
 #~ msgstr "Конфігурація гвинтів ліжка:"
 
-#~ msgid ""
-#~ "Not supported for auto-detection, it needs to be configured in "
-#~ "klipperscreen.conf"
-#~ msgstr ""
-#~ "Автоматичне визначення не підтримується, його потрібно налаштувати у "
-#~ "klipperscreen.conf"
+#~ msgid "Not supported for auto-detection, it needs to be configured in klipperscreen.conf"
+#~ msgstr "Автоматичне визначення не підтримується, його потрібно налаштувати у klipperscreen.conf"
 
 #~ msgid "Unknown screw position"
 #~ msgstr "Невідоме положення гвинта"
@@ -1161,6 +1154,4 @@ msgstr[2] "секунд"
 #~ msgstr "Ручне калібрування"
 
 #~ msgid "NOTE: Edit your printer.cfg to save manual calibration changes."
-#~ msgstr ""
-#~ "ПРИМІТКА. Відредагуйте файл printer.cfg, щоб зберегти зміни калібрування "
-#~ "вручну."
+#~ msgstr "ПРИМІТКА. Відредагуйте файл printer.cfg, щоб зберегти зміни калібрування вручну."

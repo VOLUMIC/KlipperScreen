@@ -7,6 +7,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
 from datetime import datetime
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.vyper_i18n import _v  # VOLUMIC MODIF : textes VOLUMIC traduits
 from ks_includes.KlippyGtk import find_widget
 from ks_includes.widgets.flowboxchild_extended import PrintListItem
 
@@ -56,7 +57,7 @@ class Panel(ScreenPanel):
 
         # Bouton USB - monter et naviguer vers la cle USB
         self.copyusb = self._gtk.Button(
-            "usb", "Lire USB",
+            "usb", _v("Read USB"),
             style=f"color{n % 4 + 1}",
             scale=self.bts,
             position=Gtk.PositionType.RIGHT,
@@ -70,7 +71,7 @@ class Panel(ScreenPanel):
 
         # Bouton USB Copy - copier tous les .gcode de la cle vers gcodes/
         self.usbcopy = self._gtk.Button(
-            "usb", _("Copier USB"),
+            "usb", _v("Copy USB"),
             style=f"color{n % 4 + 1}",
             scale=self.bts,
             position=Gtk.PositionType.RIGHT,
@@ -551,9 +552,9 @@ class Panel(ScreenPanel):
         spinner.start()
 
         lbl_title = Gtk.Label()
-        lbl_title.set_markup("<big><b>Copie USB en cours...</b></big>")
+        lbl_title.set_markup("<big><b>" + _v("USB copy in progress...") + "</b></big>")
 
-        lbl_sub = Gtk.Label(label="Ne pas retirer la cle USB")
+        lbl_sub = Gtk.Label(label=_v("Do not remove the USB stick"))
 
         box.pack_start(spinner,   False, False, 0)
         box.pack_start(lbl_title, False, False, 0)
@@ -561,7 +562,7 @@ class Panel(ScreenPanel):
         box.show_all()
 
         # Dialog sans bouton fermable - callback vide obligatoire pour KlippyGtk
-        dialog = self._gtk.Dialog("Copie USB", None, box, lambda *a: None)
+        dialog = self._gtk.Dialog(_v("USB copy"), None, box, lambda *a: None)
 
         # Griser tous les boutons de la headerbox pendant la copie
         for child in self.headerbox.get_children():
@@ -604,15 +605,15 @@ class Panel(ScreenPanel):
             # summary contient ex: "Copies : 3 | Ignores : 1 | Erreurs : 0"
             if returncode == 0:
                 if summary:
-                    msg = "Copie USB terminee !\n\n" + summary
+                    msg = _v("USB copy complete!") + "\n\n" + summary
                 else:
-                    msg = "Copie terminee avec succes."
+                    msg = _v("Copy completed successfully.")
                 style = "color3"
             else:
                 if summary:
-                    msg = "Erreur lors de la copie.\n\n" + summary + "\n\nConsulter : printer_data/logs/copyusb.log"
+                    msg = _v("Error during the copy.") + "\n\n" + summary + "\n\n" + _v("See: {log}").format(log="printer_data/logs/copyusb.log")
                 else:
-                    msg = "Erreur lors de la copie.\nConsulter : printer_data/logs/copyusb.log"
+                    msg = _v("Error during the copy.") + "\n" + _v("See: {log}").format(log="printer_data/logs/copyusb.log")
                 style = "color1"
 
             result_lbl = Gtk.Label()
@@ -634,7 +635,7 @@ class Panel(ScreenPanel):
                 self._refresh_files()
 
             self._gtk.Dialog(
-                "Copie USB",
+                _v("USB copy"),
                 [{'name': _("OK"), 'response': Gtk.ResponseType.OK, 'style': style}],
                 result_box,
                 _close_result,

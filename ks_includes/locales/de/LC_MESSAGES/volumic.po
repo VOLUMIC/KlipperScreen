@@ -1,0 +1,993 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: VyperOS\n"
+"POT-Creation-Date: 2026-10-27 18:30+0100\n"
+"PO-Revision-Date: 2026-10-27 18:30+0100\n"
+"Last-Translator: VOLUMIC\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "A module of the API service did not start"
+msgstr "Ein Modul des API-Dienstes wurde nicht gestartet"
+
+msgid "A print in progress cannot be resumed: restart it from the beginning."
+msgstr ""
+"Ein laufender Druck kann nicht fortgesetzt werden: Starten Sie ihn von "
+"vorne."
+
+msgid "A print is already in progress"
+msgstr "Es läuft bereits ein Druck"
+
+msgid ""
+"A temperature sensor reports an abnormal value (overheating, disconnected or"
+" faulty sensor)."
+msgstr ""
+"Ein Temperatursensor meldet einen ungewöhnlichen Wert (Überhitzung, Sensor "
+"abgesteckt oder defekt)."
+
+msgid "API"
+msgstr "API"
+
+msgid "API service configuration warning"
+msgstr "Konfigurationswarnung des API-Dienstes"
+
+msgid "API service warnings:"
+msgstr "Warnungen des API-Dienstes:"
+
+#, python-brace-format
+msgid "Abnormal temperature of the printer's computer ({temp} °C)"
+msgstr "Ungewöhnliche Temperatur des Druckercomputers ({temp} °C)"
+
+#, python-brace-format
+msgid "Abnormal temperature, {label}: {temp} °C (allowed: {min} to {max} °C)"
+msgstr ""
+"Ungewöhnliche Temperatur, {label}: {temp} °C (zulässig: {min} bis {max} °C)"
+
+msgid "Accelerometer problem"
+msgstr "Problem mit dem Beschleunigungssensor"
+
+msgid "Access denied by the API service (Moonraker)"
+msgstr "Zugriff vom API-Dienst (Moonraker) verweigert"
+
+msgid "Adjust the bed screws (Bed Level menu), then start again."
+msgstr ""
+"Stellen Sie die Schrauben des Druckbetts ein (Menü \"Druckbett leveln\") und"
+" starten Sie dann erneut."
+
+msgid "Applying the configuration..."
+msgstr "Konfiguration wird angewendet..."
+
+msgid "Auto-calibration"
+msgstr "Autokalibrierung"
+
+#, python-brace-format
+msgid "Bed mesh '{profile}' not found"
+msgstr "Druckbett-Mesh '{profile}' nicht gefunden"
+
+msgid "Bed tilted too much"
+msgstr "Druckbett zu stark geneigt"
+
+msgid "Calibrating..."
+msgstr "Kalibrierung..."
+
+msgid "Check that its fans are running and that the vents are not blocked."
+msgstr ""
+"Prüfen Sie, ob seine Lüfter laufen und die Lüftungsöffnungen nicht verdeckt "
+"sind."
+
+msgid "Check that nothing blocks the axes."
+msgstr "Prüfen Sie, ob nichts die Achsen blockiert."
+
+msgid "Check that nothing blocks the axis movement."
+msgstr "Prüfen Sie, ob nichts die Bewegung der Achse blockiert."
+
+msgid "Check that nothing obstructs the axis mechanics."
+msgstr "Prüfen Sie, ob nichts die Mechanik der Achsen behindert."
+
+msgid "Check that nothing obstructs the machine, then press \"Restart VyperOS\"."
+msgstr ""
+"Prüfen Sie, ob nichts die Maschine behindert, und drücken Sie dann auf "
+"\"VyperOS neu starten\"."
+
+msgid ""
+"Check that the USB cable is properly plugged in and does not run along the "
+"motor cables."
+msgstr ""
+"Prüfen Sie, ob das USB-Kabel richtig eingesteckt ist und nicht entlang der "
+"Motorkabel verläuft."
+
+msgid "Check that the USB cable of the board is properly plugged in."
+msgstr "Prüfen Sie, ob das USB-Kabel der Platine richtig eingesteckt ist."
+
+msgid "Check that the bed is firmly fixed and that nothing vibrates."
+msgstr "Prüfen Sie, ob das Druckbett fest montiert ist und nichts vibriert."
+
+msgid ""
+"Check that the electronics enclosure fans are running and that the vents are"
+" clear."
+msgstr ""
+"Prüfen Sie, ob die Lüfter des Elektronikgehäuses laufen und die "
+"Lüftungsöffnungen frei sind."
+
+msgid "Check that the electronics enclosure ventilation is working."
+msgstr "Prüfen Sie, ob die Belüftung des Elektronikgehäuses funktioniert."
+
+msgid ""
+"Check that the motor cable is not damaged, pinched or badly plugged in."
+msgstr ""
+"Prüfen Sie, ob das Motorkabel nicht beschädigt, eingeklemmt oder schlecht "
+"eingesteckt ist."
+
+msgid "Check that the nozzle is not already touching the bed."
+msgstr "Prüfen Sie, ob die Düse das Druckbett nicht bereits berührt."
+
+msgid ""
+"Check that the part cooling fan does not blow directly on the heater block."
+msgstr ""
+"Prüfen Sie, ob der Bauteillüfter nicht direkt auf den Heizblock bläst."
+
+msgid "Check that the part fits in the print volume."
+msgstr "Prüfen Sie, ob das Teil in den Druckraum passt."
+
+msgid "Check that the printer is connected to the Internet."
+msgstr "Prüfen Sie, ob der Drucker mit dem Internet verbunden ist."
+
+msgid "Check that the printer is switched on (main switch)."
+msgstr "Prüfen Sie, ob der Drucker eingeschaltet ist (Hauptschalter)."
+
+msgid "Check that the room is not too cold or exposed to a draught."
+msgstr "Prüfen Sie, ob der Raum nicht zu kalt oder Zugluft ausgesetzt ist."
+
+msgid "Check that the room temperature is normal."
+msgstr "Prüfen Sie, ob die Raumtemperatur normal ist."
+
+msgid "Check that the sensor is not blocked, dirty or disconnected."
+msgstr ""
+"Prüfen Sie, ob der Sensor nicht blockiert, verschmutzt oder abgesteckt ist."
+
+msgid "Check that the silicone sock of the nozzle is in place."
+msgstr "Prüfen Sie, ob die Silikonsocke der Düse angebracht ist."
+
+msgid ""
+"Check the USB cable of the board and that it does not run along the motor "
+"cables."
+msgstr ""
+"Prüfen Sie das USB-Kabel der Platine und ob es nicht entlang der Motorkabel "
+"verläuft."
+
+msgid "Check the custom start / end code in your slicer."
+msgstr "Prüfen Sie den benutzerdefinierten Start- / End-Code in Ihrem Slicer."
+
+msgid "Check the heating element and its temperature sensor."
+msgstr "Prüfen Sie das Heizelement und seinen Temperatursensor."
+
+msgid "Check the main switch and the printer power supply."
+msgstr "Prüfen Sie den Hauptschalter und die Stromversorgung des Druckers."
+
+msgid "Check the material temperature in your slicer."
+msgstr "Prüfen Sie die Materialtemperatur in Ihrem Slicer."
+
+msgid "Check the sensor cable and connector."
+msgstr "Prüfen Sie Kabel und Stecker des Sensors."
+
+msgid "Clean the nozzle (no drop of filament) and the bed."
+msgstr "Reinigen Sie die Düse (kein Filamenttropfen) und das Druckbett."
+
+msgid "Clean the nozzle and the bed."
+msgstr "Reinigen Sie die Düse und das Druckbett."
+
+msgid ""
+"Common cause: USB cable badly plugged in or disturbed, or a brief power cut."
+msgstr ""
+"Häufige Ursache: USB-Kabel schlecht eingesteckt oder gestört, oder ein "
+"kurzer Stromausfall."
+
+msgid "Communication lost during homing"
+msgstr "Kommunikation während der Referenzfahrt verloren"
+
+msgid "Configuration automatic backup corrupted"
+msgstr "Automatische Sicherung der Konfiguration beschädigt"
+
+msgid ""
+"Configuration saved.\n"
+"The machine will restart to apply it."
+msgstr ""
+"Konfiguration gespeichert.\n"
+"Die Maschine startet neu, um sie anzuwenden."
+
+msgid "Confirm"
+msgstr "Bestätigen"
+
+msgid "Copy USB"
+msgstr "USB kopieren"
+
+msgid "Copy completed successfully."
+msgstr "Kopieren erfolgreich abgeschlossen."
+
+msgid "Copy it again (USB stick or web interface) and restart the print."
+msgstr ""
+"Kopieren Sie die Datei erneut (USB-Stick oder Weboberfläche) und starten Sie"
+" den Druck neu."
+
+msgid "Core"
+msgstr "Kern"
+
+msgid "Display"
+msgstr "Anzeige"
+
+msgid "Do not remove the USB stick"
+msgstr "USB-Stick nicht entfernen"
+
+msgid "Do not unplug the printer during the whole update."
+msgstr ""
+"Trennen Sie den Drucker während der gesamten Aktualisierung nicht vom Strom."
+
+msgid ""
+"During a print, avoid large file transfers, the webcam and multiple tabs of "
+"the web interface."
+msgstr ""
+"Vermeiden Sie während eines Drucks große Dateiübertragungen, die Webcam und "
+"mehrere geöffnete Tabs der Weboberfläche."
+
+msgid "During a print: check the temperature requested in the file."
+msgstr ""
+"Während eines Drucks: Prüfen Sie die in der Datei angeforderte Temperatur."
+
+msgid "Emergency stop"
+msgstr "Not-Aus"
+
+msgid "Error during the copy."
+msgstr "Fehler beim Kopieren."
+
+msgid "Error in the printer configuration"
+msgstr "Fehler in der Druckerkonfiguration"
+
+msgid "Error while changing the time zone:"
+msgstr "Fehler beim Ändern der Zeitzone:"
+
+msgid "Error:"
+msgstr "Fehler:"
+
+msgid "Failed API service modules:"
+msgstr "Fehlgeschlagene Module des API-Dienstes:"
+
+#, python-brace-format
+msgid "Fault on the {stepper_l} driver"
+msgstr "Fehler am Treiber: {stepper_l}"
+
+msgid "Fine tuning"
+msgstr "Feintuning"
+
+msgid "For the Z axis: clean the nozzle (no stuck filament)."
+msgstr "Für die Z-Achse: Reinigen Sie die Düse (kein anhaftendes Filament)."
+
+msgid ""
+"From a computer, open the printer's web interface and update the Display "
+"module (KlipperScreen)."
+msgstr ""
+"Öffnen Sie von einem Computer aus die Weboberfläche des Druckers und "
+"aktualisieren Sie das Modul \"Anzeige\" (KlipperScreen)."
+
+msgid "Gateway"
+msgstr "Gateway"
+
+msgid ""
+"Heat the nozzle to the filament temperature before loading, unloading or "
+"extruding."
+msgstr ""
+"Heizen Sie die Düse vor dem Laden, Entladen oder Extrudieren auf die "
+"Filamenttemperatur auf."
+
+msgid "Heater calibration (PID) interrupted"
+msgstr "Kalibrierung der Heizung (PID) unterbrochen"
+
+msgid "Home all axes before moving the head."
+msgstr ""
+"Führen Sie eine Referenzfahrt (Home) aller Achsen durch, bevor Sie den Kopf "
+"bewegen."
+
+msgid "Homing interrupted by a safety shutdown"
+msgstr "Referenzfahrt durch eine Sicherheitsabschaltung unterbrochen"
+
+msgid "Homing required"
+msgstr "Referenzfahrt erforderlich"
+
+msgid "IP address"
+msgstr "IP-Adresse"
+
+msgid "IP configuration"
+msgstr "IP-Konfiguration"
+
+msgid ""
+"If the configuration (printer.cfg) was modified, undo the last change from "
+"the web interface."
+msgstr ""
+"Wenn die Konfiguration (printer.cfg) geändert wurde, machen Sie die letzte "
+"Änderung über die Weboberfläche rückgängig."
+
+msgid ""
+"If the problem persists, contact VOLUMIC support and attach the logs, which "
+"can be downloaded from the web interface."
+msgstr ""
+"Wenn das Problem weiterhin besteht, wenden Sie sich an den VOLUMIC-Support "
+"und fügen Sie die Protokolle (Logs) bei, die über die Weboberfläche "
+"heruntergeladen werden können."
+
+msgid ""
+"If the problem persists, contact VOLUMIC support with a photo of this "
+"message."
+msgstr ""
+"Wenn das Problem weiterhin besteht, wenden Sie sich mit einem Foto dieser "
+"Meldung an den VOLUMIC-Support."
+
+msgid ""
+"If this happens at the start of a print: the slicer start code must contain "
+"G28."
+msgstr ""
+"Wenn dies zu Beginn eines Drucks auftritt: Der Start-Code des Slicers muss "
+"G28 enthalten."
+
+msgid ""
+"In the slicer, check the filament diameter, the extrusion width and the "
+"layer height."
+msgstr ""
+"Prüfen Sie im Slicer den Filamentdurchmesser, die Extrusionsbreite und die "
+"Schichthöhe."
+
+msgid "Incompatible electronic board firmware"
+msgstr "Inkompatible Firmware der Elektronikplatine"
+
+msgid "Incomplete VyperOS configuration for the API service"
+msgstr "Unvollständige VyperOS-Konfiguration für den API-Dienst"
+
+msgid "Incomplete VyperOS configuration:"
+msgstr "Unvollständige VyperOS-Konfiguration:"
+
+msgid "Inconsistent probe measurements"
+msgstr "Widersprüchliche Messwerte der Sonde"
+
+msgid "Information"
+msgstr "Information"
+
+#, python-brace-format
+msgid "Intermittent communication with the {mcu_l}"
+msgstr "Unterbrochene Kommunikation mit der {mcu_l}"
+
+#, python-brace-format
+msgid "Internal communication fault on the {mcu_l}"
+msgstr "Interner Kommunikationsfehler auf der {mcu_l}"
+
+msgid "Internal software error"
+msgstr "Interner Softwarefehler"
+
+#, python-brace-format
+msgid "Invalid parameter for the command {cmd}"
+msgstr "Ungültiger Parameter für den Befehl {cmd}"
+
+msgid "It will disappear at the next update of the VyperOS module."
+msgstr "Sie verschwindet bei der nächsten Aktualisierung des Moduls VyperOS."
+
+msgid "Let it cool down, then press \"Restart VyperOS\"."
+msgstr ""
+"Lassen Sie alles abkühlen und drücken Sie dann auf \"VyperOS neu starten\"."
+
+msgid ""
+"Let the printer cool down, switched off, for 15 minutes and check the sensor"
+" connectors."
+msgstr ""
+"Lassen Sie den Drucker ausgeschaltet 15 Minuten abkühlen und prüfen Sie die "
+"Sensorstecker."
+
+msgid "Let the printer cool down, switched off, for 15 minutes."
+msgstr "Lassen Sie den Drucker ausgeschaltet 15 Minuten abkühlen."
+
+#, python-brace-format
+msgid "Lost communication with the {mcu_l}"
+msgstr "Kommunikation mit der {mcu_l} verloren"
+
+msgid "Malformed command in the file"
+msgstr "Fehlerhafter Befehl in der Datei"
+
+msgid "Manual calibration"
+msgstr "Manuelle Kalibrierung"
+
+#, python-brace-format
+msgid "Missing configuration file: {file}"
+msgstr "Fehlende Konfigurationsdatei: {file}"
+
+msgid ""
+"Most common cause: the power supply (24V) is off while the screen is on."
+msgstr ""
+"Häufigste Ursache: Die Leistungsversorgung (24V) ist ausgeschaltet, während "
+"der Bildschirm eingeschaltet ist."
+
+msgid "Movement outside the print area"
+msgstr "Bewegung außerhalb des Druckbereichs"
+
+#, python-brace-format
+msgid "Movement queue full on the {mcu_l}"
+msgstr "Bewegungswarteschlange auf der {mcu_l} voll"
+
+#, python-brace-format
+msgid "Movement too fast requested from the {mcu_l}"
+msgstr "Zu schnelle Bewegung von der {mcu_l} angefordert"
+
+msgid "NOTE: edit printer.cfg to change the values manually."
+msgstr "HINWEIS: Bearbeiten Sie printer.cfg, um die Werte manuell zu ändern."
+
+msgid "Netmask"
+msgstr "Netzmaske"
+
+msgid "Network"
+msgstr "Netzwerk"
+
+msgid "Network reset"
+msgstr "Netzwerk zurücksetzen"
+
+msgid "No accelerometer"
+msgstr "Kein Beschleunigungssensor"
+
+#, python-brace-format
+msgid ""
+"No script defined for:\n"
+"{program}"
+msgstr ""
+"Kein Skript definiert für:\n"
+"{program}"
+
+msgid "Not connected"
+msgstr "Nicht verbunden"
+
+msgid "Not up to date"
+msgstr "Nicht aktuell"
+
+msgid "Nozzle too cold to extrude"
+msgstr "Düse zu kalt zum Extrudieren"
+
+msgid "Often due to a momentary overload or to the USB cable."
+msgstr ""
+"Häufig verursacht durch eine kurzzeitige Überlastung oder das USB-Kabel."
+
+msgid "Operating system"
+msgstr "Betriebssystem"
+
+msgid "Otherwise, extrude in several short lengths."
+msgstr "Andernfalls extrudieren Sie in mehreren kurzen Abschnitten."
+
+msgid "Otherwise, update the VyperOS module from the Update menu."
+msgstr ""
+"Andernfalls aktualisieren Sie das Modul VyperOS über das Menü "
+"\"Aktualisieren\"."
+
+#, python-brace-format
+msgid "Overheating of the {stepper_l} driver"
+msgstr "Überhitzung des Treibers am {stepper_l}"
+
+msgid "Overheating, or short-circuited temperature sensor."
+msgstr "Überhitzung oder kurzgeschlossener Temperatursensor."
+
+msgid ""
+"Plug the printer directly into a wall socket, without a power strip shared "
+"with powerful appliances."
+msgstr ""
+"Schließen Sie den Drucker direkt an eine Wandsteckdose an, ohne "
+"Mehrfachsteckdose, die mit leistungsstarken Geräten geteilt wird."
+
+msgid "Plug the printer directly into a wall socket."
+msgstr "Schließen Sie den Drucker direkt an eine Wandsteckdose an."
+
+#, python-brace-format
+msgid "Power loss on the {stepper_l} driver"
+msgstr "Stromverlust des Treibers am {stepper_l}"
+
+msgid "Press \"Restart VyperOS\" at the bottom of the screen."
+msgstr "Drücken Sie unten auf dem Bildschirm auf \"VyperOS neu starten\"."
+
+msgid "Printing is still possible, some functions may be missing."
+msgstr ""
+"Drucken ist weiterhin möglich, einige Funktionen fehlen möglicherweise."
+
+msgid "RESET NETWORK"
+msgstr "NETZWERK ZURÜCKSETZEN"
+
+msgid "Read USB"
+msgstr "USB lesen"
+
+#, python-brace-format
+msgid "Ref: {ref}"
+msgstr "Ref.: {ref}"
+
+msgid "Remove the filament or material stuck under the nozzle."
+msgstr "Entfernen Sie das Filament oder Material, das unter der Düse klebt."
+
+#, python-brace-format
+msgid "Requested extrusion too long ({req} mm, maximum {max} mm)"
+msgstr "Angeforderte Extrusion zu lang ({req} mm, maximal {max} mm)"
+
+msgid "Requested material flow too high"
+msgstr "Angeforderter Materialfluss zu hoch"
+
+#, python-brace-format
+msgid "Requested temperature not possible: {req} °C (maximum {max} °C)"
+msgstr "Angeforderte Temperatur nicht möglich: {req} °C (maximal {max} °C)"
+
+#, python-brace-format
+msgid "Required setting missing: {opt} in [{sect}]"
+msgstr "Erforderliche Einstellung fehlt: {opt} in [{sect}]"
+
+msgid "Reset all interfaces to DHCP?"
+msgstr "Alle Schnittstellen auf DHCP zurücksetzen?"
+
+msgid ""
+"Reset the network to DHCP?\n"
+"\n"
+"The machine will restart after the reset.\n"
+"All connections will be cut."
+msgstr ""
+"Netzwerk auf DHCP zurücksetzen?\n"
+"\n"
+"Die Maschine startet nach dem Zurücksetzen neu.\n"
+"Alle Verbindungen werden getrennt."
+
+msgid "Reset to DHCP"
+msgstr "Auf DHCP zurücksetzen"
+
+msgid "Run a \"Full Update\" from the Update menu."
+msgstr "Starten Sie \"Vollständige Aktualisierung\" im Menü \"Aktualisieren\"."
+
+msgid "Run a \"Full Update\"."
+msgstr "Starten Sie \"Vollständige Aktualisierung\"."
+
+msgid "Run a \"Full Update\": it reprograms the board automatically."
+msgstr ""
+"Starten Sie \"Vollständige Aktualisierung\": Die Platine wird dabei "
+"automatisch neu programmiert."
+
+msgid "Run a new bed calibration from the Bed Mesh menu, then save."
+msgstr ""
+"Führen Sie über das Menü \"Druckbett Mesh\" eine neue Druckbett-Kalibrierung"
+" durch und speichern Sie sie anschließend."
+
+msgid "Save"
+msgstr "Speichern"
+
+#, python-brace-format
+msgid ""
+"Script not found:\n"
+"{path}"
+msgstr ""
+"Skript nicht gefunden:\n"
+"{path}"
+
+msgid "Searching for accelerometer"
+msgstr "Suche nach Beschleunigungssensor"
+
+#, python-brace-format
+msgid "See: {log}"
+msgstr "Siehe: {log}"
+
+msgid "Set the time zone to:"
+msgstr "Zeitzone einstellen auf:"
+
+#, python-brace-format
+msgid "Short circuit detected on the {stepper_l}"
+msgstr "Kurzschluss am {stepper_l} erkannt"
+
+msgid ""
+"Start the calibration again without using the printer during the operation."
+msgstr ""
+"Starten Sie die Kalibrierung erneut, ohne den Drucker währenddessen zu "
+"benutzen."
+
+msgid "Start the calibration again."
+msgstr "Starten Sie die Kalibrierung erneut."
+
+msgid "Start the homing again."
+msgstr "Starten Sie die Referenzfahrt erneut."
+
+msgid ""
+"Start the update again without switching the machine off during the "
+"operation."
+msgstr ""
+"Starten Sie die Aktualisierung erneut, ohne die Maschine währenddessen "
+"auszuschalten."
+
+msgid "Starting..."
+msgstr "Wird gestartet..."
+
+msgid ""
+"Switch the printer off at the power switch, wait 30 seconds, then switch it "
+"back on."
+msgstr ""
+"Schalten Sie den Drucker am Netzschalter aus, warten Sie 30 Sekunden und "
+"schalten Sie ihn dann wieder ein."
+
+msgid "Switch the printer off immediately."
+msgstr "Schalten Sie den Drucker sofort aus."
+
+#, python-brace-format
+msgid "System overloaded: the {mcu_l} has put itself in safe mode"
+msgstr "System überlastet: Die {mcu_l} hat in den Sicherheitsmodus geschaltet"
+
+#, python-brace-format
+msgid "Temperature out of limits detected by the {mcu_l}"
+msgstr "Temperatur außerhalb der Grenzwerte, erkannt von der {mcu_l}"
+
+msgid "Temperature sensor fault (thermocouple)"
+msgstr "Fehler des Temperatursensors (Thermoelement)"
+
+msgid "The API service (Moonraker) is not responding"
+msgstr "Der API-Dienst (Moonraker) antwortet nicht"
+
+msgid "The API service (Moonraker) is taking too long to respond"
+msgstr "Der API-Dienst (Moonraker) braucht zu lange zum Antworten"
+
+msgid "The API service is not sending the printer information"
+msgstr "Der API-Dienst übermittelt die Druckerinformationen nicht"
+
+msgid "The accelerometer is not responding"
+msgstr "Der Beschleunigungssensor antwortet nicht"
+
+msgid "The automatic parallelism adjustment failed"
+msgstr "Die automatische Parallelitätsausrichtung ist fehlgeschlagen"
+
+msgid "The cause is given in the previous error message."
+msgstr "Die Ursache ist in der vorherigen Fehlermeldung angegeben."
+
+msgid "The electronic board configuration must be reloaded"
+msgstr "Die Konfiguration der Elektronikplatine muss neu geladen werden"
+
+msgid "The electronic board no longer responds"
+msgstr "Die Elektronikplatine antwortet nicht mehr"
+
+msgid "The electronics enclosure has overheated."
+msgstr "Das Elektronikgehäuse ist überhitzt."
+
+msgid ""
+"The emergency stop was triggered (button, web interface or M112 command)."
+msgstr "Der Not-Aus wurde ausgelöst (Taste, Weboberfläche oder Befehl M112)."
+
+msgid "The emergency stop was triggered (screen, web interface or file)."
+msgstr "Der Not-Aus wurde ausgelöst (Bildschirm, Weboberfläche oder Datei)."
+
+msgid ""
+"The file contains a command the printer does not know (file prepared for "
+"another printer?)."
+msgstr ""
+"Die Datei enthält einen Befehl, den der Drucker nicht kennt (Datei für einen"
+" anderen Drucker erstellt?)."
+
+msgid "The file contains too many very small movements."
+msgstr "Die Datei enthält zu viele sehr kleine Bewegungen."
+
+msgid "The file is probably corrupted: generate it again and copy it again."
+msgstr ""
+"Die Datei ist wahrscheinlich beschädigt: Erzeugen Sie sie neu und kopieren "
+"Sie sie erneut."
+
+msgid "The file may have been deleted, renamed or be corrupted."
+msgstr ""
+"Die Datei wurde möglicherweise gelöscht oder umbenannt oder ist beschädigt."
+
+msgid "The file or the command moves the head outside the allowed area."
+msgstr ""
+"Die Datei oder der Befehl bewegt den Kopf außerhalb des zulässigen Bereichs."
+
+msgid ""
+"The file or the command requests a temperature outside the machine limits."
+msgstr ""
+"Die Datei oder der Befehl fordert eine Temperatur außerhalb der "
+"Maschinengrenzwerte an."
+
+msgid "The file requests more material than the nozzle can deliver."
+msgstr "Die Datei fordert mehr Material an, als die Düse liefern kann."
+
+msgid "The file requests speeds or accelerations that are too high."
+msgstr "Die Datei fordert zu hohe Geschwindigkeiten oder Beschleunigungen an."
+
+msgid "The machine must restart to apply the changes."
+msgstr "Die Maschine muss neu starten, um die Änderungen anzuwenden."
+
+msgid ""
+"The motor driver lost its power supply (brief power cut or voltage drop)."
+msgstr ""
+"Der Motortreiber hat seine Stromversorgung verloren (kurzer Stromausfall "
+"oder Spannungsabfall)."
+
+msgid "The printer could not start"
+msgstr "Der Drucker konnte nicht starten"
+
+msgid "The printer has put itself in safe mode"
+msgstr "Der Drucker hat in den Sicherheitsmodus geschaltet"
+
+msgid "The printer's computer could not keep up."
+msgstr "Der Druckercomputer konnte nicht Schritt halten."
+
+msgid "The probe was already triggered before the measurement"
+msgstr "Die Sonde war bereits vor der Messung ausgelöst"
+
+msgid ""
+"The screen and the API service are no longer compatible, usually after a "
+"partial update."
+msgstr ""
+"Der Bildschirm und der API-Dienst sind nicht mehr kompatibel, meist nach "
+"einer teilweisen Aktualisierung."
+
+msgid "The screen cannot reach the API service"
+msgstr "Der Bildschirm kann den API-Dienst nicht erreichen"
+
+msgid "The system will restart"
+msgstr "Das System startet neu"
+
+msgid "The temperature sensor seems to be disconnected, cut or faulty."
+msgstr ""
+"Der Temperatursensor scheint abgesteckt, durchtrennt oder defekt zu sein."
+
+#, python-brace-format
+msgid "The {endstop_l} remains triggered"
+msgstr "Bleibt ausgelöst: {endstop_l}"
+
+#, python-brace-format
+msgid "The {endstop_l} was not triggered"
+msgstr "Nicht ausgelöst: {endstop_l}"
+
+#, python-brace-format
+msgid "The {heater_l} is not heating up normally"
+msgstr "Heizt nicht normal auf: {heater_l}"
+
+#, python-brace-format
+msgid "The {mcu_l} has frozen"
+msgstr "Die {mcu_l} reagiert nicht mehr"
+
+#, python-brace-format
+msgid "The {mcu_l} has put itself in safe mode"
+msgstr "Die {mcu_l} hat in den Sicherheitsmodus geschaltet"
+
+#, python-brace-format
+msgid "The {mcu_l} restarted by itself"
+msgstr "Die {mcu_l} hat sich selbst neu gestartet"
+
+#, python-brace-format
+msgid "The {repo} module cannot be updated automatically"
+msgstr "Das Modul {repo} kann nicht automatisch aktualisiert werden"
+
+#, python-brace-format
+msgid "The {stepper_l} driver does not start"
+msgstr "Der Treiber am {stepper_l} startet nicht"
+
+#, python-brace-format
+msgid "The {stepper_l} driver is not responding"
+msgstr "Der Treiber am {stepper_l} antwortet nicht"
+
+msgid "Then press \"Retry\"."
+msgstr "Drücken Sie anschließend auf \"Wiederholen\"."
+
+msgid "This alert does not stop the print."
+msgstr "Diese Warnung hält den Druck nicht an."
+
+msgid "This message does not prevent printing."
+msgstr "Diese Meldung verhindert das Drucken nicht."
+
+msgid "Time zone"
+msgstr "Zeitzone"
+
+msgid "Timeout during homing"
+msgstr "Zeitüberschreitung während der Referenzfahrt"
+
+msgid "To load or unload the filament, use the Extrude menu."
+msgstr ""
+"Verwenden Sie zum Laden oder Entladen des Filaments das Menü "
+"\"Extrudieren\"."
+
+msgid "USB copy"
+msgstr "USB-Kopie"
+
+msgid "USB copy complete!"
+msgstr "USB-Kopie abgeschlossen!"
+
+msgid "USB copy in progress..."
+msgstr "USB-Kopie läuft..."
+
+#, python-brace-format
+msgid "Unable to connect to the {mcu_l}"
+msgstr "Verbindung zur {mcu_l} nicht möglich"
+
+msgid "Unable to open the print file"
+msgstr "Druckdatei kann nicht geöffnet werden"
+
+#, python-brace-format
+msgid "Unknown command in the file: {cmd}"
+msgstr "Unbekannter Befehl in der Datei: {cmd}"
+
+#, python-brace-format
+msgid "Unknown configuration section: [{sect}]"
+msgstr "Unbekannter Konfigurationsabschnitt: [{sect}]"
+
+#, python-brace-format
+msgid "Unknown setting: {opt} in [{sect}]"
+msgstr "Unbekannte Einstellung: {opt} in [{sect}]"
+
+#, python-brace-format
+msgid "Unreadable value: {opt} in [{sect}]"
+msgstr "Unlesbarer Wert: {opt} in [{sect}]"
+
+msgid "Update failed"
+msgstr "Aktualisierung fehlgeschlagen"
+
+#, python-brace-format
+msgid "Update {name}?"
+msgstr "{name} aktualisieren?"
+
+msgid ""
+"Updating VyperOS\n"
+"\n"
+"Please wait, this may take several minutes..."
+msgstr ""
+"VyperOS wird aktualisiert\n"
+"\n"
+"Bitte warten, dies kann mehrere Minuten dauern..."
+
+#, python-brace-format
+msgid "Updating {name}..."
+msgstr "{name} wird aktualisiert..."
+
+msgid ""
+"Use the VOLUMIC profile of your slicer for YOUR model, then generate the "
+"file again."
+msgstr ""
+"Verwenden Sie in Ihrem Slicer das VOLUMIC-Profil für IHR Modell und erzeugen"
+" Sie die Datei dann neu."
+
+msgid "Usually caused by a voltage drop or an electrical disturbance."
+msgstr ""
+"Meist verursacht durch einen Spannungsabfall oder eine elektrische Störung."
+
+#, python-brace-format
+msgid "Value out of limits: {opt} in [{sect}]"
+msgstr "Wert außerhalb der Grenzwerte: {opt} in [{sect}]"
+
+msgid "VyperOS"
+msgstr "VyperOS"
+
+msgid "VyperOS is not connected to the API service"
+msgstr "VyperOS ist nicht mit dem API-Dienst verbunden"
+
+msgid "VyperOS was updated but not the firmware of the electronic board."
+msgstr ""
+"VyperOS wurde aktualisiert, die Firmware der Elektronikplatine jedoch nicht."
+
+msgid "Wait 1 minute, startup may be in progress."
+msgstr "Warten Sie 1 Minute, möglicherweise läuft der Startvorgang noch."
+
+msgid "Wait 1 to 2 minutes (startup or file transfer in progress)."
+msgstr ""
+"Warten Sie 1 bis 2 Minuten (Startvorgang oder Dateiübertragung läuft)."
+
+msgid "Wait 1 to 2 minutes, then press \"Retry\"."
+msgstr "Warten Sie 1 bis 2 Minuten und drücken Sie dann auf \"Wiederholen\"."
+
+msgid "Wait 1 to 2 minutes: the service may be starting or updating."
+msgstr ""
+"Warten Sie 1 bis 2 Minuten: Der Dienst startet möglicherweise gerade oder "
+"wird aktualisiert."
+
+msgid ""
+"Wait for the current print to finish or cancel it before starting another "
+"one."
+msgstr ""
+"Warten Sie, bis der laufende Druck beendet ist, oder brechen Sie ihn ab, "
+"bevor Sie einen neuen starten."
+
+msgid "Web interface"
+msgstr "Weboberfläche"
+
+msgid "What to do:"
+msgstr "Was tun:"
+
+msgid ""
+"With the printer switched off, check the accelerometer cable connection."
+msgstr ""
+"Prüfen Sie bei ausgeschaltetem Drucker den Anschluss des "
+"Beschleunigungssensor-Kabels."
+
+msgid "With the printer switched off, check the bed connections."
+msgstr "Prüfen Sie bei ausgeschaltetem Drucker die Anschlüsse des Druckbetts."
+
+msgid ""
+"With the printer switched off, check the connectors of the heater cartridge "
+"and of the sensor on the head."
+msgstr ""
+"Prüfen Sie bei ausgeschaltetem Drucker die Stecker der Heizpatrone und des "
+"Sensors am Kopf."
+
+msgid "With the printer switched off, check the sensor connection."
+msgstr "Prüfen Sie bei ausgeschaltetem Drucker den Anschluss des Sensors."
+
+#, python-brace-format
+msgid "With the printer switched off, check the sensor connector: {label}."
+msgstr "Prüfen Sie bei ausgeschaltetem Drucker den Sensorstecker: {label}."
+
+msgid "With the printer switched off, check the thermocouple connection."
+msgstr ""
+"Prüfen Sie bei ausgeschaltetem Drucker den Anschluss des Thermoelements."
+
+msgid "accelerometer board"
+msgstr "Beschleunigungssensor-Platine"
+
+msgid "chamber sensor"
+msgstr "Kammersensor"
+
+msgid "electronic board"
+msgstr "Elektronikplatine"
+
+#, python-brace-format
+msgid "electronic board '{name}'"
+msgstr "Elektronikplatine '{name}'"
+
+msgid "endstop"
+msgstr "Endschalter"
+
+msgid "extruder motor"
+msgstr "Extrudermotor"
+
+msgid "heated bed"
+msgstr "Heizbett"
+
+msgid "heater"
+msgstr "Heizung"
+
+msgid "in error"
+msgstr "im Fehlerzustand"
+
+msgid "in safe mode"
+msgstr "im Sicherheitsmodus"
+
+msgid "main electronic board"
+msgstr "Hauptplatine"
+
+msgid "motor"
+msgstr "Motor"
+
+#, python-brace-format
+msgid "motor '{name}'"
+msgstr "Motor '{name}'"
+
+#, python-brace-format
+msgid "motor {axis}"
+msgstr "Motor {axis}"
+
+msgid "print head (nozzle)"
+msgstr "Druckkopf (Düse)"
+
+#, python-brace-format
+msgid "print head {num} (nozzle)"
+msgstr "Druckkopf {num} (Düse)"
+
+msgid "probe"
+msgstr "Sonde"
+
+msgid "ready"
+msgstr "bereit"
+
+#, python-brace-format
+msgid "sensor '{name}'"
+msgstr "Sensor '{name}'"
+
+#, python-brace-format
+msgid "sensor '{name}' (electronics enclosure)"
+msgstr "Sensor '{name}' (Elektronikgehäuse)"
+
+msgid "starting up"
+msgstr "wird gestartet"
+
+msgid "waiting for connection"
+msgstr "wartet auf Verbindung"
+
+#, python-brace-format
+msgid "{axis} axis endstop"
+msgstr "Endschalter der {axis}-Achse"

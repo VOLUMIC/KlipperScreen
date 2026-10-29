@@ -9,6 +9,7 @@ from datetime import datetime
 from math import log
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.sdbus_nm import SdbusNm
+from ks_includes.vyper_i18n import _v  # VOLUMIC MODIF
 
 try:
     import psutil
@@ -379,6 +380,7 @@ class BasePanel(ScreenPanel):
         try:
             env = Environment(extensions=["jinja2.ext.i18n"], autoescape=True)
             env.install_gettext_translations(self._config.get_lang())
+            env.globals["vgettext"] = _v  # VOLUMIC MODIF : noms de menus du catalogue volumic
             j2_temp = env.from_string(title)
             title = j2_temp.render()
         except Exception as e:

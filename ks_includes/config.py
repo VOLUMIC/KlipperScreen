@@ -1,5 +1,6 @@
 import configparser
 import gettext
+from ks_includes import vyper_i18n  # VOLUMIC MODIF
 import os
 import logging
 import json
@@ -144,6 +145,7 @@ class KlipperScreenConfig:
         logging.info(f"Using lang {lang}")
         self.lang = self.langs[lang]
         self.lang.install(names=['gettext', 'ngettext'])
+        vyper_i18n.set_language(lang)  # VOLUMIC MODIF : catalogue volumic dans la meme langue
 
     def validate_config(self, config, string="", remove=False):
         valid = True

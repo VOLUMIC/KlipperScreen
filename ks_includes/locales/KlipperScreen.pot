@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 18:08-0300\n"
+"POT-Creation-Date: 2026-10-27 18:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,12 +26,6 @@ msgid "(default)"
 msgstr ""
 
 msgid "24 Hour Time"
-msgstr ""
-
-msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr ""
-
-msgid "ADXL Not Configured"
 msgstr ""
 
 msgid "Abort"
@@ -72,9 +66,6 @@ msgstr ""
 msgid "Are you sure you wish to cancel this print?"
 msgstr ""
 
-msgid "Are you sure you wish to disable motors?"
-msgstr ""
-
 msgid "Are you sure you wish to reboot the system?"
 msgstr ""
 
@@ -85,9 +76,6 @@ msgid "Asks for confirmation before stopping"
 msgstr ""
 
 msgid "Auto"
-msgstr ""
-
-msgid "Auto-calibrate"
 msgstr ""
 
 msgid "Auto-close notifications"
@@ -112,9 +100,6 @@ msgid "Calibrate"
 msgstr ""
 
 msgid "Calibrated"
-msgstr ""
-
-msgid "Calibrating"
 msgstr ""
 
 msgid "Camera"
@@ -145,9 +130,6 @@ msgid "Changes how the time remaining is calculated"
 msgstr ""
 
 msgid "Channel"
-msgstr ""
-
-msgid "Check ADXL Wiring"
 msgstr ""
 
 msgid "Checking for updates, please wait..."
@@ -321,16 +303,10 @@ msgstr ""
 msgid "Filter"
 msgstr ""
 
-msgid "Finding ADXL"
-msgstr ""
-
 msgid "Fine Tuning"
 msgstr ""
 
 msgid "Finish"
-msgstr ""
-
-msgid "Firmware Restart"
 msgstr ""
 
 msgid "Flow:"
@@ -369,9 +345,6 @@ msgstr ""
 msgid "Hide sensors in Temp."
 msgstr ""
 
-msgid "Home"
-msgstr ""
-
 msgid "Home All"
 msgstr ""
 
@@ -399,9 +372,6 @@ msgstr ""
 msgid "Icon Theme"
 msgstr ""
 
-msgid "Initializing printer..."
-msgstr ""
-
 msgid "Initiate a PID calibration for:"
 msgstr ""
 
@@ -412,9 +382,6 @@ msgid "Insufficient privileges"
 msgstr ""
 
 msgid "Interface"
-msgstr ""
-
-msgid "Invalid"
 msgstr ""
 
 msgid "Invalid password"
@@ -448,12 +415,6 @@ msgid "Klipper Restart"
 msgstr ""
 
 msgid "Klipper has disconnected"
-msgstr ""
-
-msgid "Klipper has encountered an error."
-msgstr ""
-
-msgid "Klipper has shutdown"
 msgstr ""
 
 msgid "Klipper is attempting to start"
@@ -622,6 +583,9 @@ msgstr ""
 msgid "Nozzle diameter"
 msgstr ""
 
+msgid "OK"
+msgstr ""
+
 msgid "Only for the move panel"
 msgstr ""
 
@@ -653,9 +617,6 @@ msgid "Perform a full upgrade?"
 msgstr ""
 
 msgid "Pins"
-msgstr ""
-
-msgid "Please recompile and flash the micro-controller."
 msgstr ""
 
 msgid "Please wait"
@@ -734,9 +695,6 @@ msgid "Restart"
 msgstr ""
 
 msgid "Resume"
-msgstr ""
-
-msgid "Retract"
 msgstr ""
 
 msgid "Retraction"
@@ -854,9 +812,6 @@ msgstr ""
 msgid "Starting recovery for"
 msgstr ""
 
-msgid "Starting update for"
-msgstr ""
-
 msgid "Swaps buttons if they are on top of each other, affects other panels"
 msgstr ""
 
@@ -876,9 +831,6 @@ msgid "Temp (°C)"
 msgstr ""
 
 msgid "Temperature"
-msgstr ""
-
-msgid "Temperature too low to extrude"
 msgstr ""
 
 msgid "The system doesn't meet the minimum requirement"

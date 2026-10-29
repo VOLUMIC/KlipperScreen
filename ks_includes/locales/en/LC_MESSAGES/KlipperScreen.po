@@ -1,8 +1,9 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-27 18:24-0300\n"
+"POT-Creation-Date: 2026-10-27 18:20+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -21,12 +22,6 @@ msgid "(default)"
 msgstr ""
 
 msgid "24 Hour Time"
-msgstr ""
-
-msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr ""
-
-msgid "ADXL Not Configured"
 msgstr ""
 
 msgid "Abort"
@@ -67,9 +62,6 @@ msgstr ""
 msgid "Are you sure you wish to cancel this print?"
 msgstr ""
 
-msgid "Are you sure you wish to disable motors?"
-msgstr ""
-
 msgid "Are you sure you wish to reboot the system?"
 msgstr ""
 
@@ -80,9 +72,6 @@ msgid "Asks for confirmation before stopping"
 msgstr ""
 
 msgid "Auto"
-msgstr ""
-
-msgid "Auto-calibrate"
 msgstr ""
 
 msgid "Auto-close notifications"
@@ -107,9 +96,6 @@ msgid "Calibrate"
 msgstr ""
 
 msgid "Calibrated"
-msgstr ""
-
-msgid "Calibrating"
 msgstr ""
 
 msgid "Camera"
@@ -140,9 +126,6 @@ msgid "Changes how the time remaining is calculated"
 msgstr ""
 
 msgid "Channel"
-msgstr ""
-
-msgid "Check ADXL Wiring"
 msgstr ""
 
 msgid "Checking for updates, please wait..."
@@ -316,16 +299,10 @@ msgstr ""
 msgid "Filter"
 msgstr ""
 
-msgid "Finding ADXL"
-msgstr ""
-
 msgid "Fine Tuning"
 msgstr ""
 
 msgid "Finish"
-msgstr ""
-
-msgid "Firmware Restart"
 msgstr ""
 
 msgid "Flow:"
@@ -335,6 +312,9 @@ msgid "Flowrate:"
 msgstr ""
 
 msgid "Font Size"
+msgstr ""
+
+msgid "For mouse control or to verify touchscreen accuracy"
 msgstr ""
 
 msgid "Forget"
@@ -359,12 +339,6 @@ msgid "Hide"
 msgstr ""
 
 msgid "Hide sensors in Temp."
-msgstr ""
-
-msgid "Hide temp."
-msgstr ""
-
-msgid "Home"
 msgstr ""
 
 msgid "Home All"
@@ -394,9 +368,6 @@ msgstr ""
 msgid "Icon Theme"
 msgstr ""
 
-msgid "Initializing printer..."
-msgstr ""
-
 msgid "Initiate a PID calibration for:"
 msgstr ""
 
@@ -409,10 +380,10 @@ msgstr ""
 msgid "Interface"
 msgstr ""
 
-msgid "Invalid"
+msgid "Invalid password"
 msgstr ""
 
-msgid "Invalid password"
+msgid "Invalid temperature"
 msgstr ""
 
 msgid "Inversely affects the icon size"
@@ -437,16 +408,10 @@ msgid "Job Status"
 msgstr ""
 
 msgid "Klipper Restart"
-msgstr "VyperOS Restart"
+msgstr "Restart VyperOS"
 
 msgid "Klipper has disconnected"
 msgstr "VyperOS has disconnected"
-
-msgid "Klipper has encountered an error."
-msgstr "VyperOS has encountered an error."
-
-msgid "Klipper has shutdown"
-msgstr "VyperOS has shutdown"
 
 msgid "Klipper is attempting to start"
 msgstr "VyperOS is attempting to start"
@@ -613,14 +578,14 @@ msgstr ""
 msgid "Nozzle diameter"
 msgstr ""
 
+msgid "OK"
+msgstr ""
+
 msgid "Only for the move panel"
 msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
-msgstr ""
-
-msgid "PSK for"
 msgstr ""
 
 msgid "Package will be updated"
@@ -629,6 +594,9 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "Part Fan"
+msgstr ""
+
+msgid "Password"
 msgstr ""
 
 msgid "Password saved"
@@ -644,9 +612,6 @@ msgid "Perform a full upgrade?"
 msgstr ""
 
 msgid "Pins"
-msgstr ""
-
-msgid "Please recompile and flash the micro-controller."
 msgstr ""
 
 msgid "Please wait"
@@ -727,9 +692,6 @@ msgstr ""
 msgid "Resume"
 msgstr ""
 
-msgid "Retract"
-msgstr ""
-
 msgid "Retraction"
 msgstr ""
 
@@ -797,6 +759,9 @@ msgstr ""
 msgid "Show Scrollbars Buttons"
 msgstr ""
 
+msgid "Show cursor"
+msgstr ""
+
 msgid "Show only devices that are able to be set"
 msgstr ""
 
@@ -840,9 +805,6 @@ msgid "Start"
 msgstr ""
 
 msgid "Starting recovery for"
-msgstr ""
-
-msgid "Starting update for"
 msgstr ""
 
 msgid "Swaps buttons if they are on top of each other, affects other panels"
@@ -909,6 +871,9 @@ msgid "Updating"
 msgstr ""
 
 msgid "Useful for un-responsive touchscreens"
+msgstr ""
+
+msgid "User"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
@@ -986,3 +951,9 @@ msgid "second"
 msgid_plural "seconds"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "Klipper has encountered an error."
+#~ msgstr "VyperOS has encountered an error."
+
+#~ msgid "Klipper has shutdown"
+#~ msgstr "VyperOS has shutdown"

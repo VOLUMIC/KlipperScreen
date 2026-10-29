@@ -6,6 +6,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.vyper_i18n import _v  # VOLUMIC MODIF : textes VOLUMIC traduits
 
 
 class Panel(ScreenPanel):
@@ -17,7 +18,7 @@ class Panel(ScreenPanel):
         )
         self._screen._sound_start()
         self.labels["text"] = Gtk.Label(
-            label=_("Démarrage..."),
+            label=_v("Starting..."),
             wrap=True,
             wrap_mode=Pango.WrapMode.WORD_CHAR,
             halign=Gtk.Align.CENTER,

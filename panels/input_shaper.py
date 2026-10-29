@@ -4,6 +4,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.vyper_i18n import _v  # VOLUMIC MODIF : textes VOLUMIC traduits
 
 
 # X and Y frequencies
@@ -20,7 +21,7 @@ class Panel(ScreenPanel):
         super().__init__(screen, title)
         self.freq_xy_adj = {}
         self.freq_xy_combo = {}
-        self.calibrate_btn = self._gtk.Button("move", _('Recherche acceleromètre'), "color1", lines=1)
+        self.calibrate_btn = self._gtk.Button("move", _v('Searching for accelerometer'), "color1", lines=1)
         self.calibrate_btn.connect("clicked", self.on_popover_clicked)
         self.calibrate_btn.set_sensitive(False)
         self.status = Gtk.Label(hexpand=True, vexpand=False, halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END)
@@ -35,10 +36,10 @@ class Panel(ScreenPanel):
         auto_grid.attach(self.calibrate_btn, 1, 0, 1, 1)
 
         manual_calibration_label = Gtk.Label(vexpand=True)
-        manual_calibration_label.set_markup('<big><b>Calibration manuelle</b></big>')
+        manual_calibration_label.set_markup('<big><b>' + _v('Manual calibration') + '</b></big>')
 
         disclaimer = Gtk.Label(wrap=True, halign=Gtk.Align.CENTER)
-        disclaimer.set_markup('<small>NOTE: Editez printer.cfg pour modifier manuellement les valeurs.</small>')
+        disclaimer.set_markup('<small>' + _v('NOTE: edit printer.cfg to change the values manually.') + '</small>')
 
         input_grid = Gtk.Grid()
         input_grid.attach(manual_calibration_label, 0, 0, 3, 1)
@@ -101,7 +102,7 @@ class Panel(ScreenPanel):
             self._screen._send_action(self.calibrate_btn, "printer.gcode.script", {"script": 'SHAPER_CALIBRATE AXIS=Y'})
         if method == "both":
             self._screen._send_action(self.calibrate_btn, "printer.gcode.script", {"script": 'SHAPER_CALIBRATE'})
-        self.calibrate_btn.set_label(_('Calibration') + '...')
+        self.calibrate_btn.set_label(_v('Calibrating...'))
 
     def set_opt_value(self, widget, opt, *args):
         shaper_freq_x = self.freq_xy_adj['shaper_freq_x'].get_value()
@@ -122,7 +123,7 @@ class Panel(ScreenPanel):
         script = {"script": "SAVE_CONFIG"}
         self._screen._confirm_send_action(
             None,
-            _("Save configuration?") + "\n\n" + _("Le système va redemarrer"),
+            _("Save configuration?") + "\n\n" + _v("The system will restart"),
             "printer.gcode.script",
             script
         )
@@ -141,14 +142,14 @@ class Panel(ScreenPanel):
         self.status.set_text(f"{data.replace('shaper_', '').replace('damping_', '')}")
         data = data.lower()
         if 'got 0' in data:
-            self.calibrate_btn.set_label(_('Problème acceleromètre'))
+            self.calibrate_btn.set_label(_v('Accelerometer problem'))
             self.calibrate_btn.set_sensitive(False)
         if 'unknown command:"accelerometer_query"' in data:
-            self.calibrate_btn.set_label(_('Aucun acceleromètre'))
+            self.calibrate_btn.set_label(_v('No accelerometer'))
             self.calibrate_btn.set_sensitive(False)
         if 'adxl345 values' in data or 'axes noise' in data:
             self.calibrate_btn.set_sensitive(True)
-            self.calibrate_btn.set_label(_('Auto-calibration'))
+            self.calibrate_btn.set_label(_v('Auto-calibration'))
         # Recommended shaper_type_y = ei, shaper_freq_y = 48.4 Hz
         if 'recommended shaper_type_' in data:
             results = re.search(r'shaper_type_(?P<axis>[xy])\s*=\s*(?P<shaper_type>.*?), shaper_freq_.\s*=\s*('
